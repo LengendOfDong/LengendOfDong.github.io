@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：研磨设计模式笔记之简单工厂模式1.不用模式的解决方案1.1 示例(1)首先定义接口Api,示例代码如下： 1234public interface Api &amp;#123;    public void test1(String s);&amp;#125;  (2)有了Api，自然要有实现，此处功能为输出字符串，示例如下： 1234567public class ImplA implements  Ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：研磨设计模式笔记之简单工厂模式1.不用模式的解决方案1.1 示例(1)首先定义接口Api,示例代码如下： 1234public interface Api &amp;#123;    public void test1(String s);&amp;#125;  (2)有了Api，自然要有实现，此处功能为输出字符串，示例如下： 1234567public class ImplA implements  Ap">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-31T07:58:18.333Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.942Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/","path":"2022/07/31/原创-研磨设计模式笔记之简单工厂模式/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9A%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">原创：研磨设计模式笔记之简单工厂模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%8D%E7%94%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">1.不用模式的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 分析问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%B8%A6%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">2.带模式的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E9%87%8D%E5%86%99%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 简单工厂重写示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%B8%A6%E9%80%89%E6%8B%A9%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 带选择的简单工厂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%B8%A6%E9%80%89%E6%8B%A9%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 带选择的简单工厂的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 可配置的简单工厂</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%80%9D%E8%80%83%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82"><span class="nav-number">4.</span> <span class="nav-text">3.思考简单工厂</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：研磨设计模式笔记之简单工厂模式"><a href="#原创：研磨设计模式笔记之简单工厂模式" class="headerlink" title="原创：研磨设计模式笔记之简单工厂模式"></a>原创：研磨设计模式笔记之简单工厂模式</h1><h1 id="1-不用模式的解决方案"><a href="#1-不用模式的解决方案" class="headerlink" title="1.不用模式的解决方案"></a>1.不用模式的解决方案</h1><h2 id="1-1-示例"><a href="#1-1-示例" class="headerlink" title="1.1 示例"></a>1.1 示例</h2><p>(1)首先定义接口Api,示例代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Api &#123;</span><br><span class="line">    public void test1(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(2)有了Api，自然要有实现，此处功能为输出字符串，示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class ImplA implements  Api&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void test1(String s) &#123;</span><br><span class="line">        System.out.println(&quot;Now In Impl. The input s == &quot; + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(3)客户端调用实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        Api api = new ImplA();</span><br><span class="line">        api.test1(&quot;哈哈，不要紧张，只是一个测试而已！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-分析问题"><a href="#1-2-分析问题" class="headerlink" title="1.2 分析问题"></a>1.2 分析问题</h2><p>可以看到上例中，客户端已经知道了相应的实现，所以根本没有做到“封装隔离”。<br/><br>要做到“封装隔离”，客户端就不应该知道具体的实现是什么，那么“new Impl()”就应该封装起来，让客户端看不到。</p>
+<h1 id="2-带模式的解决方案"><a href="#2-带模式的解决方案" class="headerlink" title="2.带模式的解决方案"></a>2.带模式的解决方案</h1><h2 id="2-1-简单工厂重写示例"><a href="#2-1-简单工厂重写示例" class="headerlink" title="2.1 简单工厂重写示例"></a>2.1 简单工厂重写示例</h2><p>（1）Api与相应实现Impl都与上面相同<br/><br>此处主要说一下简单工厂Factory，示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Factory &#123;</span><br><span class="line">	//返回的实例包裹在Factory中，这样客户端就看不到了</span><br><span class="line">    public static Api create()&#123;</span><br><span class="line">        return new ImplA();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（2）重写客户端代码，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">    	//这个时候就不用显式写出new Impl()，而是通过工厂来返回</span><br><span class="line">        Api api = Factory.create();</span><br><span class="line">        api.test1(&quot;正在测试重写简单工厂。。。&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从客户端来看，不需要知道具体的实现是什么，也不需要知道如何实现的，只知道从工厂获得了一个接口对象，然后通过接口来获取想要的功能。</p>
+<h2 id="2-2-带选择的简单工厂"><a href="#2-2-带选择的简单工厂" class="headerlink" title="2.2 带选择的简单工厂"></a>2.2 带选择的简单工厂</h2><p>上面重写示例中，只有一种实现，要是有多种实现又该如何呢？<br/><br>（1）Api和相应实现不变<br/><br>在上面的基础上再添加一种实现ImplB,代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class ImplB implements Api &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void operation(String s) &#123;</span><br><span class="line">        System.out.println(&quot;ImplB s == &quot;+ s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(2)修改简单工厂Factory,做到选择实现，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Factory &#123;</span><br><span class="line">    public static Api create(int condition)&#123;</span><br><span class="line">        Api api = null;</span><br><span class="line">        if(condition == 1)&#123;</span><br><span class="line">            api = new ImplA();</span><br><span class="line">        &#125;else if(condition == 2)&#123;</span><br><span class="line">            api = new ImplB();</span><br><span class="line">        &#125;</span><br><span class="line">        return api;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(3)修改客户端代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">    //客户端通过1或者2,来选择相应的实现</span><br><span class="line">        Api api = Factory.create(1);</span><br><span class="line">        api.operation(&quot;正在使用简单工厂&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-带选择的简单工厂的缺陷"><a href="#2-3-带选择的简单工厂的缺陷" class="headerlink" title="2.3 带选择的简单工厂的缺陷"></a>2.3 带选择的简单工厂的缺陷</h2><p>带选择的简单工厂有很大的局限性，如果有多重选择，那么就要在工厂中多次判断，复杂性大大提升。另外从客户端调用工厂的时候传入选择的参数，增加了硬编码。<br/><br>这种复杂性不能放在代码中来判断，而应该放在外部，从代码中独立出来，放在配置中。</p>
+<h2 id="2-4-可配置的简单工厂"><a href="#2-4-可配置的简单工厂" class="headerlink" title="2.4 可配置的简单工厂"></a>2.4 可配置的简单工厂</h2><p>(1)配置文件用properties文件，定义一个“FactoryTest.properties”文件放在工厂类的同一个包下，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ImplClass=com.zte.rewriteonproperties.ImplA</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(2)修改工厂类Factory,代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Factory &#123;</span><br><span class="line">    </span><br><span class="line">    public static Api createApi()&#123;</span><br><span class="line">    	Properties p = new Properties();</span><br><span class="line">    	InputStream in = null;</span><br><span class="line">    	//读取配置文件</span><br><span class="line">        in = Factory.class.getResourceAsStream(&quot;FactoryTest.properties&quot;);</span><br><span class="line">        try &#123;</span><br><span class="line">            p.load(in);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(&quot;装载工厂配置文件出错了，具体的堆栈信息如下：&quot;);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">            //读取完毕，要记住关流</span><br><span class="line">                in.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        Api api = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">            //反射创建实例</span><br><span class="line">                api =(Api)Class.forName(p.getProperty(&quot;ImplClass&quot;)).newInstance();</span><br><span class="line">            &#125; catch (InstantiationException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return api;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（3）客户端代码示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">    //可以看到，此时就不需要传入参数，复杂性直接转移到配置文件中控制</span><br><span class="line">        Api api = Factory.createApi();</span><br><span class="line">        api.test1(&quot;哈哈哈，不要紧张，测试而已！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-思考简单工厂"><a href="#3-思考简单工厂" class="headerlink" title="3.思考简单工厂"></a>3.思考简单工厂</h1><p>本人还处于学习阶段，在使用简单工厂方面还缺少经验。<br/><br>根据我的理解，在同一个功能有多重实现的时候，就可以选用简单工厂，一方面能够做到接口隔离，另一方面能够做到选择实现，集中管理和控制。<br/><br>举个例子，同样的打印功能，可以用爱普生的，或者惠普的。这些打印厂家都实现了打印标准，同一接口。<br/><br>(1)首先有个同一的接口Print</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Print&#123;</span><br><span class="line">	public void print(String s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>(2)然后再有多个实现EpsonImpl,HpImpl</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class EpsonImpl implements Print&#123;</span><br><span class="line">	public void print(String s)&#123;</span><br><span class="line">		System.out.println(&quot;this is EpsonPrinter&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class HpImpl implements Print&#123;</span><br><span class="line">	public void print(String s)&#123;</span><br><span class="line">		System.out.println(&quot;this is EpsonPrinter&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再之后就可以从多个实现中做出选择，完成打印功能的隔离。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%A0%94%E7%A3%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

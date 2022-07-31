@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：Shell编程的一些常识虽然写过些shell脚本了，但是对于很多知识还是记忆不深刻。在看书的过程中，正好看到了相关常识，在此记录下以备后用。 执行数学运算1.expr命令 1234567➜  &#x2F;etc expr 1 + 56➜  &#x2F;etc expr 1 * 5expr: syntax error➜  &#x2F;etc expr 1 \* 55  注：1）数字与符号之间要有空格2）个别符号需要转义，如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Shell%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：Shell编程的一些常识虽然写过些shell脚本了，但是对于很多知识还是记忆不深刻。在看书的过程中，正好看到了相关常识，在此记录下以备后用。 执行数学运算1.expr命令 1234567➜  &#x2F;etc expr 1 + 56➜  &#x2F;etc expr 1 * 5expr: syntax error➜  &#x2F;etc expr 1 \* 55  注：1）数字与符号之间要有空格2）个别符号需要转义，如">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-31T07:58:18.272Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.931Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Shell%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Shell%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86/","path":"2022/07/31/原创-Shell编程的一些常识/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9AShell%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">原创：Shell编程的一些常识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">执行数学运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.</span> <span class="nav-text">浮点数运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.</span> <span class="nav-text">数值比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="nav-number">1.4.</span> <span class="nav-text">字符串比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%AF%94%E8%BE%83"><span class="nav-number">1.5.</span> <span class="nav-text">文件比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="nav-number">1.6.</span> <span class="nav-text">复合条件测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-then%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="nav-number">1.7.</span> <span class="nav-text">if-then的高级特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CASE%E5%91%BD%E4%BB%A4"><span class="nav-number">1.8.</span> <span class="nav-text">CASE命令</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Shell%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：Shell编程的一些常识"><a href="#原创：Shell编程的一些常识" class="headerlink" title="原创：Shell编程的一些常识"></a>原创：Shell编程的一些常识</h1><p>虽然写过些shell脚本了，但是对于很多知识还是记忆不深刻。在看书的过程中，正好看到了相关常识，在此记录下以备后用。</p>
+<h2 id="执行数学运算"><a href="#执行数学运算" class="headerlink" title="执行数学运算"></a>执行数学运算</h2><p>1.expr命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  /etc expr 1 + 5</span><br><span class="line">6</span><br><span class="line">➜  /etc expr 1 * 5</span><br><span class="line">expr: syntax error</span><br><span class="line">➜  /etc expr 1 \* 5</span><br><span class="line">5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注：1）数字与符号之间要有空格<br/><br>2）个别符号需要转义，如上例中的星号（*）</p>
+<p>2.使用方括号<br/><br>在bash中，在将一个数学运算结果赋给某个变量时，可以用美元符合方括号（$[ operation ]）将数学表达式围起来。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  /etc var1=$[1 + 5]</span><br><span class="line">➜  /etc echo $var1</span><br><span class="line">6</span><br><span class="line">➜  /etc var2=$[$var1 * 2]</span><br><span class="line">➜  /etc echo $var2</span><br><span class="line">12</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在使用方括号来计算公式时，不用担心shell会误解乘号或者其他符号，这是一大优点。</p>
+<h2 id="浮点数运算"><a href="#浮点数运算" class="headerlink" title="浮点数运算"></a>浮点数运算</h2><p>有时候会遇到浮点数算术操作，最常见的方案是用内建的bash计算器，叫做bc.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  /etc bc -q</span><br><span class="line">3.44 / 5</span><br><span class="line">0</span><br><span class="line">scale=4</span><br><span class="line">3.44 / 5</span><br><span class="line">.6880</span><br><span class="line">quit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上例中，-q是不显示bash计算器的欢迎信息。scale变量用来设置计算结果保留的小数位数。<br/><br>在shell中的运用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">variable=$(echo &quot;options; expression&quot;|bc)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一部分options允许设置变量，如果不止一个变量，可以使用分号将其分开。<br/><br>expression参数定义了通过bc执行的数学表达式。例子如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  /etc var1=$(echo &quot;scale=4;3.44 / 5&quot;|bc)</span><br><span class="line">➜  /etc echo $var1</span><br><span class="line">.6880</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="数值比较"><a href="#数值比较" class="headerlink" title="数值比较"></a>数值比较</h2><p>数值比较可以说是shell编程中最为常见的了，直接影响着流程的走向，因此对于数值比较知识点的掌握也极其重要了。</p>
+<th align="center">比较</th><th align="center">描述</th>
+|------
+<td align="center">n1 -eq n2</td><td align="center">检查n1是否与n2相等</td>
+<td align="center">n1 -ge n2</td><td align="center">检查n1是否大于或等于n2</td>
+<td align="center">n1 -gt n2</td><td align="center">检查n1是否大于n2</td>
+<td align="center">n1 -le n2</td><td align="center">检查n1是否小于或者等于n2</td>
+<td align="center">n1 -lt n2</td><td align="center">检查n1是否小于n2</td>
+<td align="center">n1 -ne n2</td><td align="center">检查n1是否不等于n2</td>
+
+<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><p>条件还允许比较字符串值。</p>
+<th align="center">比较</th><th align="center">描述</th>
+|------
+<td align="center">str1 = str2</td><td align="center">检查str1是否和str2相同</td>
+<td align="center">str1 != str2</td><td align="center">检查str1是否和str2不同</td>
+<td align="center">str1 &lt; str2</td><td align="center">检查str1是否比str2小</td>
+<td align="center">str1 &gt; str2</td><td align="center">检查str1是否比str2大</td>
+<td align="center">-n str1</td><td align="center">检查str1的长度是否非0</td>
+<td align="center">-z str1</td><td align="center">检查str1的长度是否为0</td>
+
+<h2 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a>文件比较</h2><p>文件比较在shell编程中也是用的最多的比较形式。用于测试Linux文件系统上文件和目录的状态。</p>
+<th align="center">比较</th><th align="center">描述</th>
+|------
+<td align="center">-d file</td><td align="center">检查file是否存在并是一个目录</td>
+<td align="center">-e file</td><td align="center">检查file是否存在</td>
+<td align="center">-f file</td><td align="center">检查file是否存在并是一个文件</td>
+<td align="center">-r file</td><td align="center">检查file是否存在并可读</td>
+<td align="center">-s file</td><td align="center">检查file是否存在并非空</td>
+<td align="center">-w file</td><td align="center">检查file是否存在并可写</td>
+<td align="center">-x file</td><td align="center">检查file是否存在并可执行</td>
+<td align="center">-O file</td><td align="center">检查file是否存在并属于当前用户所有</td>
+<td align="center">-G file</td><td align="center">检查file是否存在并且默认组与当前用户相同</td>
+<td align="center">file1 -nt file2</td><td align="center">检查file1是否比file2新</td>
+<td align="center">file1 -ot file2</td><td align="center">检查file1是否比file2旧</td>
+
+<h2 id="复合条件测试"><a href="#复合条件测试" class="headerlink" title="复合条件测试"></a>复合条件测试</h2><p>if-then语句允许使用布尔逻辑来组合测试，两种布尔运算符可用：</p>
+<h2 id="if-then的高级特性"><a href="#if-then的高级特性" class="headerlink" title="if-then的高级特性"></a>if-then的高级特性</h2><p>bash-shell提供了两项可在if-then语句中使用的高级特性：</p>
+<p>1.使用双括号<br/><br>双括号的命令格式如下：<br/><br>((  expression ))<br/><br>expression可以是任意的数学赋值或比较表达式。<br/><br>2.使用双方括号<br/><br>双方括号的命令格式如下：<br/><br>[[ expression ]]<br/><br>双方括号提供了模式匹配的功能。<br/><br>如： [[ $USR &#x3D;&#x3D; r* ]]可用来判断用户是否是以字母r开头</p>
+<h2 id="CASE命令"><a href="#CASE命令" class="headerlink" title="CASE命令"></a>CASE命令</h2><p>通过case命令不用写出冗长的if-then-else语句，而可以通过列表的方式来检查变量的多个值。<br/><br>格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">case variable in</span><br><span class="line">pattern1 | pattern2) commands1;;</span><br><span class="line">pattern3) commands2;;</span><br><span class="line">*) commands;;</span><br><span class="line">esac</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>case命令会将指定的变量与不同模式进行比较。如果变量和模式是匹配的，那么SHELL会执行为该模式指定的命令。可以通过竖线操作符在一行中分隔多个模式。星号(*)会捕获所有与已知模式不匹配的值。仔细一看，这个和JAVA的case非常相似。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-shell%20source%20sh%20bash%E4%B8%8E.-%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-Shell%E7%9A%84%E9%83%A8%E5%88%86%E5%86%85%E5%A4%96%E5%BB%BA%E5%91%BD%E4%BB%A4/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

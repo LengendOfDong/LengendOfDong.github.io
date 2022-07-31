@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud RibbonSpring Cloud Ribbon客户端负载均衡负载均衡是对系统的高可用,网络压力的缓解和处理能力扩容的重要手段之一通常说的负载均衡都是指服务端的负载均衡,分为硬件负载均衡和软件负载均衡硬件负载均衡主要通过在服务器节点之间安装专门用于负载均衡的设备,如F5等软件负载均衡主要通过在服务器上安装一些具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Spring%20Cloud%20Ribbon/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud RibbonSpring Cloud Ribbon客户端负载均衡负载均衡是对系统的高可用,网络压力的缓解和处理能力扩容的重要手段之一通常说的负载均衡都是指服务端的负载均衡,分为硬件负载均衡和软件负载均衡硬件负载均衡主要通过在服务器节点之间安装专门用于负载均衡的设备,如F5等软件负载均衡主要通过在服务器上安装一些具">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-31T07:58:18.291Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.928Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Spring%20Cloud%20Ribbon/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Spring%20Cloud%20Ribbon/","path":"2022/07/31/原创-SPRING CLOUD微服务实战笔记--客户端负载均衡Spring Cloud Ribbon/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9ASPRING-CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0%E2%80%93%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Spring-Cloud-Ribbon"><span class="nav-number">1.</span> <span class="nav-text">原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Cloud-Ribbon"><span class="nav-number">1.0.1.</span> <span class="nav-text">Spring Cloud Ribbon</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.</span> <span class="nav-text">客户端负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RestTemplate%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">RestTemplate详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.1.</span> <span class="nav-text">GET请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.2.</span> <span class="nav-text">POST请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUT%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.3.</span> <span class="nav-text">PUT请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.4.</span> <span class="nav-text">DELETE请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">配置详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">参数配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">重试机制</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1Spring%20Cloud%20Ribbon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：SPRING-CLOUD微服务实战笔记–客户端负载均衡Spring-Cloud-Ribbon"><a href="#原创：SPRING-CLOUD微服务实战笔记–客户端负载均衡Spring-Cloud-Ribbon" class="headerlink" title="原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud Ribbon"></a>原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud Ribbon</h1><h3 id="Spring-Cloud-Ribbon"><a href="#Spring-Cloud-Ribbon" class="headerlink" title="Spring Cloud Ribbon"></a>Spring Cloud Ribbon</h3><h1 id="客户端负载均衡"><a href="#客户端负载均衡" class="headerlink" title="客户端负载均衡"></a>客户端负载均衡</h1><p>负载均衡是对系统的高可用,网络压力的缓解和处理能力扩容的重要手段之一<br/><br>通常说的负载均衡都是指服务端的负载均衡,分为硬件负载均衡和软件负载均衡<br/><br>硬件负载均衡主要通过在服务器节点之间安装专门用于负载均衡的设备,如F5等<br/><br>软件负载均衡主要通过在服务器上安装一些具有均衡负载功能或模块的软件来完成请求分发工作,比如Nginx等<br/><br>客户端使用负载均衡分成两步:<br/><br>1.服务提供者只需要启动多个服务实例并注册到一个注册中心或者多个相关联的服务注册中心<br/><br>2.服务消费者直接通过调用被@LoadBalanced注解修饰过的RestTemplate来实现面向服务的接口调用</p>
+<h2 id="RestTemplate详解"><a href="#RestTemplate详解" class="headerlink" title="RestTemplate详解"></a>RestTemplate详解</h2><h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>1.getForEntity函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = new RestTemplate();</span><br><span class="line">ResponseEntity&amp;lt;String&amp;gt; responseEntity = restTemplate.getForEntity(&quot;http://USER-SERVICE/user?name=&#123;1&#125;&quot;,String.class,&quot;didi&quot;);</span><br><span class="line">String body = responseEntity.getBody();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三种重载实现:其中url为请求的地址,responseType为请求相应体body的包装类型,urlVariables为url中的参数绑定,如上面就是拼接的url<code>http://USER-SERVICE/user?name=didi</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getForEntity(String url,Class responseType,Object... urlVariables);</span><br><span class="line">getForEntity(String url,Class responseType,Map urlVariables);</span><br><span class="line">getForEntity(URI url,Class responseType);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.getForObject函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = new RestTemplate();</span><br><span class="line">String result = restTemplate.getForObject(uri,String.class);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三种重载实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getForObject(String url,Class responseType,Object... urlVariables);</span><br><span class="line">getForObject(String url,Class responseType,Map urlVariables);</span><br><span class="line">getForObject(URI url,Class responseType);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>1.postForEntity函数<br/><br>其实从get和post的区别就可以想象出postForEntity的用法:<br/><br>1)有个类来封装要传送的信息<br/><br>2)请求地址url中不会出现请求的参数<br/><br>3)封装类被作为参数放在postForEntity方法中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = new RestTemplate();</span><br><span class="line">User user= new User(&quot;didi&quot;,30);</span><br><span class="line">ResponseEntity&amp;lt;String&amp;gt; responseEntity = restTemplate.postForEntity(&quot;http://USER-SERVICE/user&quot;,user,String.class);</span><br><span class="line">String body = responseEntity.getBody();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三种重载实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">postForEntity(String url,Object request,Class responseType,Object... urlVariables);</span><br><span class="line">postForEntity(String url,Object request,Class responseType,Map urlVariables);</span><br><span class="line">postForEntity(URI url,Object request,Class responseType);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.postForObject函数<br/><br>postForObject简化了postForEntity的处理:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = new RestTemplate();</span><br><span class="line">User user = new User(&quot;didi&quot;,20);</span><br><span class="line">String postResult = restTemplate.postForObject(&quot;http://USER-SERVICE/user&quot;,user,String.class);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三种重载实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">postForObject(String url,Object request,Class responseType,Object... urlVariables);</span><br><span class="line">postForObject(String url,Object request,Class responseType,Map urlVariables);</span><br><span class="line">postForObject(URI url,Object request,Class responseType);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3.postForLocation函数<br/><br>以post请求提交资源,并返回新资源的URI</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user = new User(&quot;didi&quot;,40);</span><br><span class="line">URI responseURI = restTemplate.postForLocation(&quot;http://USER-SERVICE/user&quot;,user);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>三种重载实现:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">postForLocation(String url,Object request,Object... urlVariables);</span><br><span class="line">postForLocation(String url,Object request,Map urlVariables);</span><br><span class="line">postForLocation(URI url,Object request);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="PUT请求"><a href="#PUT请求" class="headerlink" title="PUT请求"></a>PUT请求</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate  = new RestTemplate();</span><br><span class="line">Long id = 10001L;</span><br><span class="line">User user = new User(&quot;didi&quot;,40);</span><br><span class="line">restTemplate.put(&quot;http://USER-SERVICE/user/&#123;1&#125;&quot;,user,id);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>put函数也实现了三种不同的重载方法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">put(String url,Object request,Object... urlVariables);</span><br><span class="line">put(String url,Object request,Map urlVariables);</span><br><span class="line">put(URI url,Object request);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="DELETE请求"><a href="#DELETE请求" class="headerlink" title="DELETE请求"></a>DELETE请求</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RestTemplate restTemplate = new RestTemplate();</span><br><span class="line">Long id = 10001L;</span><br><span class="line">restTemplate.delete(&quot;http://USER-SERVICE/user/&#123;1&#125;&quot;,id);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>delete函数三种不同的重载方法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">delete(String url,Object... urlVariables)</span><br><span class="line">delete(String url,Map urlVariables)</span><br><span class="line">delete(URI url)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a>配置详解</h2><p>在引入Spring Cloud Ribbon的依赖以后,就能够自动化构建下面这些接口的实现:</p>
+<p>|接口<th align="center">默认实现</th>|作用<br>|——<br>|IClientConfig<td align="center">com.netflix.client.config.DefaultClientConfigImpl</td>|Ribbon的客户端配置<br>|IRule<td align="center">com.netflix.loadbalancer.ZoneAvoidanceRule</td>|Ribbon的负载均衡策略,能够在多区域环境下选出最佳区域的实例进行访问<br>|IPing<td align="center">com.netflix.loadbalancer.NoOpPing</td>|Ribbon的实例检查策略,默认所有服务实例都是可用的<br>|ServerList<td align="center">com.netflix.loadbalancer.ConfigurationBasedServerList</td>|服务实例清单的维护机制<br>|ServerListFilter<td align="center">org.springframework.cloud.netflix.ribbon.ZonePreferenceServerListFilter</td>|服务实例清单过滤机制,优先过滤出于请求调用方处于同区域的服务实例<br>|ILoadBalancer<td align="center">com.netflix.loadbalancer.ZoneAwareLoadBalancer</td>|负载均衡器,具备了区域感知的能力</p>
+<p>覆盖默认的配置,实现个性化需求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyRibbonConfiguration&#123;</span><br><span class="line">	@Bean</span><br><span class="line">	public IPing ribbonPing(IClientConfig config)&#123;</span><br><span class="line">		return new PingUrl();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><p>对于Ribbon的参数配置通常有两种方式,全局配置以及指定客户端配置</p>
+<h2 id="重试机制"><a href="#重试机制" class="headerlink" title="重试机制"></a>重试机制</h2><p>Eureka和Zookeeper的区别<br/><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/vincent928/p/10084176.html">https://www.cnblogs.com/vincent928/p/10084176.html</a><br/><br>Cap定理:<br/><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/07/cap.html">http://www.ruanyifeng.com/blog/2018/07/cap.html</a><br/><br>为了增加服务调用的时候的容错,需要加入一些重试机制,在配置文件中加入内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.loadbalancer.retry.enabled=true</span><br><span class="line">hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=1000</span><br><span class="line">&amp;lt;服务名&amp;gt;.ribbon.ConnectTimeOut=250</span><br><span class="line">&amp;lt;服务名&amp;gt;.ribbon.ReadTimeOut=1000</span><br><span class="line">&amp;lt;服务名&amp;gt;.ribbon.OkToRetryOnAllOperations=true</span><br><span class="line">&amp;lt;服务名&amp;gt;.ribbon.MaxAutoRetriesNextServer=2</span><br><span class="line">&amp;lt;服务名&amp;gt;.ribbon.MaxAutoRetries=1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86-Spring%20Cloud%20Eureka(%E4%B8%80)/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8-Spring%20Cloud%20Feign/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

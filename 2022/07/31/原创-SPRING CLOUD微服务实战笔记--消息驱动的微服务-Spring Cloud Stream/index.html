@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud StreamSpring Cloud Stream快速入门123456789101112131415161718&amp;lt;dependencies&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring%20Cloud%20Stream/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud StreamSpring Cloud Stream快速入门123456789101112131415161718&amp;lt;dependencies&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402155040334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402161514452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402163121925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402232015744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-07-31T07:58:18.295Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.931Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190402155040334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring%20Cloud%20Stream/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring%20Cloud%20Stream/","path":"2022/07/31/原创-SPRING CLOUD微服务实战笔记--消息驱动的微服务-Spring Cloud Stream/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9ASPRING-CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0%E2%80%93%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring-Cloud-Stream"><span class="nav-number">1.</span> <span class="nav-text">原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud Stream</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Cloud-Stream"><span class="nav-number">1.0.1.</span> <span class="nav-text">Spring Cloud Stream</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text">快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">绑定器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">发布-订阅模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E7%BB%84"><span class="nav-number">3.3.</span> <span class="nav-text">消费组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%88%86%E5%8C%BA"><span class="nav-number">3.4.</span> <span class="nav-text">消息分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">使用详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E6%B6%88%E6%81%AF%E9%80%9A%E9%81%93"><span class="nav-number">4.1.</span> <span class="nav-text">绑定消息通道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E7%BB%91%E5%AE%9A%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.1.1.</span> <span class="nav-text">注入绑定接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E6%B6%88%E6%81%AF%E9%80%9A%E9%81%93"><span class="nav-number">4.1.2.</span> <span class="nav-text">注入消息通道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E7%BB%84%E4%B8%8E%E6%B6%88%E6%81%AF%E5%88%86%E5%8C%BA"><span class="nav-number">4.2.</span> <span class="nav-text">消费组与消息分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.3.</span> <span class="nav-text">消息类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">绑定器详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%91%E5%AE%9A%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">多绑定器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ%E4%B8%8EKafka%E7%BB%91%E5%AE%9A%E5%99%A8"><span class="nav-number">5.2.</span> <span class="nav-text">RabbitMQ与Kafka绑定器</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring%20Cloud%20Stream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：SPRING-CLOUD微服务实战笔记–消息驱动的微服务-Spring-Cloud-Stream"><a href="#原创：SPRING-CLOUD微服务实战笔记–消息驱动的微服务-Spring-Cloud-Stream" class="headerlink" title="原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud Stream"></a>原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud Stream</h1><h3 id="Spring-Cloud-Stream"><a href="#Spring-Cloud-Stream" class="headerlink" title="Spring Cloud Stream"></a>Spring Cloud Stream</h3><h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;dependencies&amp;gt;</span><br><span class="line">	&amp;lt;dependency&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-cloud-starter-stream-rabbit&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;version&amp;gt;1.3.4.RELEASE&amp;lt;/version&amp;gt;</span><br><span class="line">	&amp;lt;/dependency&amp;gt;</span><br><span class="line">	&amp;lt;dependency&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br><span class="line">	&amp;lt;dependency&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;</span><br><span class="line">	&amp;lt;/dependency&amp;gt;</span><br><span class="line">&amp;lt;/dependencies&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableBinding(Sink.class)</span><br><span class="line">public class SinkReceiver &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(HelloApplication.class);</span><br><span class="line">    @StreamListener(Sink.INPUT)</span><br><span class="line">    public void receive(Object payload)&#123;</span><br><span class="line">        logger.info(&quot;Received: &quot; + payload);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Received: [B@7236cac6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>刚才我们在RabbitMQ管理界面发布的信息，由SinkReceiver来消费了<br/><br>说一下定义在SinkReceiver的Spring Cloud Stream的核心注解<br/><br><code>@EnableBinding</code>:该注解用来指定一个或多个定义了@Input或@Output注解的接口，以此来实现对消息通道（Channel）的绑定。<br/><br><code>@StreamListener</code>：该注解主要定义在方法上，作用是将被修饰的方法注册为消息中间上数据流的事件监听器，注解中属性值对应了监听的消息通道名。<br/><br>第一个注解主要用来将当前类<code>SinkReceiver</code>绑定到<code>Sink.class</code>上，而<code>Sink.class</code>已经绑定input通道，第二个注解主要监听input通道上的数据</p>
+<h1 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h1><p>Spring Cloud Stream构建的应用程序与消息中间件之间是通过绑定器Binder相关联的，绑定器对于应用程序而言起到了隔离作用，它使得不同消息中间件的实现细节对应用程序来说是透明的。如下图所示，绑定器是作为通道和消息中间件之间的桥梁进行通信<br/><br><img alt="Binder" src="https://img-blog.csdnimg.cn/20190402155040334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/></p>
+<h2 id="绑定器"><a href="#绑定器" class="headerlink" title="绑定器"></a>绑定器</h2><p>绑定器与数据库中的DataSource相同，在连接数据库时有很多数据库厂家，每个厂家的实现数据源细节都不尽相同，所以将数据源抽象成DataSource接口，就可以将具体实现细节进行隔离。此处的绑定器与其有相同的效果，由于各消息中间件构建的初衷不同，在实现细节上也有很大差异。通过定义绑定器作为中间层，完美地实现了应用程序与消息中间件细节之间的隔离。<br/><br>通过向应用程序暴露统一的Channel通道，不需要再考虑各种不同的消息中间件的实现。当需要更换其他消息中间件时，要做的就是更换它们对应的Binder绑定器而不需要修改任何SpringBoot的应用逻辑。</p>
+<h2 id="发布-订阅模式"><a href="#发布-订阅模式" class="headerlink" title="发布-订阅模式"></a>发布-订阅模式</h2><p>Spring Cloud Stream中的消息通信方式遵循了发布-订阅模式，当一条消息被投递到消息中间件之后，它会通过共享的Topic主题进行广播，消息消费者在订阅的主题中收到它并触发自身的业务逻辑处理。<br/><br>生产者 生产消息发布在shared topic（共享主题）上，然后 消费者 通过订阅这个topic来获取消息<br/><br><img alt="发布订阅模式" src="https://img-blog.csdnimg.cn/20190402161514452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>在RabbitMQ中，Topic对应Exchange,在Kafka中对应Kafka中的Topic</p>
+<h2 id="消费组"><a href="#消费组" class="headerlink" title="消费组"></a>消费组</h2><p>在现实的微服务架构中，每一个微服务应用为了实现高可用和负载均衡，实际上都会部署多个实例。<br/><br>如果在同一个主题上的应用需要启动多个实例时，可以通过<code>spring.cloud.stream.bindings.input.group</code>属性为应用指定一个组名，这样一个组里只有一个成员真正接收到消息并进行处理。<br/><br><img alt="消费组" src="https://img-blog.csdnimg.cn/20190402163121925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/></p>
+<h2 id="消息分区"><a href="#消息分区" class="headerlink" title="消息分区"></a>消息分区</h2><p>对于同一条消息，多次到达之后可能是由不同的实例进行消费的。<br/><br>对于一些场景，需要对一些具有相同特征的消息设置每次都被同一个消费实例处理<br/><br>分区概念的引入就是为了解决这样的问题：当生产者将消息数据发送给多个消费者实例时，保证拥有共同特征的消息数据始终是由同一个消费者实例接收和处理。</p>
+<h1 id="使用详解"><a href="#使用详解" class="headerlink" title="使用详解"></a>使用详解</h1><p>@EnableBinding注解用来创建消息通道的绑定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.TYPE, ElementType.ANNOTATION_TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">//注解后会成为Spring的基本配置类</span><br><span class="line">@Configuration</span><br><span class="line">//加载Spring Cloud Stream运行需要的几个基础配置类</span><br><span class="line">@Import(&#123;BindingServiceConfiguration.class, BindingBeansRegistrar.class, BinderFactoryConfiguration.class, SpelExpressionConverterConfiguration.class&#125;)</span><br><span class="line">@EnableIntegration</span><br><span class="line">public @interface EnableBinding &#123;</span><br><span class="line">    Class&amp;lt;?&amp;gt;[] value() default &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="绑定消息通道"><a href="#绑定消息通道" class="headerlink" title="绑定消息通道"></a>绑定消息通道</h2><h3 id="注入绑定接口"><a href="#注入绑定接口" class="headerlink" title="注入绑定接口"></a>注入绑定接口</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public interface SinkSender &#123;</span><br><span class="line">    @Output(Source.OUTPUT)</span><br><span class="line">    MessageChannel output();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableBinding(value = &#123;Sink.class, SinkSender.class&#125;)</span><br><span class="line">public class SinkReceiver &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(SinkSender.class);</span><br><span class="line">    @StreamListener(Sink.INPUT)</span><br><span class="line">    public void receive(Object payload)&#123;</span><br><span class="line">        logger.info(&quot;Received: &quot; + payload);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.input.destination=raw-sensor-data</span><br><span class="line">spring.cloud.stream.bindings.output.destination=raw-sensor-data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">@WebAppConfiguration</span><br><span class="line">public class HelloApplicationTests &#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	private SinkSender sinkSender;</span><br><span class="line">	@Test</span><br><span class="line">	public void contextLoads() &#123;</span><br><span class="line">		sinkSender.output().send(MessageBuilder.withPayload(&quot;From SinkSender&quot;).build());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="注入消息通道"><a href="#注入消息通道" class="headerlink" title="注入消息通道"></a>注入消息通道</h3><p>在测试类中加入下面内容，用于注入消息通道</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private MessageChannel input;</span><br><span class="line">@Test</span><br><span class="line">public void contextLoads1()&#123;</span><br><span class="line">	input.send(MessageBuilder.withPayload(&quot;From MessageChannel&quot;).build());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="消费组与消息分区"><a href="#消费组与消息分区" class="headerlink" title="消费组与消息分区"></a>消费组与消息分区</h2><p>1.消费组<br/><br>有些业务场景下，希望生产者产生的消息只被一个实例消费，这个时候就需要为这些消费者设置消费组来实现这样的功能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableBinding(value = &#123;Sink.class&#125;)</span><br><span class="line">public class SinkReceiver &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(SinkReceiver.class);</span><br><span class="line">    @StreamListener(Sink.INPUT)</span><br><span class="line">    public void receive(User user)&#123;</span><br><span class="line">        logger.info(&quot;Received: &quot; + user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.input.group=Service-A</span><br><span class="line">spring.cloud.stream.bindings.input.destination=greetings</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这其中<code>spring.cloud.stream.bindings.input.group</code>属性指定了该应用实例都属于Service-A消费组，而<code>spring.cloud.stream.bindings.input.destination</code>属性则指定了输入通道对应的主题名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@EnableBinding(value = &#123;Source.class&#125;)</span><br><span class="line">public class SinkSender &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(SinkSender.class);</span><br><span class="line">    @Bean</span><br><span class="line">    @InboundChannelAdapter(value = Source.OUTPUT,poller = @Poller(fixedDelay = &quot;2000&quot;))</span><br><span class="line">    public MessageSource&amp;lt;String&amp;gt; timerMessageSource()&#123;</span><br><span class="line">        return ()-&amp;gt;new GenericMessage&amp;lt;&amp;gt;(&quot;&#123;\&quot;name\&quot;:\&quot;didi\&quot;,\&quot;age\&quot;:30&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.output.destination=greetings</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动多个消费者实例，再启动生产者实例，通过输出可以看到生产者发出的消息会被启动的消费者以轮询的方式进行接收和输出<br/><br><img alt="消费者交替" src="https://img-blog.csdnimg.cn/20190402232015744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>2.消息分区<br/><br>消费组只是保证了同一消息只被一个消费者实例进行接收和处理，但是不能保证消息总能被同一个实例进行消费。这个时候需要对消息进行分区处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.input.group=Service-A</span><br><span class="line">spring.cloud.stream.bindings.input.destination=greetings</span><br><span class="line">spring.cloud.stream.bindings.input.consumer.partitioned=true</span><br><span class="line">spring.cloud.stream.instance-count=2</span><br><span class="line">spring.cloud.stream.instance-index=0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>spring.cloud.stream.bindings.input.consumer.partitioned</code>:通过该参数开启消费者分区功能<br/><br><code>spring.cloud.stream.instanceCount</code>:该参数指定了当前消费者的总实例数量<br/><br><code>spring.cloud.stream.instanceIndex</code>:该参数设置当前实例的索引号，从0开始，最大值为<code>spring.cloud.stream.instanceCount</code>参数-1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.output.producer.partitionKeyExpression=payload</span><br><span class="line">spring.cloud.stream.bindings.output.producer.partitionCount=2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>spring.cloud.stream.bindings.output.producer.partitionKeyExpression</code>:通过该参数指定了分区键的表达式规则，我们可以根据实际的输出消息规则SpEL来生成合适的分区键<br/><br><code>spring.cloud.stream.bindings.output.producer.partitionCount</code>:该参数指定了消息分区的数量<br/><br><code>spring.cloud.stream.bindings.output.producer.partition-key-expression=1</code> 表示只有分区ID为1的消费端能接收到信息。<br/><br><code>spring.cloud.stream.bindings.output.producer.partition-key-expression=0</code> 表示只有分区ID为0的消费端能接收到信息。</p>
+<h2 id="消息类型"><a href="#消息类型" class="headerlink" title="消息类型"></a>消息类型</h2><p>目前，Spring Cloud Stream中自带支持了以下几种常用的消息类型转换：</p>
+<h1 id="绑定器详解"><a href="#绑定器详解" class="headerlink" title="绑定器详解"></a>绑定器详解</h1><h2 id="多绑定器配置"><a href="#多绑定器配置" class="headerlink" title="多绑定器配置"></a>多绑定器配置</h2><p>在一个应用程序中使用多个绑定器时，往往其中一个绑定器会是主要使用的，而第二个可能是为了适应一些特殊要求（比如性能等原因）。可以先通过设置默认绑定器来为大部分的通道设置绑定器。比如，使用RabbitMQ设置默认绑定器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.defaultBinder=rabbit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在设置默认绑定器之后，再为其他一些少数的消息通道单独设置绑定器，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.input.binder=kafka</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当需要在一个应用程序中使用同一类型不同环境的绑定器时，可以通过配置实现通道绑定。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.stream.bindings.input.binder=rabbit1</span><br><span class="line">spring.cloud.stream.bindings.input.binder=rabbit2</span><br><span class="line">#rabbit1的通道类型为rabbit</span><br><span class="line">spring.cloud.stream.binders.rabbit1.type=rabbit</span><br><span class="line">spring.cloud.stream.binders.rabbit1.environment.spring.rabbitmq.host=192.168.0.101</span><br><span class="line">spring.cloud.stream.binders.rabbit1.environment.spring.rabbitmq.port=5672</span><br><span class="line">#rabbit2的通道类型为rabbit</span><br><span class="line">spring.cloud.stream.binders.rabbit2.type=rabbit</span><br><span class="line">spring.cloud.stream.binders.rabbit2.environment.spring.rabbitmq.host=192.168.0.102</span><br><span class="line">spring.cloud.stream.binders.rabbit2.environment.spring.rabbitmq.port=5672</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从上面的配置中，可以看出rabbit1和rabbit2的通道类型都为rabbit,只是主机地址不同。<br/><br>当采用显示配置方式时会自动禁用默认的绑定器配置，所以当定义了显示配置以后，对于这些绑定器的配置需要通过spring.cloud.stream.binders.属性来进行设置。对于绑定器的配置 主要有下面4个参数：</p>
+<h2 id="RabbitMQ与Kafka绑定器"><a href="#RabbitMQ与Kafka绑定器" class="headerlink" title="RabbitMQ与Kafka绑定器"></a>RabbitMQ与Kafka绑定器</h2><p>RabbitMQ与Kafka的绑定器是如何使用消息中间件中不同概念来实现消息的生产与消费的：</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring%20Boot/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E6%80%BB%E7%BA%BF-Spring%20Cloud%20Bus/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

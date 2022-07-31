@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：HTTP首部（三）响应首部字段响应首部字段是由服务器端向客户端返回响应报文中所使用的字段。用于补充响应的附加信息、服务器信息，以及对客户端的附加要求等信息。 Accept-Ranges12Accept-Ranges:bytes  首部字段Accept-Ranges是用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。可指定的字段值有两种，可处理范围请求时指定其为byte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：HTTP首部（三）响应首部字段响应首部字段是由服务器端向客户端返回响应报文中所使用的字段。用于补充响应的附加信息、服务器信息，以及对客户端的附加要求等信息。 Accept-Ranges12Accept-Ranges:bytes  首部字段Accept-Ranges是用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。可指定的字段值有两种，可处理范围请求时指定其为byte">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-31T07:58:18.233Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.922Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%89%EF%BC%89/","path":"2022/07/31/原创-HTTP首部（三）/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9AHTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%89%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">原创：HTTP首部（三）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">响应首部字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Accept-Ranges"><span class="nav-number">2.1.</span> <span class="nav-text">Accept-Ranges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Age"><span class="nav-number">2.2.</span> <span class="nav-text">Age</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ETag"><span class="nav-number">2.3.</span> <span class="nav-text">ETag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Location"><span class="nav-number">2.4.</span> <span class="nav-text">Location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy-Authenticate"><span class="nav-number">2.5.</span> <span class="nav-text">Proxy-Authenticate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Retry-After"><span class="nav-number">2.6.</span> <span class="nav-text">Retry-After</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server"><span class="nav-number">2.7.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vary"><span class="nav-number">2.8.</span> <span class="nav-text">Vary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WWW-Authenticate"><span class="nav-number">2.9.</span> <span class="nav-text">WWW-Authenticate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">实体首部字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Allow"><span class="nav-number">3.1.</span> <span class="nav-text">Allow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Encoding"><span class="nav-number">3.2.</span> <span class="nav-text">Content-Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Language"><span class="nav-number">3.3.</span> <span class="nav-text">Content-Language</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Length"><span class="nav-number">3.4.</span> <span class="nav-text">Content-Length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Location"><span class="nav-number">3.5.</span> <span class="nav-text">Content-Location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-MD5"><span class="nav-number">3.6.</span> <span class="nav-text">Content-MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Range"><span class="nav-number">3.7.</span> <span class="nav-text">Content-Range</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Type"><span class="nav-number">3.8.</span> <span class="nav-text">Content-Type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expires"><span class="nav-number">3.9.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Last-Modified"><span class="nav-number">3.10.</span> <span class="nav-text">Last-Modified</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BACookie%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A6%96%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">为Cookie服务的首部字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set-Cookie"><span class="nav-number">4.1.</span> <span class="nav-text">Set-Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">4.2.</span> <span class="nav-text">Cookie</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：HTTP首部（三）"><a href="#原创：HTTP首部（三）" class="headerlink" title="原创：HTTP首部（三）"></a>原创：HTTP首部（三）</h1><h1 id="响应首部字段"><a href="#响应首部字段" class="headerlink" title="响应首部字段"></a>响应首部字段</h1><p>响应首部字段是由服务器端向客户端返回响应报文中所使用的字段。用于补充响应的附加信息、服务器信息，以及对客户端的附加要求等信息。</p>
+<h2 id="Accept-Ranges"><a href="#Accept-Ranges" class="headerlink" title="Accept-Ranges"></a>Accept-Ranges</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges:bytes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Accept-Ranges是用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。<br/><br>可指定的字段值有两种，可处理范围请求时指定其为bytes,反之则指定其为none。</p>
+<h2 id="Age"><a href="#Age" class="headerlink" title="Age"></a>Age</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Age:600</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Age能告知客户端，源服务器在多久前创建了响应。字段值的单位为秒。<br/><br>若创建该响应的服务器为缓存服务器，Age值是指缓存后的响应再次发起认证到认证完成的时间值。</p>
+<h2 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ETag:&quot;9819364440793772187&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段ETag能告知客户端实体标识。它是一种可将资源以字符串形式做唯一性标识的方式。服务器会为每份资源分配对应的ETag值。<br/><br>资源被缓存时，就会被分配唯一性标识。<br/><br>强ETag值和弱ETag值<br/><br>ETag中有强ETag值和弱ETag值之分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ETag:&quot;usagi-1234&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ETag: W/&quot;usagi-1234&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h2><p>请求报文：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /sample.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>返回重定向，位置转移：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">302  Found</span><br><span class="line">Location:http://www.usagedesign.jp/sample.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据返回的location,重新发起请求：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET  /sample.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>返回响应成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">200 OK</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用首部字段Location可以将响应接收方引导至某个与请求URI位置不同的资源。<br/><br>基本上，该字段会配合3xx:Redirection的响应，提供重定向的URI.</p>
+<h2 id="Proxy-Authenticate"><a href="#Proxy-Authenticate" class="headerlink" title="Proxy-Authenticate"></a>Proxy-Authenticate</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Proxy-Authenticate:Basic  realm=&quot;Usagidesign Auth&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Proxy-Authenticate会把由代理服务器所要求的认证信息发送给客户端<br/><br>该认证行为是在客户端与代理之间进行的。</p>
+<h2 id="Retry-After"><a href="#Retry-After" class="headerlink" title="Retry-After"></a>Retry-After</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Retry-After:120</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上例表示120秒后再尝试访问<br/><br>首部字段Retry-After告知客户端应该在多久之后再次发送请求。主要配合状态码503 Service Unavailable响应，或3xx Redirect响应一起使用。</p>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Server:Apache/2.2.17(Unix)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Server告知客户端当前服务器上安装的HTTP服务器应用程序的信息。不单单会标出服务器上的软件应用名称，还有可能包括版本号和安装时启用的可选项。</p>
+<h2 id="Vary"><a href="#Vary" class="headerlink" title="Vary"></a>Vary</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vary:Accept-Language</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Vary即改变的意思，如何理解改变？<br/><br>指的是响应的返回方式进行了改变<br/><br>当代理服务器接收到带有Vary首部字段指定获取资源的请求时，如果使用的Accept-Language字段的值相同，那么就直接从缓存返回响应。反之，则需要先从源服务器端获取资源后才能作为响应返回。</p>
+<h2 id="WWW-Authenticate"><a href="#WWW-Authenticate" class="headerlink" title="WWW-Authenticate"></a>WWW-Authenticate</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Basic realm=&quot;Usagidesign Auth&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段WWW-Authenticate用于HTTP访问认证。它会告知客户端适用于访问请求URI所指定资源的认证方案（Basic或是Digest）和带参数提示的质询（challenge）。</p>
+<h1 id="实体首部字段"><a href="#实体首部字段" class="headerlink" title="实体首部字段"></a>实体首部字段</h1><p>实体首部字段是包含在请求报文和响应报文中的实体部分所使用的首部，用于补充内容的更新时间等与实体相关的信息。</p>
+<h2 id="Allow"><a href="#Allow" class="headerlink" title="Allow"></a>Allow</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Allow:GET,HEAD</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Allow用于通知客户端能够支持Request-URI指定资源的所有HTTP方法。当服务器接收到不支持的HTTP方法时，会以状态码405  Method Not Allowed作为响应返回。与此同时，还会把能支持的HTTP方法写入首部字段Allow后返回。</p>
+<h2 id="Content-Encoding"><a href="#Content-Encoding" class="headerlink" title="Content-Encoding"></a>Content-Encoding</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Encoding:gzip</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Content-Encoding会告知客户端服务器对实体的主体部分选用的内容编码方式。内容编码是指在不丢失实体信息的前提下所进行的压缩。</p>
+<h2 id="Content-Language"><a href="#Content-Language" class="headerlink" title="Content-Language"></a>Content-Language</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Language:zh-Cn</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Content-Language会告知客户端，实体主体使用的自然语言（指中文或英文等语言）</p>
+<h2 id="Content-Length"><a href="#Content-Length" class="headerlink" title="Content-Length"></a>Content-Length</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Length:15000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Content-Length表明了实体主体部分的大小（单位是字节）。对实体主体进行内容编码传输时，不能再使用Content-Length首部字段。</p>
+<h2 id="Content-Location"><a href="#Content-Location" class="headerlink" title="Content-Location"></a>Content-Location</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Location:http://www.hackr.jp/index-ja.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Content-Location给出与报文主体部分相对应的URI。和首部字段Location不同，Content-Location表示的是报文主体返回资源对应的URI。</p>
+<h2 id="Content-MD5"><a href="#Content-MD5" class="headerlink" title="Content-MD5"></a>Content-MD5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-MD5:OGFKZUwHDGSGEWEewewrweiH==</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Content-MD5的目的在于检查报文主体在传输过程中是否保持完整，以及确认传输到达。<br/><br>客户端会对接收的报文主体执行相同的MD5算法，然后与首部字段Content-MD5的字段值进行比较,即可判断出报文主体的准确性。<br/><br>注：采用这种方法，对内容上的偶发性改变是无从查证的，也无法检测出恶意篡改，因为Content-MD5也可重新计算然后被篡改。</p>
+<h2 id="Content-Range"><a href="#Content-Range" class="headerlink" title="Content-Range"></a>Content-Range</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Range:bytes 5001-10000/10000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>针对范围请求，返回响应时使用的首部字段Content-Range,能告知客户端作为响应返回的实体的哪个部分符合范围请求。字段值以字节为单位，表示当前发送部分及整个实体大小。</p>
+<h2 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Type:text/html;charset=UTF-8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Content-Type说明了实体主体内对象的媒体类型。和首部字段Accept一样，字段值用type&#x2F;subtype形式赋值。</p>
+<h2 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Expires：Wed, 04  Jul  2012  08:26:05  GMT</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Expires会将资源失效的日期告知客户端。<br/><br>缓存服务器在接收到含有首部字段Expires的响应后，会以缓存来应答请求，在Expires字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源。</p>
+<h2 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified:Mon, 23 Oct 2017 10:01:51 GMT</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Last-Modified指明资源最终修改的时间。一般来说，这个值就是Request-URI指定资源被修改的时间。</p>
+<h1 id="为Cookie服务的首部字段"><a href="#为Cookie服务的首部字段" class="headerlink" title="为Cookie服务的首部字段"></a>为Cookie服务的首部字段</h1><p>为Cookie服务的首部字段如下：</p>
+<p>|首部字段名|说明|首部类型<br>|——<br>|Set-Cookie|开始状态管理所使用的Cookie信息|响应首部字段<br>|Cookie|服务器接收到的Cookie信息|请求首部字段</p>
+<h2 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: BD_CK_SAM=deleted; expires=Thu, 01-Jan-1970 17:00:00 GMT; path=/; domain=.m.baidu.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当服务器准备开始管理客户端的状态时，会事先告知各种信息。<br/><br>下面的表格列举了Set-Cookie的字段值</p>
+<p>|属性|说明<br>|——<br>|NAME&#x3D;VALUE|赋予Cookie的名称和其值<br>|expires&#x3D;DATE|Cookie的有效期（若不明确指定则默认为浏览器关闭前为止）<br>|path&#x3D;PATH|将服务器上的文件目录作为Cookie的适用对象（若不指定则默认为文档所在的文件目录）<br>|domain&#x3D;域名|作为Cookie适用对象的域名（若不指定则默认为创建Cookie的服务器的域名）<br>|Secure|仅在HTTPS安全通信时才会发送Cookie<br>|HttpOnly|加以限制，使Cookie不能被JavaScript脚本访问</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie:status=enable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首部字段Cookie会告知服务器，当客户端想获得HTTP状态管理支持时，就会在请求中包含从服务器接收到的Cookie。接收到多个Cookie时，同样可以以多个Cookie形式发送。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-HTTP%E9%A6%96%E9%83%A8%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

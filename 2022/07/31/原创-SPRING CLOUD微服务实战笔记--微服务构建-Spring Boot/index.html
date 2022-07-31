@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot文章目录快速入门1.实现RESTful API 12345678@RestControllerpublic class HelloController&amp;#123;	@RequestMapping(&quot;&#x2F;hello&quot;)	public String hello()&amp;#123;		return &quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring%20Boot/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot文章目录快速入门1.实现RESTful API 12345678@RestControllerpublic class HelloController&amp;#123;	@RequestMapping(&quot;&#x2F;hello&quot;)	public String hello()&amp;#123;		return &quot;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316091018365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316091649997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190316125418820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-07-31T07:58:18.294Z">
+<meta property="article:modified_time" content="2022-07-31T07:51:32.929Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190316091018365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70">
+
+
+<link rel="canonical" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring%20Boot/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring%20Boot/","path":"2022/07/31/原创-SPRING CLOUD微服务实战笔记--微服务构建-Spring Boot/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Hexo</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%88%9B%EF%BC%9ASPRING-CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0%E2%80%93%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring-Boot"><span class="nav-number">1.</span> <span class="nav-text">原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="nav-number">1.0.1.</span> <span class="nav-text">文章目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">1.1.</span> <span class="nav-text">快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">配置详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringBoot%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">SpringBoot默认配置文件位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">YAML配置格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">自定义参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%BC%95%E7%94%A8"><span class="nav-number">1.2.4.</span> <span class="nav-text">参数引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.2.5.</span> <span class="nav-text">生成随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.6.</span> <span class="nav-text">命令行参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.7.</span> <span class="nav-text">多环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.2.8.</span> <span class="nav-text">加载顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">监控与管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E8%AF%86actuator"><span class="nav-number">1.3.1.</span> <span class="nav-text">初识actuator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E7%AB%AF%E7%82%B9"><span class="nav-number">1.3.2.</span> <span class="nav-text">原生端点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">应用配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E6%8C%87%E6%A0%87%E7%B1%BB"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">度量指标类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%8E%A7%E5%88%B6%E7%B1%BB"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">操作控制类</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA-Spring%20Boot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="原创：SPRING-CLOUD微服务实战笔记–微服务构建-Spring-Boot"><a href="#原创：SPRING-CLOUD微服务实战笔记–微服务构建-Spring-Boot" class="headerlink" title="原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot"></a>原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot</h1><h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>1.实现RESTful API</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class HelloController&#123;</span><br><span class="line">	@RequestMapping(&quot;/hello&quot;)</span><br><span class="line">	public String hello()&#123;</span><br><span class="line">		return &quot;hello world!&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.启动Spring Boot应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">@WebAppConfiguration</span><br><span class="line">public class HelloApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">	private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">	@Before</span><br><span class="line">	public void setUp() throws Exception&#123;</span><br><span class="line">		mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Test</span><br><span class="line">	public void hello() throws Exception&#123;</span><br><span class="line">		mvc.perform(MockMvcRequestBuilders.get(&quot;/hello&quot;).accept(MediaType.APPLICATION_JSON))</span><br><span class="line">				.andExpect(status().isOk())</span><br><span class="line">				.andExpect(content().string(equalTo(&quot;Hello World!&quot;)));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>@RunWith(SpringRunner.class)</code>:书中为<code>@RunWith(SpringJUnit4ClassRunner.class)</code>,引入Spring对JUnit4的支持<br/><br><code>@SpringBootTest</code>:书中为<code>@SpringApplicationConfiguration</code>,指定SpringBoot的启动类<br/><br><code>@WebAppConfiguration</code>:开启Web应用的配置,用于模拟ServletContext<br/><br><code>MockMvc</code>对象:用于模拟调用Controller的接口发起请求,在<code>@Test</code>定义的hello测试用例中,perform执行一次请求调用,accept用于执行接收的数据类型,andExpect用于判断接口返回的期望值<br/><br><code>@Before</code>:JUnit定义在测试用例@Test内容执行前预加载的内容,这里用来初始化对HelloController的模拟</p>
+<h2 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a>配置详解</h2><h3 id="SpringBoot默认配置文件位置"><a href="#SpringBoot默认配置文件位置" class="headerlink" title="SpringBoot默认配置文件位置"></a>SpringBoot默认配置文件位置</h3><p><code>src/main/resources/application.properties</code></p>
+<h3 id="YAML配置格式"><a href="#YAML配置格式" class="headerlink" title="YAML配置格式"></a>YAML配置格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">environments:</span><br><span class="line">	dev:</span><br><span class="line">		url: http://dev.bar.com</span><br><span class="line">		name: developer setup</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义参数"><a href="#自定义参数" class="headerlink" title="自定义参数"></a>自定义参数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book.name=SpringCloudApplication</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Book&#123;</span><br><span class="line">	@Value(&quot;$&#123;book.name&#125;&quot;)</span><br><span class="line">	private String name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数引用"><a href="#参数引用" class="headerlink" title="参数引用"></a>参数引用</h3><p>属性文件中的各个参数也可相互调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">book.name=SpringCloud</span><br><span class="line">book.author=haha</span><br><span class="line">book.desc=$&#123;book.author&#125; is writing &amp;lt;$&#123;book.name&#125;&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a>生成随机数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$&#123;random&#125;的配置方式主要有以下几种</span><br><span class="line">#随机字符串</span><br><span class="line">blog.value=$&#123;random.value&#125;</span><br><span class="line">#随机int</span><br><span class="line">blog.number=$&#123;random.int&#125;</span><br><span class="line">#随机long</span><br><span class="line">blog.bignumber=$&#123;random.log&#125;</span><br><span class="line">#10以内的随机数</span><br><span class="line">blog.test1=$&#123;random.int(10)&#125;</span><br><span class="line">#10~20以内的随机数</span><br><span class="line">blog.test2=$&#123;random.int[10,20]&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><p>通过<code>java -jar xxx.jar --server.port=8888</code>可以将配置文件中server.port修改为8888</p>
+<h3 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h3><p><code>spring.profiles.active</code>属性设置{profile}值<br/><br>例如:<code>spring.profiles.active=test</code>就会加载<code>application-test.properties</code></p>
+<h3 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h3><blockquote>
+</blockquote>
+<p>1)在命令行传入的参数<br/>
+2)SPRING_APPLICATION_JSON中的属性,SPRING_APPLICATION_JSON是以JSON格式<br/>
+配置在系统环境变量中的内容<br/>
+3)java:comp/env中的JNDI属性<br/>
+4)Java的系统属性,可以通过System.getProperties()获得的内容<br/>
+5)操作系统的环境变量<br/>
+6)通过random.*配置的随机属性<br/>
+7)jar包之外,不同环境对应的application-{profile}配置文件<br/>
+8)jar包之内,不同环境对应的application-{profile}配置文件<br/>
+9)jar包之外的application.properties或YAML<br/>
+10)jar包之内的application.properties或YAML<br/>
+11)@Configuration修改的类,通过@PropertySource注解定义的属性<br/>
+12)应用默认属性,使用SpringApplication.setDefaultProperties定义的内容</p>
+
+
+<p><code>以上数字越小优先级越高</code></p>
+<h2 id="监控与管理"><a href="#监控与管理" class="headerlink" title="监控与管理"></a>监控与管理</h2><h3 id="初识actuator"><a href="#初识actuator" class="headerlink" title="初识actuator"></a>初识actuator</h3><p>引入依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;dependency&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt;</span><br><span class="line">  &amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>刷新pom,此处若不刷新会报错<br/><br><img alt="actuator引入失败解决" src="https://img-blog.csdnimg.cn/20190316091018365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>重启应用,控制台输出<br/><br><img alt="控制台输出" src="https://img-blog.csdnimg.cn/20190316091649997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>访问<code>http://localhost:8080/health</code>可以实时获取应用的各项监控指标</p>
+<h3 id="原生端点"><a href="#原生端点" class="headerlink" title="原生端点"></a>原生端点</h3><p>1.应用配置类:获取应用程序中加载的应用配置,环境变量,自动化配置报告等与SpringBoot应用密切相关的配置类信息<br/><br>2.度量指标类:获取应用程序运行过程中用于监控的度量指标,比如内存信息,线程池信息,HTTP请求统计等<br/><br>3.操作控制类:提供了对应用的关闭等操作类功能</p>
+<h4 id="应用配置类"><a href="#应用配置类" class="headerlink" title="应用配置类"></a>应用配置类</h4><p>若要端点能够生效,需要在<code>application.properties</code>中加入<code>management.security.enabled=false</code><br/><br>否则会出现如下报错:status&#x3D;401<br/><br><img alt="未生效端点" src="https://img-blog.csdnimg.cn/20190316125418820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br><code>/autoconfig</code>:该端点用来获取应用的自动化配置报告<br/><br><code>positiveMatches</code>中返回的是条件匹配成功的自动化配置	<br/><br><code>negativeMatches</code>中返回的是条件匹配不成功的自动化配置,可以查看具体没有生效的原因<br/><br><code>/beans</code>:该端点用来获取应用上下文中创建的所有bean<br/><br><code>/configprops</code>:该端点用于获取应用中配置的属性信息报告<br/><br><code>/env</code>:用来获取所有可用的环境属性报告,如环境变量,JVM属性,应用的配置属性,命令行中的参数,可以通过<kbd>@ConfigurationProperties</kbd>注解来引入到应用程序中使用<br/><br><code>/mappings</code>:该端点用来返回所有SpringMvc的控制器映射关系报告<br/><br><code>/info</code>:该端点用来返回一些应用自定义的信息<br/><br>比如在application.properties中通过info前缀设置属性:<code>info.app.name=spring-boot-hello</code></p>
+<h4 id="度量指标类"><a href="#度量指标类" class="headerlink" title="度量指标类"></a>度量指标类</h4><p><code>/metrics</code>:该端点用来返回当前应用的各类重要度量指标,比如内存信息,线程信息,垃圾回收信息等<br/><br><code>/health</code>:该端点用于获取应用的各类健康指标信息.</p>
+<p>|检测器|功能<br>|——<br>|DiskSpaceHealthIndicator|低磁盘空间检测<br>|DataSourceHealthIndicator|检测DataSource的连接是否可用<br>|MongoHealthIndicator|检测Mongo数据库是否可用<br>|RedisHealthIndicator|检测Redis服务器是否可用</p>
+<p>对于没有自动化配置的检测器,需要自己来实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class RocketMQHealthIndicator implements HealthIndicator&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Health health() &#123;</span><br><span class="line">        int errorCode = check();</span><br><span class="line">        if(errorCode != 0)&#123;</span><br><span class="line">            return Health.down().withDetail(&quot;Error Code&quot;,errorCode).build();</span><br><span class="line">        &#125;</span><br><span class="line">        return Health.up().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int check()&#123;</span><br><span class="line">        //对监控对象的检测操作</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>/dump</code>:该端点用于暴露程序运行时的线程信息<br/><br><code>/trace</code>:该端点用于返回基本的HTTP跟踪信息</p>
+<h4 id="操作控制类"><a href="#操作控制类" class="headerlink" title="操作控制类"></a>操作控制类</h4><p><code>/shutdown</code>可以通过如下配置来开启,需要加入保护机制如定制化的actuator的端点路径或者整合Spring Security进行安全校验等<br/><br><code>endpoints.shutdown.enabled=true</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8-Spring%20Cloud%20Feign/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-Spring%20Cloud%20Stream/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
