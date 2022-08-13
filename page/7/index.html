@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,87 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-shell%20source%20sh%20bash%E4%B8%8E.-%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-shell%20source%20sh%20bash%E4%B8%8E.-%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：shell-source-sh-bash与-x2F-的区别"><a href="#原创：shell-source-sh-bash与-x2F-的区别" class="headerlink" title="原创：shell source sh bash与.&#x2F;的区别"></a>原创：shell source sh bash与.&#x2F;的区别</h1><h1 id="source的使用"><a href="#source的使用" class="headerlink" title="source的使用"></a>source的使用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source FileName</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>作用:在当前bash环境下读取并执行FileName中的命令。该filename文件可以无”执行权限”<br/><br>注：该命令通常用命令“.”来替代。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source .bash_profile</span><br><span class="line">. .bash_profile</span><br><span class="line">两者等效</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>source通常用来生效刚刚修改的文件</p>
+<h1 id="sh与bash的使用"><a href="#sh与bash的使用" class="headerlink" title="sh与bash的使用"></a>sh与bash的使用</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh FileName</span><br><span class="line"> bash FileName</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>作用:在当前bash环境下读取并执行FileName中的命令。该filename文件可以无”执行权限”<br/><br>注：两者在执行文件时的不同，是分别用自己的shell来跑文件。</p>
+<h1 id="x2F-的使用"><a href="#x2F-的使用" class="headerlink" title=".&#x2F;的使用"></a>.&#x2F;的使用</h1><p><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/20200109101618427.png"/><br/><br>作用:打开一个子shell来读取并执行FileName中命令。<br/><br>注：运行一个shell脚本时会启动另一个命令解释器.<br/><br>注：需要加权限才可以执行。</p>
+<h1 id="source-sh-bash-与-x2F-的区别"><a href="#source-sh-bash-与-x2F-的区别" class="headerlink" title="source sh bash 与.&#x2F;的区别"></a>source sh bash 与.&#x2F;的区别</h1><p>如下例子中，展示source 、sh、bash与.&#x2F;的区别：<br/><br>结论一:脚本加上执行权限后，.&#x2F;<strong>.sh, sh .&#x2F;</strong>.sh与bash .&#x2F;*.sh相同，此三种执行脚本的方式都是重新启动一个子shell,在子shell中执行此脚本。</p>
+<p>结论二: source  *.sh和.  *.sh的执行方式是等价的，即两种执行方式都是在当前shell进程中执行此脚本，而不是重新启动一个shell 而在子shell进程中执行此脚本。<br/><br><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/2020010910011516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>验证依据：没有被export导出的变量（即非环境变量）是不能被子shell继承的<br/><br><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/20200109102437144.png"/></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -882,88 +963,6 @@ id(b)<br/>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;build&amp;gt;</span><br><span class="line">	&amp;lt;plugins&amp;gt;</span><br><span class="line">		&amp;lt;plugin&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt;</span><br><span class="line">			&amp;lt;version&amp;gt;2.0.3.RELEASE&amp;lt;/version&amp;gt;</span><br><span class="line">			&amp;lt;executions&amp;gt;</span><br><span class="line">				&amp;lt;execution&amp;gt;</span><br><span class="line">					&amp;lt;goals&amp;gt;</span><br><span class="line">						&amp;lt;goal&amp;gt;repackage&amp;lt;/goal&amp;gt;</span><br><span class="line">					&amp;lt;/goals&amp;gt;</span><br><span class="line">				&amp;lt;/execution&amp;gt;</span><br><span class="line">			&amp;lt;/executions&amp;gt;</span><br><span class="line">		&amp;lt;/plugin&amp;gt;</span><br><span class="line">	&amp;lt;/plugins&amp;gt;</span><br><span class="line">&amp;lt;/build&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>第二步:在控制台输入<code>mvn clean package</code>,打包成功<br/><br><img alt="mvn clean package" src="https://img-blog.csdnimg.cn/20190327005428520.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>注:执行此命令要在有pom.xml的文件夹下,否则就会报以下错误,找不到pom.xml<br/><br>通常在一个项目的根目录下就会有pom.xml<br/><br><img alt="no Pom" src="https://img-blog.csdnimg.cn/20190327005912519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Maven%20Package%E8%B7%B3%E8%BF%87%E6%B5%8B%E8%AF%95%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.webp">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-Maven%20Package%E8%B7%B3%E8%BF%87%E6%B5%8B%E8%AF%95%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%8A%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：Maven-Package跳过测试的两种方法及区别"><a href="#原创：Maven-Package跳过测试的两种方法及区别" class="headerlink" title="原创：Maven Package跳过测试的两种方法及区别"></a>原创：Maven Package跳过测试的两种方法及区别</h1><p>最近在工作中需要打包项目，直接使用了Maven Package的命令，但是在编译测试的时候耗时很长，这个时候就想着有没有能跳过测试的方法。</p>
-<p>-DskipTests，不执行测试用例，但编译测试用例类生成相应的class文件至target&#x2F;test-classes下。</p>
-<p>-Dmaven.test.skip&#x3D;true，不执行测试用例，也不编译测试用例类。</p>
-<p>第一种方法：  使用 mvn package -DskipTests 跳过单元测试，但是会继续编译。如果没时间修改单元测试的bug，或者单元测试编译错误，则使用第二种方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;plugin&amp;gt;  </span><br><span class="line">    &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;  </span><br><span class="line">    &amp;lt;artifactId&amp;gt;maven-surefire-plugin&amp;lt;/artifactId&amp;gt;  </span><br><span class="line">    &amp;lt;version&amp;gt;2.5&amp;lt;/version&amp;gt;  </span><br><span class="line">    &amp;lt;configuration&amp;gt;  </span><br><span class="line">        &amp;lt;skipTests&amp;gt;true&amp;lt;/skipTests&amp;gt;  </span><br><span class="line">    &amp;lt;/configuration&amp;gt;  </span><br><span class="line">&amp;lt;/plugin&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>第二种方法：使用maven.test.skip，不但跳过单元测试的运行，也跳过测试代码的编译。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn package -Dmaven.test.skip=true </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>也可以在pom.xml中加入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;plugin&amp;gt;  </span><br><span class="line">    &amp;lt;groupId&amp;gt;org.apache.maven.plugin&amp;lt;/groupId&amp;gt;  </span><br><span class="line">    &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt;  </span><br><span class="line">    &amp;lt;version&amp;gt;2.1&amp;lt;/version&amp;gt;  </span><br><span class="line">    &amp;lt;configuration&amp;gt;  </span><br><span class="line">        &amp;lt;skip&amp;gt;true&amp;lt;/skip&amp;gt;  </span><br><span class="line">    &amp;lt;/configuration&amp;gt;  </span><br><span class="line">&amp;lt;/plugin&amp;gt;  </span><br><span class="line">&amp;lt;plugin&amp;gt;  </span><br><span class="line">    &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;  </span><br><span class="line">    &amp;lt;artifactId&amp;gt;maven-surefire-plugin&amp;lt;/artifactId&amp;gt;  </span><br><span class="line">    &amp;lt;version&amp;gt;2.5&amp;lt;/version&amp;gt;  </span><br><span class="line">    &amp;lt;configuration&amp;gt;  </span><br><span class="line">        &amp;lt;skip&amp;gt;true&amp;lt;/skip&amp;gt;  </span><br><span class="line">    &amp;lt;/configuration&amp;gt;  </span><br><span class="line">&amp;lt;/plugin&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>默认idea的跳过测试采用的是第一种，所以仍然会编译代码，如果想不执行测试用例，也不编译测试用例类,那么必须采用第二种方式在pom中加上skip为true，这样才能跳过编译</p>
 
       
     </div>

@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,88 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B9%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B9%8B%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Lambda表达式之方法引用"><a href="#Lambda表达式之方法引用" class="headerlink" title="Lambda表达式之方法引用"></a>Lambda表达式之方法引用</h1><h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>方法引用可以被看做仅仅调用特定方法的Lambda的一种快捷写法。它的基本思想是，如果一个Lambda代表的只是”直接调用这个方法“，那最好还是用名称来调用它，而不是去描述如何调用它。<br/><br>  事实上，方法引用就是让你根据已有的方法实现来创建Lambda表达式。但是，显式地指明方法的名称，你的代码可读性会更好。</p>
+<h3 id="如何构建方法引用"><a href="#如何构建方法引用" class="headerlink" title="如何构建方法引用"></a>如何构建方法引用</h3><p>方法引用主要有三类：<br/><br>（1）指向静态方法的方法引用（例如Integer的parseInt方法，写作Integer::parseInt)<br/><br>（2）指向任意类型实例方法的方法引用（例如String的length方法，写作String::length)<br/><br>（3）指向现有对象的实例方法的方法引用（假设你有一个局部变量expensiveTransaction用于存放Transaction<br/><br>第一种很好理解，就是静态方法<br/><br>第二种就是你在引用一个对象的方法，而这个对象本身是Lambda的一个参数。<br/><br>例如：Lambda表达式（String s) - &gt;  s.toUpperCase()可以写作String::toUpperCase。<br/><br>第三种就是你在Lambda中调用一个已经存在的外部对象中的方法。<br/><br>例如：Lambda表达式（）-&gt; expensiveTransaction.getValue()可以写作expensiveTransaction::getValue。</p>
+<h3 id="构造函数引用"><a href="#构造函数引用" class="headerlink" title="构造函数引用"></a>构造函数引用</h3><p>  对于一个现有构造函数，可以利用它的名称和关键字new，来创建一个它的一个引用：ClassName::new。它的功能与指向静态方法的引用类似。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Supplier&amp;lt;Apple&amp;gt; c1 = Apple::new;</span><br><span class="line">Apple a1 = c1.get();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Supplier&amp;lt;Apple&amp;gt; c1 = () -&amp;gt; new Apple();</span><br><span class="line">Apple a1 = c1.get();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果你的构造函数的签名是Apple(Integer weight),那么它就适合Function接口的签名，于是你可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&amp;lt;Integer,Apple&amp;gt; c2 = Apple::new;</span><br><span class="line">Apple a2 = c2.apple(110);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这等价于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Function&amp;lt;Integer,Apple&amp;gt; c2 = (weight) -&amp;gt; new Apple(weight);</span><br><span class="line">Apple a2 = c2.apple(110);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -943,86 +1025,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="转载-小白一路走来，连续刷题三年，谈谈我的算法学习经验"><a href="#转载-小白一路走来，连续刷题三年，谈谈我的算法学习经验" class="headerlink" title="[转载]小白一路走来，连续刷题三年，谈谈我的算法学习经验"></a>[转载]小白一路走来，连续刷题三年，谈谈我的算法学习经验</h1><p>转载自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kubidemanong/p/10996134.html">小白一路走来，连续刷题三年，谈谈我的算法学习经验</a><br/><br>说得很中肯，值得推荐</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/[%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7]%E6%89%BE%E5%87%BA%E6%B2%A1%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.webp">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%5B%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7%5D%E6%89%BE%E5%87%BA%E6%B2%A1%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="解题技巧-找出没有重复的数"><a href="#解题技巧-找出没有重复的数" class="headerlink" title="[解题技巧]找出没有重复的数"></a>[解题技巧]找出没有重复的数</h1><p>题目：<br/><br>给你一组整型数据，这些数据中，其中有一个数只出现了一次，其他的数都出现了两次，让你来找出一个数 。<br/><br>数据如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1,2,3,4,5,4,3,2,1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>使用异或方式解题：</p>
-<p>解题思路：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1^2^3^4^5^4^3^2^1  = (1^1)^(2^2)^(3^3)^(4^4)^5 = 0^0^0^0^5 = 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public int findNum(int[] array)&#123;</span><br><span class="line">       int tmp = 0;</span><br><span class="line">       for(int num : array)&#123;</span><br><span class="line">           tmp = tmp^num;</span><br><span class="line">       &#125;</span><br><span class="line">       return tmp;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
 
       
     </div>

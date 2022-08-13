@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,82 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Java8%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-Java8%E4%B8%AD%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：Java8中的默认方法"><a href="#原创：Java8中的默认方法" class="headerlink" title="原创：Java8中的默认方法"></a>原创：Java8中的默认方法</h1><h2 id="默认方法"><a href="#默认方法" class="headerlink" title="默认方法"></a>默认方法</h2><p>  Java8中加入默认方法主要是为了支持库设计师，让他们能够写出容易改进的接口。这一方法很重要，因为你会在接口中遇到越来越多的默认方法，但由于真正需要编写默认方法的程序员相对较少，而且它们只是有助于程序改进，而不是用于编写任何具体的程序。<br/><br>  两段Java8示例代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&amp;lt;Apple&amp;gt; heavyApples1 =</span><br><span class="line">	inventory.stream().filter((Apple a) -&amp;gt; a.getWeight() &amp;gt; 50).collect(toList());</span><br><span class="line">List&amp;lt;Apple&amp;gt; heavyApples2 = </span><br><span class="line">    inventory.parallelStream().filter((Apple a) -&amp;gt; a.getWeight() &amp;gt; 50).collect(toList())	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但这里有个问题：在Java8之前，List并没有stream或者parallelStream方法，它实现的Collection接口也没有。可没有这些方法，这些代码就不能编译。最简单的方法就是在Collection接口中加入stream方法，并加入ArrayList类的实现。<br/><br>  可要是这样做，对用户来说就是噩梦了。有很多的替代集合框架都用Collection API实现了接口。但给接口加入一个新方法，意味着所有的实体类都必须为其提供一个实现。语言设计者没法控制Collections所有现有的实现，所以如何改变已发布的接口而不破坏已有的实现呢？<br/><br>  Java8的解决办法就是打破最后一环——接口如今可以包含实现类没有提供实现的方法签名了。缺失的方法主体随接口提供了，而不是由实现类提供。<br/><br>  这就给接口设计者提供了一个扩充接口的方式，而不会破坏现有的代码。Java 8在接口声明中使用新的<strong>default</strong>关键字来表示这一点。<br/><br>  例如，在Java 8里，现在可以直接对List用sort方法。它是用Java8 List接口中如下所示的默认方法实现的，它会调用Collections.sort静态方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">default void sort(Comparator&amp;lt;? super E&amp;gt; c)&#123;</span><br><span class="line">	Collections.sort(this,c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  这意味着List的任何实体类都不需要显式实现sort,而在以前的Java版本中，除非提供了sort的实现，否则这些实体类在重新编译时都会失败。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1127,89 +1203,6 @@
 <p>git add 如果添加了错误的文件的话</p>
 <p>撤销操作</p>
 <p>git status 先看一下add 中的文件<br/><br>git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了<br/><br>git reset HEAD XXX&#x2F;XXX&#x2F;XXX.java 就是对某个文件进行撤销了</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-365.%E6%B0%B4%E5%A3%B6%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.webp">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-365.%E6%B0%B4%E5%A3%B6%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：365-水壶问题"><a href="#原创：365-水壶问题" class="headerlink" title="原创：365.水壶问题"></a>原创：365.水壶问题</h1><p>来源：力扣（LeetCode）<br/><br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/water-and-jug-problem">https://leetcode-cn.com/problems/water-and-jug-problem</a></p>
-<p>有两个容量分别为 x升 和 y升 的水壶以及无限多的水。请判断能否通过使用这两个水壶，从而可以得到恰好 z升 的水？</p>
-<p>如果可以，最后请用以上水壶中的一或两个来盛放取得的 z升 水。</p>
-<p>你允许：</p>
-<p>装满任意一个水壶<br/><br>清空任意一个水壶<br/><br>从一个水壶向另外一个水壶倒水，直到装满或者倒空<br/><br>示例 1: (From the famous “Die Hard” example)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: x = 3, y = 5, z = 4</span><br><span class="line">输出: True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>示例 2:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: x = 2, y = 6, z = 5</span><br><span class="line">输出: False</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>java:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean canMeasureWater(int x, int y, int z) &#123;</span><br><span class="line">        if(x+y&amp;lt;z)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        if(x == 0 || y == 0)&#123;</span><br><span class="line">            return z==0 || x+y==z;</span><br><span class="line">        &#125;</span><br><span class="line">        return z % gcb(x,y) == 0;</span><br><span class="line">    &#125;</span><br><span class="line">    int gcb(int m, int n) &#123;  </span><br><span class="line">            if (m &amp;lt; n) &#123;// 保证m&amp;gt;n,若m&amp;lt;n,则进行数据交换  </span><br><span class="line">                int temp = m;  </span><br><span class="line">                m = n;  </span><br><span class="line">                n = temp;  </span><br><span class="line">            &#125;  </span><br><span class="line">            if (m % n == 0) &#123;// 若余数为0,返回最大公约数  </span><br><span class="line">                return n;  </span><br><span class="line">            &#125; else &#123; // 否则,进行递归,把n赋给m,把余数赋给n  </span><br><span class="line">                return gcb(n, m % n);  </span><br><span class="line">            &#125;  </span><br><span class="line">      &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>贝祖定理：<br/><br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A3%B4%E8%9C%80%E5%AE%9A%E7%90%86/5186593?fromtitle=%E8%B4%9D%E7%A5%96%E5%AE%9A%E7%90%86&amp;fromid=5185441">https://baike.baidu.com/item/%E8%A3%B4%E8%9C%80%E5%AE%9A%E7%90%86/5186593?fromtitle=%E8%B4%9D%E7%A5%96%E5%AE%9A%E7%90%86&amp;fromid=5185441</a></p>
 
       
     </div>

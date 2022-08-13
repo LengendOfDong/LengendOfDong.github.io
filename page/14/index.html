@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,86 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/[%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7]%E6%89%BE%E5%87%BA%E6%B2%A1%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%5B%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7%5D%E6%89%BE%E5%87%BA%E6%B2%A1%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="解题技巧-找出没有重复的数"><a href="#解题技巧-找出没有重复的数" class="headerlink" title="[解题技巧]找出没有重复的数"></a>[解题技巧]找出没有重复的数</h1><p>题目：<br/><br>给你一组整型数据，这些数据中，其中有一个数只出现了一次，其他的数都出现了两次，让你来找出一个数 。<br/><br>数据如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1,2,3,4,5,4,3,2,1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用异或方式解题：</p>
+<p>解题思路：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1^2^3^4^5^4^3^2^1  = (1^1)^(2^2)^(3^3)^(4^4)^5 = 0^0^0^0^5 = 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public int findNum(int[] array)&#123;</span><br><span class="line">       int tmp = 0;</span><br><span class="line">       for(int num : array)&#123;</span><br><span class="line">           tmp = tmp^num;</span><br><span class="line">       &#125;</span><br><span class="line">       return tmp;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度为O(n)，空间复杂度为O(1)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,90 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E8%BD%AC%E8%BD%BD-java%E4%BD%BF%20FileWriter%20FileReader%20%E6%97%A0%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%EF%BC%8COutputStreamWriter%20InputStreamReader%E5%8F%AF%E8%AE%BE%E7%BD%AE%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E8%BD%AC%E8%BD%BD-java%E4%BD%BF%20FileWriter%20FileReader%20%E6%97%A0%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%EF%BC%8COutputStreamWriter%20InputStreamReader%E5%8F%AF%E8%AE%BE%E7%BD%AE%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="转载：java使-FileWriter-FileReader-无编码格式，OutputStreamWriter-InputStreamReader可设置编码格式"><a href="#转载：java使-FileWriter-FileReader-无编码格式，OutputStreamWriter-InputStreamReader可设置编码格式" class="headerlink" title="转载：java使 FileWriter FileReader 无编码格式，OutputStreamWriter InputStreamReader可设置编码格式"></a>转载：java使 FileWriter FileReader 无编码格式，OutputStreamWriter InputStreamReader可设置编码格式</h1><p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27093465/article/details/72730796">https://blog.csdn.net/qq_27093465/article/details/72730796</a></p>
+<p>使用Java中的 FileWriter FileReader 可以传个文件路径，然后就可以简单的实现，文件的读和写。<br/><br>但是这个实现是太简单了，会有问题的。</p>
+<p>简单的代码操作，如我的这篇博文里面的转存文件的代码就是使用这2个类来实现的。</p>
+<p>java修改文件名-renameTo()方法的使用实例，复制一个文件或者叫转存一个文件</p>
+<p>上面的转存代码，经过findbugs分析，有如下的提示：</p>
+<p>具体如下：<br/><br>Found reliance on default encoding: new java.io.FileWriter(String)<br/><br>Reliance on default encoding<br/><br>Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms. Use an alternative API and specify a charset name or Charset object explicitly.</p>
+<p>然后，翻译一下就是下图：</p>
+<p>FileWriter FileReader 是不带编码格式的，默认使用本机器的默认编码，那么就会因为编码问题，而bug的。</p>
+<p>怎么让 FileWriter FileReader 他们带上编码格式呢？</p>
+<p>还是拿转存文件的代码来修改。具体修改如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">private static boolean copyFile(String src, String des) &#123;</span><br><span class="line">    InputStreamReader fr = null;</span><br><span class="line">    OutputStreamWriter fw = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        fr = new InputStreamReader(new FileInputStream(src),&quot;UTF-8&quot;);//读</span><br><span class="line">        fw = new OutputStreamWriter(new FileOutputStream(des), &quot;UTF-8&quot;);//写</span><br><span class="line">        char[] buf = new char[1024];//缓冲区</span><br><span class="line">        int len;</span><br><span class="line">        while ((len = fr.read(buf)) != -1) &#123;</span><br><span class="line">            fw.write(buf, 0, len);//读几个写几个</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        LOG.error(e.getMessage());</span><br><span class="line">        return false;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (fr != null) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                fr.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                LOG.error(e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (fw != null) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                fw.flush();</span><br><span class="line">                fw.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                LOG.error(e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重点就是把<br/><br>FileWriter FileReader   换成了  OutputStreamWriter InputStreamReader</p>
+<p>new InputStreamReader(new FileInputStream(src),“UTF-8”);&#x2F;&#x2F;读<br/><br>new OutputStreamWriter(new FileOutputStream(des), “UTF-8”);&#x2F;&#x2F;写</p>
+<p>这就带上了编码格式了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1255,7 +1339,7 @@ V put(K paramK, int paramInt, V paramV, boolean paramBoolean)  </li><l
 <p>从上述的分析看出，<strong><strong>ConcurrentHashMap基于concurrentLevel划分出了多个Segment来对key-value进行存储，从而避免每次锁定整个数组，在默认的情况下，允许16个线程并发无阻塞的操作集合对象，尽可能地减少并发时的阻塞现象。</strong></strong></p>
 <p>在多线程的环境中，相对于HashTable，ConcurrentHashMap会带来很大的性能提升！</p>
 <p><strong><u>欢迎读者批评指正，有任何建议请联系:</u></strong></p>
-<p><strong><u>EGG：<a href="mailto:&#120;&#116;&#x66;&#x67;&#x67;&#x65;&#x66;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#120;&#116;&#x66;&#x67;&#x67;&#x65;&#x66;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>      <a target="_blank" rel="noopener" href="http://weibo.com/xtfggef">http://weibo.com/xtfggef</a></u></strong></p>
+<p><strong><u>EGG：<a href="mailto:&#120;&#x74;&#x66;&#x67;&#103;&#101;&#102;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#120;&#x74;&#x66;&#x67;&#103;&#101;&#102;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a>      <a target="_blank" rel="noopener" href="http://weibo.com/xtfggef">http://weibo.com/xtfggef</a></u></strong></p>
 <p><strong>四、HashMap常见问题分析</strong></p>
 <p><strong><strong>1、此处我觉得</strong></strong>网友**<a href="mailto:huxb23@126">huxb23@126</a>**的一篇文章说的很好，<a target="_blank" rel="noopener" href="http://blog.163.com/huxb23@126/blog/static/625898182011211318854/"><strong>分析多线程并发写HashMap线程被hang住的原因</strong></a> ，因为是优秀的资源，此处我整理下搬到这儿。</p>
 <p>以下内容转自博文：<a target="_blank" rel="noopener" href="http://blog.163.com/huxb23@126/blog/static/625898182011211318854/">http:&#x2F;&#x2F;blog.163.com&#x2F;huxb23@126&#x2F;blog&#x2F;static&#x2F;625898182011211318854&#x2F;</a> </p>
@@ -2529,79 +2613,6 @@ public class Test
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class HpImpl implements Print&#123;</span><br><span class="line">	public void print(String s)&#123;</span><br><span class="line">		System.out.println(&quot;this is EpsonPrinter&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>再之后就可以从多个实现中做出选择，完成打印功能的隔离。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.webp">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：线程的调度方式"><a href="#原创：线程的调度方式" class="headerlink" title="原创：线程的调度方式"></a>原创：线程的调度方式</h1><h1 id="线程的调度方式"><a href="#线程的调度方式" class="headerlink" title="线程的调度方式"></a>线程的调度方式</h1><p>  在一个进程里，线程的调度有抢占式和非抢占式的模式。</p>
-<h2 id="抢占式"><a href="#抢占式" class="headerlink" title="抢占式"></a>抢占式</h2><p>  在抢占模式下，操作系统负责分配CPU时间给各个进程，一旦当前的进程使用完分配给自己的CPU时间，操作系统将决定下一个占用CPU时间的是哪一个线程。因此操作系统将定期的中断当前正在执行的线程，将CPU分配给在等待队列的下一个线程。所以任何一个线程都不能独占CPU。每个线程占用CPU的时间取决于进程和操作系统。进程分配给每个线程的时间很短，以至于我们感觉所有的线程是同时执行的。实际上，系统运行每个进程的时间有2毫秒，然后调度其他的线程，它同时维持着所有的线程和循环，分配很少量的CPU时间给线程。<br/><br>  调度是什么意思？调度意味着处理器存储着将要执行完CPU时间的进程的状态和将来某个时间装载这个进程的状态而恢其运行。<br/><br>  抢占式有不足之处，一个线程可以在任何给定的时间中断另外一个线程的执行。假设一个线程正在向一个文件做写入操作，而另外一个线程中断其运行，也向同一个文件做写操作，就会出现写入问题。</p>
-<h2 id="非抢占式"><a href="#非抢占式" class="headerlink" title="非抢占式"></a>非抢占式</h2><p>  在非抢占式调度模式下，每个线程可以需要CPU多少时间就占用CPU多少时间。在这种调度方式下，可能一个执行时间很长的线程使得其他所有需要CPU的线程“饿死”。在处理机空闲，即该进程没有使用CPU时，系统可以允许其他的进程暂时使用CPU。占用CPU 的线程拥有对CPU的控制权，只有它自己主动释放CPU时，其他的线程才可以使用CPU。</p>
-<h2 id="何时用"><a href="#何时用" class="headerlink" title="何时用"></a>何时用</h2><p>  在有些操作系统里面，这两种调度策略都会用到。<br/><br>  非抢占的调度策略在线程运行优先级一般时用到，而对于高优先级的线程调度则多采用抢占式的调度策略。如果你不确定系统采用的是哪种调度策略，假设抢占的调度策略不可用是比较安全的。（前面说明了，文件写入影响很大）<br/><br>  在设计应用程序的时候，我们认为那些占用CPU时间比较多的线程在一定的间隔是会释放CPU的控制权的，这时候系统会查看那些在等候队列里面的与当前执行的线程同一优先级或者更高的优先级的线程，而让这些线程得以使用CPU。如果系统找到一个这样的线程，就立刻暂停当前执行的线程和激活满足条件的线程。如果没有找到同一优先级或更高级的线程，当前线程还继续占有CPU。当正在执行的线程想释放CPU的控制权给一个低优先级的线程，当前线程就转入睡眠状态而让低优先级的线程占有CPU。</p>
 
       
     </div>

@@ -125,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -155,6 +155,79 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：线程的调度方式"><a href="#原创：线程的调度方式" class="headerlink" title="原创：线程的调度方式"></a>原创：线程的调度方式</h1><h1 id="线程的调度方式"><a href="#线程的调度方式" class="headerlink" title="线程的调度方式"></a>线程的调度方式</h1><p>  在一个进程里，线程的调度有抢占式和非抢占式的模式。</p>
+<h2 id="抢占式"><a href="#抢占式" class="headerlink" title="抢占式"></a>抢占式</h2><p>  在抢占模式下，操作系统负责分配CPU时间给各个进程，一旦当前的进程使用完分配给自己的CPU时间，操作系统将决定下一个占用CPU时间的是哪一个线程。因此操作系统将定期的中断当前正在执行的线程，将CPU分配给在等待队列的下一个线程。所以任何一个线程都不能独占CPU。每个线程占用CPU的时间取决于进程和操作系统。进程分配给每个线程的时间很短，以至于我们感觉所有的线程是同时执行的。实际上，系统运行每个进程的时间有2毫秒，然后调度其他的线程，它同时维持着所有的线程和循环，分配很少量的CPU时间给线程。<br/><br>  调度是什么意思？调度意味着处理器存储着将要执行完CPU时间的进程的状态和将来某个时间装载这个进程的状态而恢其运行。<br/><br>  抢占式有不足之处，一个线程可以在任何给定的时间中断另外一个线程的执行。假设一个线程正在向一个文件做写入操作，而另外一个线程中断其运行，也向同一个文件做写操作，就会出现写入问题。</p>
+<h2 id="非抢占式"><a href="#非抢占式" class="headerlink" title="非抢占式"></a>非抢占式</h2><p>  在非抢占式调度模式下，每个线程可以需要CPU多少时间就占用CPU多少时间。在这种调度方式下，可能一个执行时间很长的线程使得其他所有需要CPU的线程“饿死”。在处理机空闲，即该进程没有使用CPU时，系统可以允许其他的进程暂时使用CPU。占用CPU 的线程拥有对CPU的控制权，只有它自己主动释放CPU时，其他的线程才可以使用CPU。</p>
+<h2 id="何时用"><a href="#何时用" class="headerlink" title="何时用"></a>何时用</h2><p>  在有些操作系统里面，这两种调度策略都会用到。<br/><br>  非抢占的调度策略在线程运行优先级一般时用到，而对于高优先级的线程调度则多采用抢占式的调度策略。如果你不确定系统采用的是哪种调度策略，假设抢占的调度策略不可用是比较安全的。（前面说明了，文件写入影响很大）<br/><br>  在设计应用程序的时候，我们认为那些占用CPU时间比较多的线程在一定的间隔是会释放CPU的控制权的，这时候系统会查看那些在等候队列里面的与当前执行的线程同一优先级或者更高的优先级的线程，而让这些线程得以使用CPU。如果系统找到一个这样的线程，就立刻暂停当前执行的线程和激活满足条件的线程。如果没有找到同一优先级或更高级的线程，当前线程还继续占有CPU。当正在执行的线程想释放CPU的控制权给一个低优先级的线程，当前线程就转入睡眠状态而让低优先级的线程占有CPU。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -890,75 +963,6 @@
 <td align="center">-x</td><td align="center">exclude,排除某个对象</td>
 <td align="center">-y</td><td align="center">yes,对所有问题回答yes</td>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E5%B8%B8%E7%94%A8%E4%BD%86%E6%98%93%E5%BF%98%E7%9A%84bash%20shell%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.webp">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E5%B8%B8%E7%94%A8%E4%BD%86%E6%98%93%E5%BF%98%E7%9A%84bash%20shell%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：常用但易忘的bash-shell命令"><a href="#原创：常用但易忘的bash-shell命令" class="headerlink" title="原创：常用但易忘的bash shell命令"></a>原创：常用但易忘的bash shell命令</h1><h2 id="LS"><a href="#LS" class="headerlink" title="LS"></a>LS</h2><h2 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h2><h2 id="链接文件"><a href="#链接文件" class="headerlink" title="链接文件"></a>链接文件</h2><h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><h2 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h2><h2 id="查看整个文件"><a href="#查看整个文件" class="headerlink" title="查看整个文件"></a>查看整个文件</h2><h2 id="查看部分文件"><a href="#查看部分文件" class="headerlink" title="查看部分文件"></a>查看部分文件</h2><h2 id="监测程序"><a href="#监测程序" class="headerlink" title="监测程序"></a>监测程序</h2><h2 id="挂载存储媒体"><a href="#挂载存储媒体" class="headerlink" title="挂载存储媒体"></a>挂载存储媒体</h2><h2 id="使用df命令"><a href="#使用df命令" class="headerlink" title="使用df命令"></a>使用df命令</h2><h2 id="使用du命令"><a href="#使用du命令" class="headerlink" title="使用du命令"></a>使用du命令</h2><h2 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h2><h2 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h2><h2 id="归档数据"><a href="#归档数据" class="headerlink" title="归档数据"></a>归档数据</h2>
       
     </div>
 
