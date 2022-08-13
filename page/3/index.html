@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,96 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E5%AD%97%E6%AE%B5%E5%88%86%E9%9A%94%E7%AC%A6%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E4%BD%BF%E7%94%A8%E5%86%85%E9%83%A8%E5%AD%97%E6%AE%B5%E5%88%86%E9%9A%94%E7%AC%A6%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：使用内部字段分隔符读取文件"><a href="#原创：使用内部字段分隔符读取文件" class="headerlink" title="原创：使用内部字段分隔符读取文件"></a>原创：使用内部字段分隔符读取文件</h1><p>特殊环境变量IFS，叫做内部字段分隔符（internal field separator）<br/><br>默认情况下，bash shell默认会以下列字符作为内部字段分隔符：</p>
+<h2 id="读取一个文件"><a href="#读取一个文件" class="headerlink" title="读取一个文件"></a>读取一个文件</h2><p>可以临时更改IFS环境变量的值来限制被bash shell当作字段分隔符的字符。<br/><br>如拾起只能识别换行符，IFS&#x3D;$’\n’.<br/><br>下面先新建一个文件，如下所示：<br/><br>$ cat  states</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Alabama</span><br><span class="line">Alaska</span><br><span class="line">Arizona</span><br><span class="line">Delaware</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再新建一个脚本，命名为test<br/><br>$cat test</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># reading values from a file</span><br><span class="line">file=&quot;states&quot;</span><br><span class="line"></span><br><span class="line">IFS=$&#x27;\n&#x27;</span><br><span class="line">for state in $(cat $file)</span><br><span class="line">do</span><br><span class="line">  echo &quot;Visit beautiful $state&quot;</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行test脚本，可以获得如下输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Visit beautiful Alabama</span><br><span class="line">Visit beautiful Alaska</span><br><span class="line">Visit beautiful Arizona</span><br><span class="line">Visit beautiful Delaware</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注：如果要指定多个IFS字符，只要将它们在赋值行串起来就行<br/><br>如IFS&#x3D;$’\n’:;”会将换行符，冒号，分号，双引号作为字段分隔符。</p>
+<h2 id="循环处理文件"><a href="#循环处理文件" class="headerlink" title="循环处理文件"></a>循环处理文件</h2><p>通过修改IFS，不停变换字段分隔符，可以用在循环处理文件中<br/><br>先新建一个文件：<br/><br>$cat  cities</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Shandong:jinan</span><br><span class="line">heilongjiang:haerbin</span><br><span class="line">fujian:fuzhou</span><br><span class="line">yunan:kunming</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再新建一个脚本，命名为test2<br/><br>$cat test2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#city in province</span><br><span class="line">IFS=$&#x27;\n&#x27;</span><br><span class="line">for city in $(cat cities)</span><br><span class="line">do </span><br><span class="line">  echo City is $city</span><br><span class="line">  IFS=:</span><br><span class="line">  for value in $city</span><br><span class="line">  do </span><br><span class="line">     echo &quot; $value&quot;</span><br><span class="line">  done</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行test2脚本，可以获得如下输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">City is Shandong:jinan</span><br><span class="line"> Shandong</span><br><span class="line"> jinan</span><br><span class="line">City is heilongjiang haerbin</span><br><span class="line"> heilongjiang</span><br><span class="line"> haerbin</span><br><span class="line">City is fujian fuzhou</span><br><span class="line"> fujian</span><br><span class="line"> fuzhou</span><br><span class="line">City is yunan kunming</span><br><span class="line"> yunan</span><br><span class="line"> kunming</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>从上面的例子中，可以看到一开始将IFS设置为换行符，用于读取每行数据<br/><br>之后通过修改IFS为冒号,用于分隔每行数据中每个字段，最后通过嵌套循环展示。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -860,82 +950,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="原创：常用但易忘的bash-shell命令"><a href="#原创：常用但易忘的bash-shell命令" class="headerlink" title="原创：常用但易忘的bash shell命令"></a>原创：常用但易忘的bash shell命令</h1><h2 id="LS"><a href="#LS" class="headerlink" title="LS"></a>LS</h2><h2 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h2><h2 id="链接文件"><a href="#链接文件" class="headerlink" title="链接文件"></a>链接文件</h2><h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><h2 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h2><h2 id="查看整个文件"><a href="#查看整个文件" class="headerlink" title="查看整个文件"></a>查看整个文件</h2><h2 id="查看部分文件"><a href="#查看部分文件" class="headerlink" title="查看部分文件"></a>查看部分文件</h2><h2 id="监测程序"><a href="#监测程序" class="headerlink" title="监测程序"></a>监测程序</h2><h2 id="挂载存储媒体"><a href="#挂载存储媒体" class="headerlink" title="挂载存储媒体"></a>挂载存储媒体</h2><h2 id="使用df命令"><a href="#使用df命令" class="headerlink" title="使用df命令"></a>使用df命令</h2><h2 id="使用du命令"><a href="#使用du命令" class="headerlink" title="使用du命令"></a>使用du命令</h2><h2 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h2><h2 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h2><h2 id="归档数据"><a href="#归档数据" class="headerlink" title="归档数据"></a>归档数据</h2>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89------%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89------%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：并发编程学习笔记（一）——并发编程的挑战"><a href="#原创：并发编程学习笔记（一）——并发编程的挑战" class="headerlink" title="原创：并发编程学习笔记（一）——并发编程的挑战"></a>原创：并发编程学习笔记（一）——并发编程的挑战</h1><p>注明：<br/><br>参考书作者：方腾飞  魏鹏   程晓明<br/><br>参考书目：《Java 并发编程的艺术》</p>
-<h1 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h1><p>1.什么是上下文切换？<br/><br>CPU通过时间片分配算法来循环执行任务，当前任务执行一个时间片后会切换到下一个任务。但是在切换前会保存一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态。所以任务从保存到再加载的过程就是一次上下文切换。</p>
-<p>2.如何减少上下文切换？<br/><br>我们知道，频繁地切换上下文会影响多线程的执行速度，甚至于在一定执行次数内，并发执行效果还不如串行执行。当并发执行累加操作不超过百万次时，速度会比串行执行累加操作要慢。<br/><br>减少上下文切换的方法有以下几种：</p>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class DeadLockDemo &#123;</span><br><span class="line">    private static String A = &quot;A&quot;;</span><br><span class="line">    private static String B = &quot;B&quot;;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        new DeadLockDemo().deadLock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void deadLock() &#123;</span><br><span class="line">        Thread t1 = new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                synchronized (A)&#123;</span><br><span class="line">                    try&#123;</span><br><span class="line">                        Thread.currentThread().sleep(200);</span><br><span class="line"></span><br><span class="line">                    &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    synchronized (B)&#123;</span><br><span class="line">                        System.out.println(&quot;1&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                synchronized (B)&#123;</span><br><span class="line">                    synchronized (A)&#123;</span><br><span class="line">                        System.out.println(&quot;2&quot;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>可以看到当t1进入synchronized(A)且t2进入synchronized(B)时，t1锁定资源A，t2锁定资源B<br/><br>接着t1要进入synchronized(B)且t2要进入synchronized(A)时，t1会等待t2释放B，t2会等待t1释放A，这时就发生了死锁。双方锁定着对方要请求的资源，互不想让，就造成了死锁。<br/><br>避免死锁的几个方法：</p>
-<h1 id="资源限制"><a href="#资源限制" class="headerlink" title="资源限制"></a>资源限制</h1><p>1.资源限制是什么？<br/><br>资源限制就是指在进行并发编程时，程序的执行速度受限于计算机硬件资源或软件资源。<br/><br>硬件资源限制有带宽的上传&#x2F;下载速度、硬盘读写速度和cpu的处理速度。<br/><br>软件资源限制有数据库的连接数和socket连接数等。<br/><br>2.如何解决资源限制问题？<br/><br>对于硬件资源限制，可以通过集群的方式来解决。可以根据算法，将不同类的数据交于不同的机器执行。<br/><br>对于软件资源限制，可以通过资源池的资源复用。比如使用连接池将数据库和Socket连接复用。</p>
-
       
     </div>
 

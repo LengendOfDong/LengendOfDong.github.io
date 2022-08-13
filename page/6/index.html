@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,118 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99%E4%BF%9D%E6%8A%A4-Spring%20Cloud%20Hystrix(%E4%BA%8C)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-SPRING%20CLOUD%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0--%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99%E4%BF%9D%E6%8A%A4-Spring%20Cloud%20Hystrix(%E4%BA%8C)/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：SPRING-CLOUD微服务实战笔记–服务容错保护-Spring-Cloud-Hystrix-二"><a href="#原创：SPRING-CLOUD微服务实战笔记–服务容错保护-Spring-Cloud-Hystrix-二" class="headerlink" title="原创：SPRING CLOUD微服务实战笔记–服务容错保护:Spring Cloud Hystrix(二)"></a>原创：SPRING CLOUD微服务实战笔记–服务容错保护:Spring Cloud Hystrix(二)</h1><h3 id="Spring-Cloud-Hystrix"><a href="#Spring-Cloud-Hystrix" class="headerlink" title="Spring Cloud Hystrix"></a>Spring Cloud Hystrix</h3><h1 id="属性详解"><a href="#属性详解" class="headerlink" title="属性详解"></a>属性详解</h1><p>四种不同优先级别的配置(优先级由低到高)</p>
+<h2 id="Command属性"><a href="#Command属性" class="headerlink" title="Command属性"></a>Command属性</h2><p>主要有5种不同类型的属性配置:</p>
+<h3 id="execution配置"><a href="#execution配置" class="headerlink" title="execution配置"></a>execution配置</h3><p>execution配置控制的是<code>HystrixCommand.run()</code>的执行</p>
+<h3 id="fallback配置"><a href="#fallback配置" class="headerlink" title="fallback配置"></a>fallback配置</h3><p>这些属性用来控制<code>HystrixCommand.getFallback()</code>的执行.这些属性同时适用于线程池的信号量的隔离策略</p>
+<h3 id="circuitBreaker配置"><a href="#circuitBreaker配置" class="headerlink" title="circuitBreaker配置"></a>circuitBreaker配置</h3><p>下面这些是断路器的属性配置,用来控制<code>HystrixCircuitBreaker</code>的行为</p>
+<h3 id="metrics设置"><a href="#metrics设置" class="headerlink" title="metrics设置"></a>metrics设置</h3><p>下面的属性均与<code>HystrixCommand</code>和<code>HystrixObservableCommand</code>执行中捕获的指标信息有关.</p>
+<h3 id="requestContext配置"><a href="#requestContext配置" class="headerlink" title="requestContext配置"></a>requestContext配置</h3><p>下面这些属性涉及<code>HystrixCommand</code>使用的<code>HystrixRequestContext</code>的配置</p>
+<h3 id="collapser属性"><a href="#collapser属性" class="headerlink" title="collapser属性"></a>collapser属性</h3><p>该属性除了在代码中用set和配置文件配置之外,也可使用注解进行配置.可使用<code>@HystrixCollapser</code>中的<code>collapserProperties</code>属性来设置,比如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@HystrixCollapser(batchMethod = &quot;batch&quot;,collapserProperties = &#123;@HystrixProperty(name = &quot;timerDelayInMilliseconds&quot;,value = &quot;20&quot;)&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下面这些属性用来控制命令合并相关的行为</p>
+<h3 id="threadPool属性"><a href="#threadPool属性" class="headerlink" title="threadPool属性"></a>threadPool属性</h3><p>该属性除了在代码中用set和属性文件配置之外,还可使用注解进行设置.可使用<code>@HystrixCommand</code>中的<code>threadPoolProperties</code>属性来设置,比如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@HystrixCommand(fallbackMethod=&quot;helloFallback&quot; , commandKey=&quot;helloKey&quot;,threadPoolProperties=&#123;@HystrixProperty(name=&quot;coreSize&quot;,value=&quot;20&quot;)&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下面这些属性用来控制Hystrix命令所属线程池的配置</p>
+<h1 id="Hystrix仪表盘"><a href="#Hystrix仪表盘" class="headerlink" title="Hystrix仪表盘"></a>Hystrix仪表盘</h1><p>构建一个Hystrix Dashboard,需要四步:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;dependency&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;spring-cloud-starter-hystrix-dashboard&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;version&amp;gt;1.4.6.RELEASE&amp;lt;/version&amp;gt;</span><br><span class="line">&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=hystrix-dashboard</span><br><span class="line">server.port=2001</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动应用,看到如下页面:<br/><br><img alt="Hystrix Dashboard" src="https://img-blog.csdnimg.cn/20190325152310174.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>首页的两个参数,Delay和Title:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;dependency&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;spring-cloud-starter-hystrix&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;version&amp;gt;1.4.6.RELEASE&amp;lt;/version&amp;gt;</span><br><span class="line">&amp;lt;/dependency&amp;gt;</span><br><span class="line">&amp;lt;dependency&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt;</span><br><span class="line">&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二步,在服务消费方的主类中使用@EnableCircuitBreaker注解,开启断路器功能<br/><br>重启服务消费方,在Hystrix Dashboard的首页输入<a target="_blank" rel="noopener" href="http://localhost:9000/hystrix.stream,%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E9%A1%B5%E9%9D%A2">http://localhost:9000/hystrix.stream,可以看到如下页面</a><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/20190325170829377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/></p>
+<h1 id="Turbine-集群监控"><a href="#Turbine-集群监控" class="headerlink" title="Turbine 集群监控"></a>Turbine 集群监控</h1><h2 id="构建监控聚合服务"><a href="#构建监控聚合服务" class="headerlink" title="构建监控聚合服务"></a>构建监控聚合服务</h2><p>1.引入Turbine来聚合RIBBON-CONSUMER服务的监控信息,并输出给Hystrix Dashboard来进行展示,具体步骤如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;parent&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;version&amp;gt;Brixton.SR5&amp;lt;/version&amp;gt;</span><br><span class="line">		&amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;</span><br><span class="line">	&amp;lt;/parent&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;com.didispace&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;hello&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt;</span><br><span class="line">	&amp;lt;name&amp;gt;hello&amp;lt;/name&amp;gt;</span><br><span class="line">	&amp;lt;description&amp;gt;Demo project for Spring Boot&amp;lt;/description&amp;gt;</span><br><span class="line"></span><br><span class="line">	&amp;lt;properties&amp;gt;</span><br><span class="line">		&amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt;</span><br><span class="line">	&amp;lt;/properties&amp;gt;</span><br><span class="line"></span><br><span class="line">	&amp;lt;dependencies&amp;gt;</span><br><span class="line">		&amp;lt;!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-turbine --&amp;gt;</span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-cloud-starter-turbine&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt;</span><br><span class="line">			&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line">	&amp;lt;/dependencies&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaClient</span><br><span class="line">@EnableTurbine</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class HelloApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(HelloApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=turbine</span><br><span class="line"></span><br><span class="line">server.port=8989</span><br><span class="line">management.port=8990</span><br><span class="line"></span><br><span class="line">eureka.client.service-url.defaultZone=http://localhost:1111/eureka/</span><br><span class="line"></span><br><span class="line">turbine.app-config=RIBBON-CONSUMER</span><br><span class="line">turbine.cluster-name-expression=&quot;default&quot;</span><br><span class="line">turbine.combine-host-port=true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>turbine.app-config:该参数指定了需要收集监控信息的服务名<br/><br>turbine.cluster-name-expression:该参数指定了集群名称为default<br/><br>turbine.combine-host-port:该参数设置为true,可以让同一主机上的服务通过主机名和端口号的组合来进行区分<br/><br>启动eureka-server&#x2F;HELLO-SERVER&#x2F;RIBBON-CONSUMER&#x2F;Turbine&#x2F;Hystrix Dashboard,页面如下:<br/><br><img alt="Turbine" src="https://img-blog.csdnimg.cn/2019032518435437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/></p>
+<h2 id="与消息代理结合"><a href="#与消息代理结合" class="headerlink" title="与消息代理结合"></a>与消息代理结合</h2><p>实现基于消息代理的Turbine聚合服务<br/><br>1)创建一个标准的Spring Boot工程,命名为turbine-amqp<br/><br>2)编辑pom.xml,导入依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;parent&amp;gt;</span><br><span class="line">		&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">		&amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;version&amp;gt;Brixton.SR5&amp;lt;/version&amp;gt;</span><br><span class="line">		&amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;</span><br><span class="line">	&amp;lt;/parent&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;com.didispace&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;hello&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt;</span><br><span class="line">	&amp;lt;name&amp;gt;hello&amp;lt;/name&amp;gt;</span><br><span class="line">	&amp;lt;description&amp;gt;Demo project for Spring Boot&amp;lt;/description&amp;gt;</span><br><span class="line"></span><br><span class="line">	&amp;lt;properties&amp;gt;</span><br><span class="line">		&amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt;</span><br><span class="line">	&amp;lt;/properties&amp;gt;</span><br><span class="line"></span><br><span class="line">	&amp;lt;dependencies&amp;gt;</span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-cloud-starter-turbine-amqp&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br><span class="line">		&amp;lt;dependency&amp;gt;</span><br><span class="line">			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;</span><br><span class="line">			&amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt;</span><br><span class="line">			&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;</span><br><span class="line">		&amp;lt;/dependency&amp;gt;</span><br><span class="line">	&amp;lt;/dependencies&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3)在应用类中使用@EnableTurbineStream注解来启用Turbine Stream的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@EnableTurbineStream</span><br><span class="line">@EnableEurekaClient</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class HelloApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(HelloApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>4)配置application.properties文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=turbine</span><br><span class="line">server.port=8989</span><br><span class="line">management.port=8990</span><br><span class="line">eureka.client.service-url.defaultZone=http://localhost:1111/eureka/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>5)服务消费者也要进行更改pom.xml,使其监控信息能够输出到RabbitMQ上.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&amp;lt;dependency&amp;gt;</span><br><span class="line">	&amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;</span><br><span class="line">	&amp;lt;artifactId&amp;gt;spring-cloud-netflix-hystrix-amqp&amp;lt;/artifactId&amp;gt;</span><br><span class="line">	&amp;lt;version&amp;gt;1.4.6.RELEASE&amp;lt;/version&amp;gt;</span><br><span class="line">&amp;lt;/dependency&amp;gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1220,80 +1332,6 @@
 <h1 id="x2F-的使用"><a href="#x2F-的使用" class="headerlink" title=".&#x2F;的使用"></a>.&#x2F;的使用</h1><p><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/20200109101618427.png"/><br/><br>作用:打开一个子shell来读取并执行FileName中命令。<br/><br>注：运行一个shell脚本时会启动另一个命令解释器.<br/><br>注：需要加权限才可以执行。</p>
 <h1 id="source-sh-bash-与-x2F-的区别"><a href="#source-sh-bash-与-x2F-的区别" class="headerlink" title="source sh bash 与.&#x2F;的区别"></a>source sh bash 与.&#x2F;的区别</h1><p>如下例子中，展示source 、sh、bash与.&#x2F;的区别：<br/><br>结论一:脚本加上执行权限后，.&#x2F;<strong>.sh, sh .&#x2F;</strong>.sh与bash .&#x2F;*.sh相同，此三种执行脚本的方式都是重新启动一个子shell,在子shell中执行此脚本。</p>
 <p>结论二: source  *.sh和.  *.sh的执行方式是等价的，即两种执行方式都是在当前shell进程中执行此脚本，而不是重新启动一个shell 而在子shell进程中执行此脚本。<br/><br><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/2020010910011516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW5nZG9uZzEyMzQ1,size_16,color_FFFFFF,t_70"/><br/><br>验证依据：没有被export导出的变量（即非环境变量）是不能被子shell继承的<br/><br><img alt="在这里插入图片描述" src="https://img-blog.csdnimg.cn/20200109102437144.png"/></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-Ride%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99-KeyError-%20'APPDATA'/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-Ride%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99-KeyError-%20'APPDATA'/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="原创：Ride启动报错：KeyError-‘APPDATA’"><a href="#原创：Ride启动报错：KeyError-‘APPDATA’" class="headerlink" title="原创：Ride启动报错：KeyError: ‘APPDATA’"></a>原创：Ride启动报错：KeyError: ‘APPDATA’</h1><h2 id="报错信息："><a href="#报错信息：" class="headerlink" title="报错信息："></a>报错信息：</h2><p>Traceback (most recent call last):<br/><br>File “D:\Install\Python27\lib\site-packages\robotide_<strong>init</strong><em>.py”, line 83, in main<br/><br><em>run(inpath, not noupdatecheck, debug_console)<br/><br>File “D:\Install\Python27\lib\site-packages\robotide</em><strong>init</strong></em>.py”, line 102, in <em>run<br/><br>from robotide.application import RIDE<br/><br>File “D:\Install\Python27\lib\site-packages\robotide\application_<strong>init</strong></em>.py”, line 16, in <br/><br>from .application import RIDE, Project<br/><br>File “D:\Install\Python27\lib\site-packages\robotide\application\application.py”, line 23, in <br/><br>from robotide.controller import Project<br/><br>File “D:\Install\Python27\lib\site-packages\robotide\controller_<strong>init</strong><em>.py”, line 16, in <br/><br>from .project import Project<br/><br>File “D:\Install\Python27\lib\site-packages\robotide\controller\project.py”, line 20, in <br/><br>from robotide.context import LOG<br/><br>File “D:\Install\Python27\lib\site-packages\robotide\context</em><strong>init</strong>_.py”, line 35, in <br/><br>os.environ[‘APPDATA’], ‘RobotFramework’, ‘ride’)<br/><br>File “D:\Install\Python27\lib\os.py”, line 425, in <strong>getitem</strong><br/><br>return self.data[key.upper()]<br/><br>KeyError: ‘APPDATA’</p>
-<p>Use –help to get usage information.</p>
-<h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>查看“D:\Install\Python27\lib\site-packages\robotide\context_<strong>init</strong>_.py”文件<br/><br>if IS_WINDOWS:<br/><br>SETTINGS_DIRECTORY &#x3D; os.path.join(<br/><br>os.environ[‘APPDATA’], ‘RobotFramework’, ‘ride’)<br/><br>else:<br/><br>SETTINGS_DIRECTORY &#x3D; os.path.join(<br/><br>os.path.expanduser(’~&#x2F;.robotframework’), ‘ride’)</p>
-<p>缺少os.environ[‘APPDATA’]</p>
-<h2 id="问题处理："><a href="#问题处理：" class="headerlink" title="问题处理："></a>问题处理：</h2><p>卸载python27,然后重新安装python27,重启之后解决此问题。<br/><br>估计是安装了nodejs的原因导致了环境变量的修改</p>
 
       
     </div>

@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E5%8E%9F%E5%88%9B-1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E5%8E%9F%E5%88%9B-1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="原创：1-两数之和"><a href="#原创：1-两数之和" class="headerlink" title="原创：1.两数之和"></a>原创：1.两数之和</h1><p>方法一：暴力法<br/><br>复杂度分析：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class SolutionOne &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target)&#123;</span><br><span class="line">        for( int i = 0; i&amp;lt; nums.length ; i++)&#123;</span><br><span class="line">            for (int j = i+ 1; j &amp;lt; nums.length ; j++)&#123;</span><br><span class="line">                if (nums[j] == target - nums[i])&#123;</span><br><span class="line">                    return new int[]&#123;i ,j&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalArgumentException(&quot;No two sum solution&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：一遍哈希表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class SolutionTwo &#123;</span><br><span class="line">    public  int[] twoSum(int[] nums, int target)&#123;</span><br><span class="line">        Map&amp;lt;Integer,Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;();</span><br><span class="line">        for(int i = 0; i &amp;lt; nums.length ; i++)&#123;</span><br><span class="line">            int complement = target - nums[i];</span><br><span class="line">            if(map.containsKey(complement))&#123;</span><br><span class="line">                return new int[]&#123;map.get(complement),i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(nums[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        throw  new IllegalArgumentException(&quot;No two sum solution&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -836,96 +910,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="常用但易忘的bash-shell命令"><a href="#常用但易忘的bash-shell命令" class="headerlink" title="常用但易忘的bash shell命令"></a>常用但易忘的bash shell命令</h1><h2 id="LS"><a href="#LS" class="headerlink" title="LS"></a>LS</h2><h2 id="CP"><a href="#CP" class="headerlink" title="CP"></a>CP</h2><h2 id="链接文件"><a href="#链接文件" class="headerlink" title="链接文件"></a>链接文件</h2><h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><h2 id="查看文件类型"><a href="#查看文件类型" class="headerlink" title="查看文件类型"></a>查看文件类型</h2><h2 id="查看整个文件"><a href="#查看整个文件" class="headerlink" title="查看整个文件"></a>查看整个文件</h2><h2 id="查看部分文件"><a href="#查看部分文件" class="headerlink" title="查看部分文件"></a>查看部分文件</h2><h2 id="监测程序"><a href="#监测程序" class="headerlink" title="监测程序"></a>监测程序</h2><h2 id="挂载存储媒体"><a href="#挂载存储媒体" class="headerlink" title="挂载存储媒体"></a>挂载存储媒体</h2><h2 id="使用df命令"><a href="#使用df命令" class="headerlink" title="使用df命令"></a>使用df命令</h2><h2 id="使用du命令"><a href="#使用du命令" class="headerlink" title="使用du命令"></a>使用du命令</h2><h2 id="排序数据"><a href="#排序数据" class="headerlink" title="排序数据"></a>排序数据</h2><h2 id="搜索数据"><a href="#搜索数据" class="headerlink" title="搜索数据"></a>搜索数据</h2><h2 id="归档数据"><a href="#归档数据" class="headerlink" title="归档数据"></a>归档数据</h2>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%8C%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E5%92%8C%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%8C%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E5%92%8C%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="编译型语言和解释型语言，动态语言和静态语言的区别"><a href="#编译型语言和解释型语言，动态语言和静态语言的区别" class="headerlink" title="编译型语言和解释型语言，动态语言和静态语言的区别"></a>编译型语言和解释型语言，动态语言和静态语言的区别</h1><h2 id="编译型和解释型的区别"><a href="#编译型和解释型的区别" class="headerlink" title="编译型和解释型的区别"></a>编译型和解释型的区别</h2><p>先来看看编译型语言的定义：</p>
-<blockquote>
-</blockquote>
-<p>编译型语言首先是将源代码编译生成机器指令，再由机器运行机器码（二进制）</p>
-<p>再来看看解释型语言的定义：</p>
-<blockquote>
-</blockquote>
-<p>解释型语言的源代码不是直接翻译成机器指令，而是先翻译成中间代码，再由解释器对中间代码进行解释运行。</p>
-<p>下面打个比方：</p>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>编译型和解释型的定义是对立存在的，但也可以在一个语言中同时存在。比如Java语言同时兼有编译型和解释型特点。整个流程如下：<br/><br>将源代码（.java)文件编译生成字节码（.class文件），再通过JVM（java虚拟机）运行生成机器指令，由机器运行机器码。<br/><br><strong>注</strong>：此处生成机器语言前的操作是解释型，每次运行都要重新解释。因此，此处表明Java是解释型。<br/><br>但是，部分JVM（java虚拟机）有一种JIT（Just in time)机制，能够将部分已经解释翻译的常用机器指令保存。下次不需要解释，直接运行即可。此时Java是编译型。<br/><br>因此，现在用编译型和解释型区分语言是行不通的。</p>
-<p><strong>编译型语言</strong><br/><br><strong>优点</strong>：<br/><br>1.编译型语言最大的优势之一就是其执行速度。用C&#x2F;C++编写的程序运行速度要比用Java编写的相同程序快30%~70%.<br/><br>2.编译型程序比解释型程序消耗的内存更少。<br/><br><strong>缺点</strong>：<br/><br>1.编译器比解释器要难写得多<br/><br>2.编译器在调试程序时提供不了多少帮助<br/><br>3.可执行的编译型代码比相同的解释型代码要大许多<br/><br>4.编译型程序是面向特定平台的因而是平台依赖的<br/><br>5.编译型程序不支持代码中实现安全性，大部分病毒是使用编译型语言编写的<br/><br>6.由于松散的安全性和平台依赖性，编译型语言不太适合开发因特网或者基于Web的应用</p>
-<p><strong>解释型语言</strong><br/><br><strong>优点</strong>：<br/><br>1.解释型语言提供了极佳的调试支持<br/><br>2.解释器比编译器更容易实现<br/><br>3.解释型语言最大的优势之一是其平台独立性<br/><br>4.解释型语言也可以保证高度的安全性，这正是互联网应用所迫切需要的<br/><br>5.中间语言代码的大小比编译型可执行代码小很多<br/><br><strong>缺点</strong>：<br/><br>1.解释型语言存在一些严重的缺点。解释型应用占用更多的内存和CPU资源<br/><br>2.由于解释型应用的decode-fetch-execute(解码-抓取-执行）的周期，它们比编译型程序慢很多</p>
-<h2 id="动态语言和静态语言"><a href="#动态语言和静态语言" class="headerlink" title="动态语言和静态语言"></a>动态语言和静态语言</h2><p>我们常说的动态语言和静态语言，其实是指动态类型和静态类型语言。先来看看动态类型语言定义：</p>
-<blockquote>
-</blockquote>
-<p>动态类型语言，是指数据类型的检查是在运行时做的。用动态类型语言编程时，不用给变量指定数据类型，该语言会在你第一次赋值给变量时，在内部记录数据类型。</p>
-<p>再来看看静态类型语言的定义：</p>
-<blockquote>
-</blockquote>
-<p>静态类型语言，是指数据类型的检查是在运行前（如编译阶段）做的。</p>
-<p>小结：</p>
-
       
     </div>
 

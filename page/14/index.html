@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,81 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/[%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7]m%E7%9A%84n%E6%AC%A1%E6%96%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%5B%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7%5Dm%E7%9A%84n%E6%AC%A1%E6%96%B9/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="解题技巧-m的n次方"><a href="#解题技巧-m的n次方" class="headerlink" title="[解题技巧]m的n次方"></a>[解题技巧]m的n次方</h1><p>题目：求解m的n次方</p>
+<p>使用位运算进行处理：<br/><br>将n拆解为每一位，只处理当前位为1的情况。<br/><br>例如：n为13，二进制表示成1101，可以拆解成1000 + 0100 + 0000 + 0001<br/><br>需要过滤当前位为0的情况，可以使用&amp; 1的方式进行过滤。</p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int getMultiplier(int m, int n) &#123;</span><br><span class="line">        int sum = 1;</span><br><span class="line">        int tmp = m;</span><br><span class="line">        //对n进行移位，直到n的当前值为0</span><br><span class="line">        while (n != 0) &#123;</span><br><span class="line">            //通过与0001相与得到最后一位，判断最后一位的值是否为1</span><br><span class="line">            if ((n &amp;amp; 1) == 1) &#123;</span><br><span class="line">                sum = sum * tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            n = n &amp;gt;&amp;gt; 1;</span><br><span class="line">            //tmp不断相乘，相当于给每一位进行加权（8,4,2,1）</span><br><span class="line">            tmp *= tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>底数m为2的时候直接进行移位就可以，但是很多时候底数m不为2，这个时候需要从指数n的角度进行考虑。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

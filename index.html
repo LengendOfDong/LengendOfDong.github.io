@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,101 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-08-13 12:18:05" itemprop="dateCreated datePublished" datetime="2022-08-13T12:18:05+08:00">2022-08-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>JDK介绍</p>
+<p>拿我的jdk1.8来说，加载的位置包括C:\Program Files\Java\jdk1.8.0_261\jre\lib\ext 以及C:\Program Files\Java\jdk1.8.0_261\jre\lib</p>
+<p>摘自OSCHINA:</p>
+<blockquote>
+<p>JDK 1.8 lib:</p>
+<p>access-bridge-64.jar<br>charsets.jar<br>cldrdata.jar<br>deploy.jar<br>dnsns.jar<br>jaccess.jar<br>javawa.jar<br>jce.jar<br>jfr.jar<br>jfxrt.jar<br>jfxswt.jar<br>jsse.jar<br>localedata.jar<br>management-agent.jar<br>nashorn.jar<br>plugin.jar<br>resources.jar<br>rt.jar<br>sunec.jar<br>sunjce_provider.jar<br>sunmscapi.jar<br>sunpkcs11.jar<br>zipfs.jar</p>
+</blockquote>
+<p>&#x2F;&#x2F; 1<br>access-bridge-64.jar<br>Java Access Bridge is a technology that exposes the Java Accessibility API in a Microsoft Windows DLL, enabling Java applications and applets that implement the Java Accessibility API to be visible to assistive technologies on Microsoft Windows systems. Java Accessibility API is part of Java Accessibility Utilities, which is a set of utility classes that help assistive technologies provide access to GUI toolkits that implement the Java Accessibility API.<br>一个允许 WindowsDLL调用java api 技术。</p>
+<p>&#x2F;&#x2F; 2<br>charsets.jar<br>Java 字符集，这个类库中包含 Java 所有支持字符集的字符</p>
+<p>&#x2F;&#x2F; 3<br>cldrdata.jar<br>The Unicode CLDR provides key building blocks for software to support the world’s languages, with the largest and most extensive standard repository of locale data available. This data is used by a wide spectrum of companies for their software internationalization and localization, adapting software to the conventions of different languages for such common software tasks.<br>Unicode CLDR为支持世界语言的软件提供了关键的构建块，提供了最大和最广泛的语言环境数据标准存储库。</p>
+<p>&#x2F;&#x2F; 4<br>deploy.jar<br>Java安装目录的常见部分 - 该文件运行某些产品的安装。 正确设置Java路径后，用户可以执行此文件（只需双击它或按文件上的Enter键），要部署的应用程序将运行其安装程序。 例如。 诺基亚OVI套件通常使用这种部署形式。 作为彼此的JAVA包，如果您将其重命名为ZIP并打开内容，则可以检查包中的类。</p>
+<p>&#x2F;&#x2F; 5<br>dnsns.jar<br>名字是DNS naming service ,只有2个方法 getHostByAddr lookupAllHostAddr</p>
+<p>&#x2F;&#x2F; 6<br>jaccess.jar<br>Defines JDK utility classes used by implementors of Assistive Technologies.AWT(Abstract Window Toolkit)，中文译为抽象窗口工具包。<br>@Exported() 当前Activity是否可以被另一个Application的组件启动：true允许被启动；false不允许被启动。</p>
+<p>&#x2F;&#x2F; 7<br>javaws.jar<br>JNLP（Java Network Launching Protocol ）是java提供的一种可以通过浏览器直接执行java应用程序的途径<br>里面同时有com.sun 和 javax.jnlp的路径<br>包括<br>-exceptions 异常类<br>-jnl 各种 XXXDesc, 是这个包的POJO<br>-net 只有一个Handler.openConnection()<br>-progress 进度条相关<br>-security 权限校验<br>-ui  CacheViewer这个类很大，而且是很像是一个固定的使用页面<br>-util JavaFX<br>里面还有Main方法，怎么看都和别的JDK jar有很大的差异</p>
+<p>&#x2F;&#x2F; 8<br>jce.jar<br>路径是javax.crypto<br>（javax的x是extension的意思，也就是扩展包。java类库是java发布之初就确定了的基础库，<br>而javax类库则是在上面增加的一层东西，就是为了保持版本兼容要保存原来的，但有些东西有了更好的解决方案，<br>所以，就加上些，典型的就是awt(Abstract Windowing ToolKit) 和swing。）<br>这个包都是加密相关的。</p>
+<p>&#x2F;&#x2F; 9<br>jfr.jar<br>和 jdk\bin\jmc.exe有关系。Java Mission Control 包括 JMX 控制台和 Java 飞行记录器。<br>Java 飞行记录器 (JFR) 是一个用于收集有关正在运行的 Java 应用程序的诊断数据和概要分析数据的工具。它集成到 Java 虚拟机 (JVM) 中，<br>几乎不会带来性能开销，因此甚至可以在高负载生产环境中使用。使用默认设置时，内部测试和客户反馈表明性能影响低于 1%。<br>对于一些应用程序，这一数字会大幅降低。但是，对于短时间运行的应用程序 (不是在生产环境中运行的应用程序类型)，<br>相对的启动和预热时间可能会较长，这对性能的影响可能会超过 1%。JFR 收集有关 JVM 及其上运行的 Java 应用程序的数据。</p>
+<p>&#x2F;&#x2F; 10<br>jfxrt.jar<br>JDK有个 rt.jar ，是JAVA的。这个就是JavaFX的rt.jar. JavaFX&gt;Swing&gt;AWT.<br>JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich<br>client applications that operate consistently across diverse platforms.<br>里面的FXConsole类有针对键盘输入的代码。应该可以用来借鉴</p>
+<p>&#x2F;&#x2F; 11<br>jfxswt.jar<br>同为JavaFx相关，对JavaFx和Swing做兼容性操作。</p>
+<p>&#x2F;&#x2F; 12<br>jsse.jar<br>SSL连接，验证，X509文件验证，</p>
+<p>&#x2F;&#x2F; 13<br>localedata.jar<br>日期显示国际化的包，里面各地区的日期文字，没有复杂逻辑。</p>
+<p>&#x2F;&#x2F; 14<br>management-agent.jar<br>空的？网上资料说的和 jmx 监控有关，没研究为什么是空的。&#x2F;&#x2F;TODO</p>
+<p>&#x2F;&#x2F; 15<br>nashorn.jar<br>包括1.动态链接.包含用于链接调用的动态调用站点的接口和类。<br>dynalink与java.lang.invoke包密切相关，并且依赖于该包。<br>虽然java.lang.invoke为invoke dynamic调用站点的动态链接提供了一个低级别的API，但它不提供一种方法来表示对象的更高级别操作，也不提供实现这些操作的方法。<br>如果一种语言是静态类型的，并且它的类型系统与JVM的类型系统匹配，那么它可以使用通常的调用、字段访问等指令（例如invokevirtual、getfield）来实现这一点。<br>但是，如果语言是动态的（因此，某些表达式的类型直到在运行时进行计算时才知道），或者其对象模型或类型系统与JVM的对象模型或类型系统不匹配，<br>那么它应该使用invokedynamic调用站点，并让dynalink管理它们。<br>2.Javascript引擎<br>从 JDK 8 开始，Nashorn取代 Rhino 成为 Java 的嵌入式 JavaScript 引擎。Nashorn 完全支持ECMAScript 5.1<br>规范以及一些扩展。该特性允许开发人员将 JavaScript 代码嵌入到 Java 中，甚至从嵌入的 JavaScript 中调用 Java。此外，<br>它还提供了使用jrunscript从命令行运行 JavaScript 的能力。</p>
+<p>&#x2F;&#x2F; 16<br>plugin.jar<br>这个包相当杂。什么东西都有，不好概括。</p>
+<p>&#x2F;&#x2F; 17<br>resources.jar<br>提示信息显示国际化的包，里面各地区的文字。只有图片和properties，没有java代码</p>
+<p>&#x2F;&#x2F;18<br>rt.jar<br>JDK的灵魂</p>
+<p>&#x2F;&#x2F;19<br>sunec.jar<br>&#x2F;&#x2F; 20<br>sunjce_provider.jar<br>&#x2F;&#x2F; 21<br>sunmscapi.jar<br>&#x2F;&#x2F; 22<br>sunpkcs11.jar<br>以上4个包都是加密相关的。</p>
+<p>&#x2F;&#x2F; 23<br>zipfs.jar<br>java 对zip文件操作的支持。因为文件系统不一致， ZipInfo里有各种属性的转换。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -889,510 +984,6 @@
 <p>重点就是把<br/><br>FileWriter FileReader   换成了  OutputStreamWriter InputStreamReader</p>
 <p>new InputStreamReader(new FileInputStream(src),“UTF-8”);&#x2F;&#x2F;读<br/><br>new OutputStreamWriter(new FileOutputStream(des), “UTF-8”);&#x2F;&#x2F;写</p>
 <p>这就带上了编码格式了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E8%BD%AC%E8%BD%BD-Java%20%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E5%92%8C%E5%A4%84%E7%90%86%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/%E8%BD%AC%E8%BD%BD-Java%20%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E5%92%8C%E5%A4%84%E7%90%86%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="转载：Java-中的异常和处理详解"><a href="#转载：Java-中的异常和处理详解" class="headerlink" title="转载：Java 中的异常和处理详解"></a>转载：Java 中的异常和处理详解</h1><h2 id="原文出处：-代码钢琴家"><a href="#原文出处：-代码钢琴家" class="headerlink" title="原文出处： 代码钢琴家"></a>原文出处： <a target="_blank" rel="noopener" href="http://www.cnblogs.com/lulipro/p/7504267.html">代码钢琴家</a></h2><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>程序运行时，发生的不被期望的事件，它阻止了程序按照程序员的预期正常执行，这就是异常。异常发生时，是任程序自生自灭，立刻退出终止，还是输出错误给用户？或者用C语言风格：用函数返回值作为执行状态？。</p>
-<p>Java提供了更加优秀的解决办法：异常处理机制。</p>
-<p>异常处理机制能让程序在异常发生时，按照代码的预先设定的异常处理逻辑，针对性地处理异常，让程序尽最大可能恢复正常并继续执行，且保持代码的清晰。<br/><br>Java中的异常可以是函数中的语句执行时引发的，也可以是程序员通过throw 语句手动抛出的，只要在Java程序中产生了异常，就会用一个对应类型的异常对象来封装异常，JRE就会试图寻找异常处理程序来处理异常。</p>
-<p>Throwable类是Java异常类型的顶层父类，一个对象只有是 Throwable 类的（直接或者间接）实例，他才是一个异常对象，才能被异常处理机制识别。JDK中内建了一些常用的异常类，我们也可以自定义异常。</p>
-<h2 id="Java异常的分类和类结构图"><a href="#Java异常的分类和类结构图" class="headerlink" title="Java异常的分类和类结构图"></a>Java异常的分类和类结构图</h2><p>Java标准库内建了一些通用的异常，这些类以Throwable为顶层父类。</p>
-<p>Throwable又派生出Error类和Exception类。</p>
-<p>错误：Error类以及他的子类的实例，代表了JVM本身的错误。错误不能被程序员通过代码处理，Error很少出现。因此，程序员应该关注Exception为父类的分支下的各种异常类。</p>
-<p>异常：Exception以及他的子类，代表程序运行时发送的各种不期望发生的事件。可以被Java异常处理机制使用，是异常处理的核心。</p>
-<p>总体上我们根据Javac对异常的处理要求，将异常类分为2类。</p>
-<p>非检查异常（unckecked exception）：Error 和 RuntimeException 以及他们的子类。javac在编译时，不会提示和发现这样的异常，不要求在程序处理这些异常。所以如果愿意，我们可以编写代码处理（使用try…catch…finally）这样的异常，也可以不处理。对于这些异常，我们应该修正代码，而不是去通过异常处理器处理 。这样的异常发生的原因多半是代码写的有问题。如除0错误ArithmeticException，错误的强制类型转换错误ClassCastException，数组索引越界ArrayIndexOutOfBoundsException，使用了空对象NullPointerException等等。</p>
-<p>检查异常（checked exception）：除了Error 和 RuntimeException的其它异常。javac强制要求程序员为这样的异常做预备处理工作（使用try…catch…finally或者throws）。在方法中要么用try-catch语句捕获它并处理，要么用throws子句声明抛出它，否则编译不会通过。这样的异常一般是由程序的运行环境导致的。因为程序可能被运行在各种未知的环境下，而程序员无法干预用户如何使用他编写的程序，于是程序员就应该为这样的异常时刻准备着。如SQLException , IOException,ClassNotFoundException 等。</p>
-<p>需要明确的是：检查和非检查是对于javac来说的，这样就很好理解和区分了。</p>
-<h2 id="初识异常"><a href="#初识异常" class="headerlink" title="初识异常"></a>初识异常</h2><p>下面的代码会演示2个异常类型：ArithmeticException 和 InputMismatchException。前者由于整数除0引发，后者是输入的数据不能被转换为int类型引发。<br>|1234567891011121314151617181920212223242526272829303132333435363738394041|<code>package</code> <code>com.example;``import</code> <code>java. util .Scanner ;``public</code> <code>class</code> <code>AllDemo``&#123;``      ``public</code> <code>static</code> <code>void</code> <code>main (String [] args )``      ``&#123;``            ``System . out. println( ``&quot;----欢迎使用命令行除法计算器----&quot;</code> <code>) ;``            ``CMDCalculate ();``      ``&#125;``      ``public</code> <code>static</code> <code>void</code> <code>CMDCalculate ()``      ``&#123;``            ``Scanner scan = ``new</code> <code>Scanner ( System. in );``            ``int</code> <code>num1 = scan .nextInt () ;``            ``int</code> <code>num2 = scan .nextInt () ;``            ``int</code> <code>result = devide (num1 , num2 ) ;``            ``System . out. println( ``&quot;result:&quot;</code> <code>+ result) ;``            ``scan .close () ;``      ``&#125;``      ``public</code> <code>static</code> <code>int</code> <code>devide (``int</code> <code>num1, ``int</code> <code>num2 )&#123;``            ``return</code> <code>num1 / num2 ;``      ``&#125;``&#125;``/*****************************************</code> <code>----欢迎使用命令行除法计算器----``0``Exception in thread &quot;main&quot; java.lang.ArithmeticException : / by zero``     ``at com.example.AllDemo.devide( AllDemo.java:30 )``     ``at com.example.AllDemo.CMDCalculate( AllDemo.java:22 )``     ``at com.example.AllDemo.main( AllDemo.java:12 )</code> <code>----欢迎使用命令行除法计算器----``r``Exception in thread &quot;main&quot; java.util.InputMismatchException``     ``at java.util.Scanner.throwFor( Scanner.java:864 )``     ``at java.util.Scanner.next( Scanner.java:1485 )``     ``at java.util.Scanner.nextInt( Scanner.java:2117 )``     ``at java.util.Scanner.nextInt( Scanner.java:2076 )``     ``at com.example.AllDemo.CMDCalculate( AllDemo.java:20 )``     ``at com.example.AllDemo.main( AllDemo.java:12 )``*****************************************/</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p>34</p>
-<p>36</p>
-<p>38</p>
-<p>40</p>
-<p><code>package</code> <code>com.example;</code></p>
-<p><code>public</code> <code>class</code> <code>AllDemo</code></p>
-<p><code>      ``public</code> <code>static</code> <code>void</code> <code>main (String [] args )</code></p>
-<p><code>            ``System . out. println( ``&quot;----欢迎使用命令行除法计算器----&quot;</code> <code>) ;</code></p>
-<p><code>      ``&#125;</code></p>
-<p><code>      ``&#123;</code></p>
-<p><code>            ``int</code> <code>num1 = scan .nextInt () ;</code></p>
-<p><code>            ``int</code> <code>result = devide (num1 , num2 ) ;</code></p>
-<p><code>            ``scan .close () ;</code></p>
-<p><code>      ``public</code> <code>static</code> <code>int</code> <code>devide (``int</code> <code>num1, ``int</code> <code>num2 )&#123;</code></p>
-<p><code>      ``&#125;</code></p>
-<p><code>/*****************************************</code></p>
-<p><code>----欢迎使用命令行除法计算器----</code></p>
-<p><code>Exception in thread &quot;main&quot; java.lang.ArithmeticException : / by zero</code></p>
-<p><code>     ``at com.example.AllDemo.CMDCalculate( AllDemo.java:22 )</code></p>
-<p> </p>
-<p><code>r</code></p>
-<p><code>     ``at java.util.Scanner.throwFor( Scanner.java:864 )</code></p>
-<p><code>     ``at java.util.Scanner.nextInt( Scanner.java:2117 )</code></p>
-<p><code>     ``at com.example.AllDemo.CMDCalculate( AllDemo.java:20 )</code></p>
-<p><code>*****************************************/</code></p>
-<p>异常是在执行某个函数时引发的，而函数又是层级调用，形成调用栈的，因为，只要一个函数发生了异常，那么他的所有的caller都会被异常影响。当这些被影响的函数以异常信息输出时，就形成的了异常追踪栈。</p>
-<p>异常最先发生的地方，叫做异常抛出点。</p>
-<p>从上面的例子可以看出，当devide函数发生除0异常时，devide函数将抛出ArithmeticException异常，因此调用他的CMDCalculate函数也无法正常完成，因此也发送异常，而CMDCalculate的caller——main 因为CMDCalculate抛出异常，也发生了异常，这样一直向调用栈的栈底回溯。这种行为叫做异常的冒泡，异常的冒泡是为了在当前发生异常的函数或者这个函数的caller中找到最近的异常处理程序。由于这个例子中没有使用任何异常处理机制，因此异常最终由main函数抛给JRE，导致程序终止。</p>
-<p>上面的代码不使用异常处理机制，也可以顺利编译，因为2个异常都是非检查异常。但是下面的例子就必须使用异常处理机制，因为异常是检查异常。</p>
-<p>代码中我选择使用throws声明异常，让函数的调用者去处理可能发生的异常。但是为什么只throws了IOException呢？因为FileNotFoundException是IOException的子类，在处理范围内。<br>|123456789101112131415|<code>@Test``public</code> <code>void</code> <code>testException() ``throws</code> <code>IOException``&#123;``    ``//FileInputStream的构造函数会抛出FileNotFoundException``    ``FileInputStream fileIn = ``new</code> <code>FileInputStream(``&quot;E:\\a.txt&quot;``);</code> <code>    ``int</code> <code>word;``    ``//read方法会抛出IOException``    ``while``((word =  fileIn.read())!=-``1``) ``    ``&#123;``        ``System.out.print((``char``)word);``    ``&#125;``    ``//close方法会抛出IOException``    ``fileIn.clos``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p><code>@Test</code></p>
-<p><code>&#123;</code></p>
-<p><code>    ``FileInputStream fileIn = ``new</code> <code>FileInputStream(``&quot;E:\\a.txt&quot;``);</code></p>
-<p><code>    ``int</code> <code>word;</code></p>
-<p><code>    ``while``((word =  fileIn.read())!=-``1``) </code></p>
-<p><code>        ``System.out.print((``char``)word);</code></p>
-<p><code>    ``//close方法会抛出IOException</code></p>
-<p><code>&#125;</code></p>
-<h2 id="异常处理的基本语法"><a href="#异常处理的基本语法" class="headerlink" title="异常处理的基本语法"></a>异常处理的基本语法</h2><p>在编写代码处理异常时，对于检查异常，有2种不同的处理方式：使用try…catch…finally语句块处理它。或者，在函数签名中使用throws 声明交给函数调用者caller去解决。</p>
-<p>try…catch…finally语句块<br>|123456789101112131415161718192021|<code>try``&#123;``     ``//try块中放可能发生异常的代码。``     ``//如果执行完try且不发生异常，则接着去执行finally块和finally后面的代码（如果有的话）。``     ``//如果发生异常，则尝试去匹配catch块。</code> <code>&#125;``catch``(SQLException SQLexception)&#123;``    ``//每一个catch块用于捕获并处理一个特定的异常，或者这异常类型的子类。Java7中可以将多个异常声明在一个catch中。``    ``//catch后面的括号定义了异常类型和异常参数。如果异常与之匹配且是最先匹配到的，则虚拟机将使用这个catch块来处理异常。``    ``//在catch块中可以使用这个块的异常参数来获取异常的相关信息。异常参数是这个catch块中的局部变量，其它块不能访问。``    ``//如果当前try块中发生的异常在后续的所有catch中都没捕获到，则先去执行finally，然后到这个函数的外部caller中去匹配异常处理器。``    ``//如果try中没有发生异常，则所有的catch块将被忽略。</code> <code>&#125;``catch``(Exception exception)&#123;``    ``//...``&#125;``finally``&#123;</code> <code>    ``//finally块通常是可选的。``   ``//无论异常是否发生，异常是否匹配被处理，finally都会执行。``   ``//一个try至少要有一个catch块，否则， 至少要有1个finally块。但是finally不是用来处理异常的，finally不会捕获异常。``  ``//finally主要做一些清理工作，如流的关闭，数据库连接的关闭等。 ``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p><code>try``&#123;</code></p>
-<p><code>     ``//如果执行完try且不发生异常，则接着去执行finally块和finally后面的代码（如果有的话）。</code></p>
-<p> </p>
-<p><code>    ``//每一个catch块用于捕获并处理一个特定的异常，或者这异常类型的子类。Java7中可以将多个异常声明在一个catch中。</code></p>
-<p><code>    ``//在catch块中可以使用这个块的异常参数来获取异常的相关信息。异常参数是这个catch块中的局部变量，其它块不能访问。</code></p>
-<p><code>    ``//如果try中没有发生异常，则所有的catch块将被忽略。</code></p>
-<p><code>&#125;``catch``(Exception exception)&#123;</code></p>
-<p><code>&#125;``finally``&#123;</code></p>
-<p><code>    ``//finally块通常是可选的。</code></p>
-<p><code>   ``//一个try至少要有一个catch块，否则， 至少要有1个finally块。但是finally不是用来处理异常的，finally不会捕获异常。</code></p>
-<p><code>&#125;</code></p>
-<p><strong>需要注意的地方</strong></p>
-<p>1、try块中的局部变量和catch块中的局部变量（包括异常变量），以及finally中的局部变量，他们之间不可共享使用。</p>
-<p>2、每一个catch块用于处理一个异常。异常匹配是按照catch块的顺序从上往下寻找的，只有第一个匹配的catch会得到执行。匹配时，不仅运行精确匹配，也支持父类匹配，因此，如果同一个try块下的多个catch异常类型有父子关系，应该将子类异常放在前面，父类异常放在后面，这样保证每个catch块都有存在的意义。</p>
-<p>3、java中，异常处理的任务就是将执行控制流从异常发生的地方转移到能够处理这种异常的地方去。也就是说：当一个函数的某条语句发生异常时，这条语句的后面的语句不会再执行，它失去了焦点。执行流跳转到最近的匹配的异常处理catch代码块去执行，异常被处理完后，执行流会接着在“处理了这个异常的catch代码块”后面接着执行。<br/><br>有的编程语言当异常被处理后，控制流会恢复到异常抛出点接着执行，这种策略叫做：resumption model of exception handling（恢复式异常处理模式 ）<br/><br>而Java则是让执行流恢复到处理了异常的catch块后接着执行，这种策略叫做：termination model of exception handling（终结式异常处理模式）<br>|1234567891011|<code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)&#123;``        ``try</code> <code>&#123;``            ``foo();``        ``&#125;``catch``(ArithmeticException ae) &#123;``            ``System.out.println(``&quot;处理异常&quot;``);``        ``&#125;``&#125;``public</code> <code>static</code> <code>void</code> <code>foo()&#123;``        ``int</code> <code>a = ``5``/``0``;  ``//异常抛出点``        ``System.out.println(``&quot;为什么还不给我涨工资!!!&quot;``);  ``//////////////////////不会执行``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p><code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)&#123;</code></p>
-<p><code>            ``foo();</code></p>
-<p><code>            ``System.out.println(``&quot;处理异常&quot;``);</code></p>
-<p><code>&#125;</code></p>
-<p><code>        ``int</code> <code>a = ``5``/``0``;  ``//异常抛出点</code></p>
-<p><code>&#125;</code></p>
-<p>throws 函数声明</p>
-<p>throws声明：如果一个方法内部的代码会抛出检查异常（checked exception），而方法自己又没有完全处理掉，则javac保证你必须在方法的签名上使用throws关键字声明这些可能抛出的异常，否则编译不通过。</p>
-<p>throws是另一种处理异常的方式，它不同于try…catch…finally，throws仅仅是将函数中可能出现的异常向调用者声明，而自己则不具体处理。</p>
-<p>采取这种异常处理的原因可能是：方法本身不知道如何处理这样的异常，或者说让调用者处理更好，调用者需要为可能发生的异常负责。<br>|1234|<code>public</code> <code>void</code> <code>foo() ``throws</code> <code>ExceptionType1 , ExceptionType2 ,ExceptionTypeN``&#123; ``     ``//foo内部可以抛出 ExceptionType1 , ExceptionType2 ,ExceptionTypeN 类的异常，或者他们的子类的异常对象。``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p><code>&#123; </code></p>
-<p><code>&#125;</code></p>
-<h2 id="finally块"><a href="#finally块" class="headerlink" title="finally块"></a>finally块</h2><p>finally块不管异常是否发生，只要对应的try执行了，则它一定也执行。只有一种方法让finally块不执行：System.exit()。因此finally块通常用来做资源释放操作：关闭文件，关闭数据库连接等等。</p>
-<p>良好的编程习惯是：在try块中打开资源，在finally块中清理释放这些资源。</p>
-<p>需要注意的地方:</p>
-<p>1、finally块没有处理异常的能力。处理异常的只能是catch块。</p>
-<p>2、在同一try…catch…finally块中 ，如果try中抛出异常，且有匹配的catch块，则先执行catch块，再执行finally块。如果没有catch块匹配，则先执行finally，然后去外面的调用者中寻找合适的catch块。</p>
-<p>3、在同一try…catch…finally块中 ，try发生异常，且匹配的catch块中处理异常时也抛出异常，那么后面的finally也会执行：首先执行finally块，然后去外围调用者中寻找合适的catch块。</p>
-<p>这是正常的情况，但是也有特例。关于finally有很多恶心，偏、怪、难的问题，我在本文最后统一介绍了，电梯速达-&gt;：finally块和return</p>
-<h2 id="throw-异常抛出语句"><a href="#throw-异常抛出语句" class="headerlink" title="throw 异常抛出语句"></a>throw 异常抛出语句</h2><p>throw exceptionObject</p>
-<p>程序员也可以通过throw语句手动显式的抛出一个异常。throw语句的后面必须是一个异常对象。</p>
-<p>throw 语句必须写在函数中，执行throw 语句的地方就是一个异常抛出点，它和由JRE自动形成的异常抛出点没有任何差别。<br>|1234567|<code>public</code> <code>void</code> <code>save(User user)``&#123;``      ``if``(user  == ``null``) ``          ``throw</code> <code>new</code> <code>IllegalArgumentException(``&quot;User对象为空&quot;``);``      ``//......</code> <code>&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p><code>public</code> <code>void</code> <code>save(User user)</code></p>
-<p><code>      ``if``(user  == ``null``) </code></p>
-<p><code>      ``//......</code></p>
-<p><code>&#125;</code></p>
-<h2 id="异常的链化"><a href="#异常的链化" class="headerlink" title="异常的链化"></a>异常的链化</h2><p>在一些大型的，模块化的软件开发中，一旦一个地方发生异常，则如骨牌效应一样，将导致一连串的异常。假设B模块完成自己的逻辑需要调用A模块的方法，如果A模块发生异常，则B也将不能完成而发生异常，但是B在抛出异常时，会将A的异常信息掩盖掉，这将使得异常的根源信息丢失。异常的链化可以将多个模块的异常串联起来，使得异常信息不会丢失。</p>
-<p>异常链化:以一个异常对象为参数构造新的异常对象。新的异对象将包含先前异常的信息。这项技术主要是异常类的一个带Throwable参数的函数来实现的。这个当做参数的异常，我们叫他根源异常（cause）。</p>
-<p>查看Throwable类源码，可以发现里面有一个Throwable字段cause，就是它保存了构造时传递的根源异常参数。这种设计和链表的结点类设计如出一辙，因此形成链也是自然的了。<br>|12345678910111213141516|<code>public</code> <code>class</code> <code>Throwable ``implements</code> <code>Serializable &#123;``    ``private</code> <code>Throwable cause = ``this``;</code> <code>    ``public</code> <code>Throwable(String message, Throwable cause) &#123;``        ``fillInStackTrace();``        ``detailMessage = message;``        ``this``.cause = cause;``    ``&#125;``     ``public</code> <code>Throwable(Throwable cause) &#123;``        ``fillInStackTrace();``        ``detailMessage = (cause==``null</code> <code>? ``null</code> <code>: cause.toString());``        ``this``.cause = cause;``    ``&#125;</code> <code>    ``//........``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p><code>    ``private</code> <code>Throwable cause = ``this``;</code></p>
-<p><code>    ``public</code> <code>Throwable(String message, Throwable cause) &#123;</code></p>
-<p><code>        ``detailMessage = message;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>        ``fillInStackTrace();</code></p>
-<p><code>        ``this``.cause = cause;</code></p>
-<p> </p>
-<p><code>&#125;</code></p>
-<p>下面是一个例子，演示了异常的链化：从命令行输入2个int，将他们相加，输出。输入的数不是int，则导致getInputNumbers异常，从而导致add函数异常，则可以在add函数中抛出</p>
-<p>一个链化的异常。<br>|123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960|<code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)``&#123;</code> <code>    ``System.out.println(``&quot;请输入2个加数&quot;``);``    ``int</code> <code>result;``    ``try``    ``&#123;``        ``result = add();``        ``System.out.println(``&quot;结果:&quot;``+result);``    ``&#125; ``catch</code> <code>(Exception e)&#123;``        ``e.printStackTrace();``    ``&#125;``&#125;``//获取输入的2个整数返回``private</code> <code>static</code> <code>List&amp;lt;Integer&amp;gt; getInputNumbers()``&#123;``    ``List&amp;lt;Integer&amp;gt; nums = ``new</code> <code>ArrayList&amp;lt;&amp;gt;();``    ``Scanner scan = ``new</code> <code>Scanner(System.in);``    ``try</code> <code>&#123;``        ``int</code> <code>num1 = scan.nextInt();``        ``int</code> <code>num2 = scan.nextInt();``        ``nums.add(``new</code> <code>Integer(num1));``        ``nums.add(``new</code> <code>Integer(num2));``    ``&#125;``catch``(InputMismatchException immExp)&#123;``        ``throw</code> <code>immExp;``    ``&#125;``finally</code> <code>&#123;``        ``scan.close();``    ``&#125;``    ``return</code> <code>nums;``&#125;</code> <code>//执行加法计算``private</code> <code>static</code> <code>int</code> <code>add() ``throws</code> <code>Exception``&#123;``    ``int</code> <code>result;``    ``try</code> <code>&#123;``        ``List&amp;lt;Integer&amp;gt; nums =getInputNumbers();``        ``result = nums.get(``0``)  + nums.get(``1``);``    ``&#125;``catch``(InputMismatchException immExp)&#123;``        ``throw</code> <code>new</code> <code>Exception(``&quot;计算失败&quot;``,immExp);  ``/////////////////////////////链化:以一个异常对象为参数构造新的异常对象。``    ``&#125;``    ``return</code>  <code>result;``&#125;</code> <code>/*``请输入2个加数``r 1``java.lang.Exception: 计算失败``    ``at practise.ExceptionTest.add(ExceptionTest.java:53)``    ``at practise.ExceptionTest.main(ExceptionTest.java:18)``Caused by: java.util.InputMismatchException``    ``at java.util.Scanner.throwFor(Scanner.java:864)``    ``at java.util.Scanner.next(Scanner.java:1485)``    ``at java.util.Scanner.nextInt(Scanner.java:2117)``    ``at java.util.Scanner.nextInt(Scanner.java:2076)``    ``at practise.ExceptionTest.getInputNumbers(ExceptionTest.java:30)``    ``at practise.ExceptionTest.add(ExceptionTest.java:48)``    ``... 1 more</code> <code>*/</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p>34</p>
-<p>36</p>
-<p>38</p>
-<p>40</p>
-<p>42</p>
-<p>44</p>
-<p>46</p>
-<p>48</p>
-<p>50</p>
-<p>52</p>
-<p>54</p>
-<p>56</p>
-<p>58</p>
-<p>60</p>
-<p><code>&#123;</code></p>
-<p><code>    ``System.out.println(``&quot;请输入2个加数&quot;``);</code></p>
-<p><code>    ``try</code></p>
-<p><code>        ``result = add();</code></p>
-<p><code>    ``&#125; ``catch</code> <code>(Exception e)&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>//获取输入的2个整数返回</code></p>
-<p><code>&#123;</code></p>
-<p><code>    ``Scanner scan = ``new</code> <code>Scanner(System.in);</code></p>
-<p><code>        ``int</code> <code>num1 = scan.nextInt();</code></p>
-<p><code>        ``nums.add(``new</code> <code>Integer(num1));</code></p>
-<p><code>    ``&#125;``catch``(InputMismatchException immExp)&#123;</code></p>
-<p><code>    ``&#125;``finally</code> <code>&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>&#125;</code></p>
-<p><code>//执行加法计算</code></p>
-<p><code>&#123;</code></p>
-<p><code>    ``try</code> <code>&#123;</code></p>
-<p><code>        ``result = nums.get(``0``)  + nums.get(``1``);</code></p>
-<p><code>        ``throw</code> <code>new</code> <code>Exception(``&quot;计算失败&quot;``,immExp);  ``/////////////////////////////链化:以一个异常对象为参数构造新的异常对象。</code></p>
-<p><code>    ``return</code>  <code>result;</code></p>
-<p> </p>
-<p><code>请输入2个加数</code></p>
-<p><code>java.lang.Exception: 计算失败</code></p>
-<p><code>    ``at practise.ExceptionTest.main(ExceptionTest.java:18)</code></p>
-<p><code>    ``at java.util.Scanner.throwFor(Scanner.java:864)</code></p>
-<p><code>    ``at java.util.Scanner.nextInt(Scanner.java:2117)</code></p>
-<p><code>    ``at practise.ExceptionTest.getInputNumbers(ExceptionTest.java:30)</code></p>
-<p><code>    ``... 1 more</code></p>
-<p><code>*/</code></p>
-<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>如果要自定义异常类，则扩展Exception类即可，因此这样的自定义异常都属于检查异常（checked exception）。如果要自定义非检查异常，则扩展自RuntimeException。</p>
-<p>按照国际惯例，自定义的异常应该总是包含如下的构造函数：</p>
-<p>下面是IOException类的完整源代码，可以借鉴。<br>|123456789101112131415161718192021222324|<code>public</code> <code>class</code> <code>IOException ``extends</code> <code>Exception``&#123;``    ``static</code> <code>final</code> <code>long</code> <code>serialVersionUID = 7818375828146090155L;</code> <code>    ``public</code> <code>IOException()``    ``&#123;``        ``super``();``    ``&#125;</code> <code>    ``public</code> <code>IOException(String message)``    ``&#123;``        ``super``(message);``    ``&#125;</code> <code>    ``public</code> <code>IOException(String message, Throwable cause)``    ``&#123;``        ``super``(message, cause);``    ``&#125;</code> <code>    ``public</code> <code>IOException(Throwable cause)``    ``&#123;``        ``super``(cause);``    ``&#125;``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p><code>&#123;</code></p>
-<p> </p>
-<p><code>    ``&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>    ``public</code> <code>IOException(String message)</code></p>
-<p><code>        ``super``(message);</code></p>
-<p> </p>
-<p><code>    ``&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>    ``public</code> <code>IOException(Throwable cause)</code></p>
-<p><code>        ``super``(cause);</code></p>
-<p><code>&#125;</code></p>
-<h2 id="异常的注意事项"><a href="#异常的注意事项" class="headerlink" title="异常的注意事项"></a>异常的注意事项</h2><p>1、当子类重写父类的带有 throws声明的函数时，其throws声明的异常必须在父类异常的可控范围内——用于处理父类的throws方法的异常处理器，必须也适用于子类的这个带throws方法 。这是为了支持多态。</p>
-<p>例如，父类方法throws 的是2个异常，子类就不能throws 3个及以上的异常。父类throws IOException，子类就必须throws IOException或者IOException的子类。</p>
-<p>至于为什么？我想，也许下面的例子可以说明。<br>|1234567891011121314151617181920212223242526272829303132333435363738|<code>class</code> <code>Father``&#123;``    ``public</code> <code>void</code> <code>start() ``throws</code> <code>IOException``    ``&#123;``        ``throw</code> <code>new</code> <code>IOException();``    ``&#125;``&#125;</code> <code>class</code> <code>Son ``extends</code> <code>Father``&#123;``    ``public</code> <code>void</code> <code>start() ``throws</code> <code>Exception``    ``&#123;``        ``throw</code> <code>new</code> <code>SQLException();``    ``&#125;``&#125;``/**********************假设上面的代码是允许的（实质是错误的）***********************/``class</code> <code>Test``&#123;``    ``public</code> <code>static</code> <code>void</code> <code>main(String[] args)``    ``&#123;``        ``Father[] objs = ``new</code> <code>Father[``2``];``        ``objs[``0``] = ``new</code> <code>Father();``        ``objs[``1``] = ``new</code> <code>Son();</code> <code>        ``for``(Father obj:objs)``        ``&#123;``        ``//因为Son类抛出的实质是SQLException，而IOException无法处理它。``        ``//那么这里的try。。catch就不能处理Son中的异常。``        ``//多态就不能实现了。``            ``try</code> <code>&#123;``                 ``obj.start();``            ``&#125;``catch``(IOException)``            ``&#123;``                 ``//处理IOException``            ``&#125;``         ``&#125;``   ``&#125;``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p>34</p>
-<p>36</p>
-<p>38</p>
-<p><code>&#123;</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p> </p>
-<p><code>&#123;</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>/**********************假设上面的代码是允许的（实质是错误的）***********************/</code></p>
-<p><code>&#123;</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>        ``objs[``0``] = ``new</code> <code>Father();</code></p>
-<p> </p>
-<p><code>        ``&#123;</code></p>
-<p><code>        ``//那么这里的try。。catch就不能处理Son中的异常。</code></p>
-<p><code>            ``try</code> <code>&#123;</code></p>
-<p><code>            ``&#125;``catch``(IOException)</code></p>
-<p><code>                 ``//处理IOException</code></p>
-<p><code>         ``&#125;</code></p>
-<p><code>&#125;</code></p>
-<p>2、Java程序可以是多线程的。每一个线程都是一个独立的执行流，独立的函数调用栈。如果程序只有一个线程，那么没有被任何代码处理的异常 会导致程序终止。如果是多线程的，那么没有被任何代码处理的异常仅仅会导致异常所在的线程结束。</p>
-<p>也就是说，Java中的异常是线程独立的，线程的问题应该由线程自己来解决，而不要委托到外部，也不会直接影响到其它线程的执行。</p>
-<h2 id="finally块和return"><a href="#finally块和return" class="headerlink" title="finally块和return"></a>finally块和return</h2><p>首先一个不容易理解的事实：在 try块中即便有return，break，continue等改变执行流的语句，finally也会执行。<br>|12345678910111213141516|<code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)``&#123;``    ``int</code> <code>re = bar();``    ``System.out.println(re);``&#125;``private</code> <code>static</code> <code>int</code> <code>bar() ``&#123;``    ``try``&#123;``        ``return</code> <code>5``;``    ``&#125; ``finally``&#123;``        ``System.out.println(``&quot;finally&quot;``);``    ``&#125;``&#125;``/*输出：``finally``*/</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p><code>&#123;</code></p>
-<p><code>    ``System.out.println(re);</code></p>
-<p><code>private</code> <code>static</code> <code>int</code> <code>bar() </code></p>
-<p><code>    ``try``&#123;</code></p>
-<p><code>    ``&#125; ``finally``&#123;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>/*输出：</code></p>
-<p><code>*/</code></p>
-<p>很多人面对这个问题时，总是在归纳执行的顺序和规律，不过我觉得还是很难理解。我自己总结了一个方法。用如下GIF图说明。</p>
-<p>也就是说：try…catch…finally中的return 只要能执行，就都执行了，他们共同向同一个内存地址（假设地址是0×80）写入返回值，后执行的将覆盖先执行的数据，而真正被调用者取的返回值就是最后一次写入的。那么，按照这个思想，下面的这个例子也就不难理解了。</p>
-<p>finally中的return 会覆盖 try 或者catch中的返回值。<br>|123456789101112131415161718192021222324252627282930313233|<code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)``    ``&#123;``        ``int</code> <code>result;</code> <code>        ``result  =  foo();``        ``System.out.println(result);     ``/////////2</code> <code>        ``result = bar();``        ``System.out.println(result);    ``/////////2``    ``&#125;</code> <code>    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>foo()``    ``&#123;``        ``trz&#123;``            ``int</code> <code>a = ``5</code> <code>/ ``0``;``        ``&#125; ``catch</code> <code>(Exception e)&#123;``            ``return</code> <code>1``;``        ``&#125; ``finally``&#123;``            ``return</code> <code>2``;``        ``&#125;</code> <code>    ``&#125;</code> <code>    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>bar()``    ``&#123;``        ``try</code> <code>&#123;``            ``return</code> <code>1``;``        ``&#125;``finally</code> <code>&#123;``            ``return</code> <code>2``;``        ``&#125;``    ``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p><code>public</code> <code>static</code> <code>void</code> <code>main(String[] args)</code></p>
-<p><code>        ``int</code> <code>result;</code></p>
-<p><code>        ``result  =  foo();</code></p>
-<p> </p>
-<p><code>        ``System.out.println(result);    ``/////////2</code></p>
-<p> </p>
-<p><code>    ``public</code> <code>static</code> <code>int</code> <code>foo()</code></p>
-<p><code>        ``trz&#123;</code></p>
-<p><code>        ``&#125; ``catch</code> <code>(Exception e)&#123;</code></p>
-<p><code>        ``&#125; ``finally``&#123;</code></p>
-<p><code>        ``&#125;</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>    ``@SuppressWarnings``(``&quot;finally&quot;``)</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>            ``return</code> <code>1``;</code></p>
-<p><code>            ``return</code> <code>2``;</code></p>
-<p><code>    ``&#125;</code></p>
-<p>finally中的return会抑制（消灭）前面try或者catch块中的异常<br>|12345678910111213141516171819202122232425262728293031323334353637383940414243444546|<code>class</code> <code>TestException``&#123;``    ``public</code> <code>static</code> <code>void</code> <code>main(String[] args)``    ``&#123;``        ``int</code> <code>result;``        ``try``&#123;``            ``result = foo();``            ``System.out.println(result);           ``//输出100``        ``&#125; ``catch</code> <code>(Exception e)&#123;``            ``System.out.println(e.getMessage());    ``//没有捕获到异常``        ``&#125;</code> <code>        ``try``&#123;``            ``result  = bar();``            ``System.out.println(result);           ``//输出100``        ``&#125; ``catch</code> <code>(Exception e)&#123;``            ``System.out.println(e.getMessage());    ``//没有捕获到异常``        ``&#125;``    ``&#125;</code> <code>    ``//catch中的异常被抑制``    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>foo() ``throws</code> <code>Exception``    ``&#123;``        ``try</code> <code>&#123;``            ``int</code> <code>a = ``5``/``0``;``            ``return</code> <code>1``;``        ``&#125;``catch``(ArithmeticException amExp) &#123;``            ``throw</code> <code>new</code> <code>Exception(``&quot;我将被忽略，因为下面的finally中使用了return&quot;``);``        ``&#125;``finally</code> <code>&#123;``            ``return</code> <code>100``;``        ``&#125;``    ``&#125;</code> <code>    ``//try中的异常被抑制``    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>bar() ``throws</code> <code>Exception``    ``&#123;``        ``try</code> <code>&#123;``            ``int</code> <code>a = ``5``/``0``;``            ``return</code> <code>1``;``        ``&#125;``finally</code> <code>&#123;``            ``return</code> <code>100``;``        ``&#125;``    ``&#125;``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p>34</p>
-<p>36</p>
-<p>38</p>
-<p>40</p>
-<p>42</p>
-<p>44</p>
-<p>46</p>
-<p><code>&#123;</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>        ``try``&#123;</code></p>
-<p><code>            ``System.out.println(result);           ``//输出100</code></p>
-<p><code>            ``System.out.println(e.getMessage());    ``//没有捕获到异常</code></p>
-<p> </p>
-<p><code>            ``result  = bar();</code></p>
-<p><code>        ``&#125; ``catch</code> <code>(Exception e)&#123;</code></p>
-<p><code>        ``&#125;</code></p>
-<p> </p>
-<p><code>    ``@SuppressWarnings``(``&quot;finally&quot;``)</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>            ``int</code> <code>a = ``5``/``0``;</code></p>
-<p><code>        ``&#125;``catch``(ArithmeticException amExp) &#123;</code></p>
-<p><code>        ``&#125;``finally</code> <code>&#123;</code></p>
-<p><code>        ``&#125;</code></p>
-<p> </p>
-<p><code>    ``@SuppressWarnings``(``&quot;finally&quot;``)</code></p>
-<p><code>    ``&#123;</code></p>
-<p><code>            ``int</code> <code>a = ``5``/``0``;</code></p>
-<p><code>        ``&#125;``finally</code> <code>&#123;</code></p>
-<p><code>        ``&#125;</code></p>
-<p><code>&#125;</code></p>
-<p>finally中的异常会覆盖（消灭）前面try或者catch中的异常<br>|123456789101112131415161718192021222324252627282930313233343536373839404142434445|<code>class</code> <code>TestException``&#123;``    ``public</code> <code>static</code> <code>void</code> <code>main(String[] args)``    ``&#123;``        ``int</code> <code>result;``        ``try``&#123;``            ``result = foo();``        ``&#125; ``catch</code> <code>(Exception e)&#123;``            ``System.out.println(e.getMessage());    ``//输出：我是finaly中的Exception``        ``&#125;</code> <code>        ``try``&#123;``            ``result  = bar();``        ``&#125; ``catch</code> <code>(Exception e)&#123;``            ``System.out.println(e.getMessage());    ``//输出：我是finaly中的Exception``        ``&#125;``    ``&#125;</code> <code>    ``//catch中的异常被抑制``    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>foo() ``throws</code> <code>Exception``    ``&#123;``        ``try</code> <code>&#123;``            ``int</code> <code>a = ``5``/``0``;``            ``return</code> <code>1``;``        ``&#125;``catch``(ArithmeticException amExp) &#123;``            ``throw</code> <code>new</code> <code>Exception(``&quot;我将被忽略，因为下面的finally中抛出了新的异常&quot;``);``        ``&#125;``finally</code> <code>&#123;``            ``throw</code> <code>new</code> <code>Exception(``&quot;我是finaly中的Exception&quot;``);``        ``&#125;``    ``&#125;</code> <code>    ``//try中的异常被抑制``    ``@SuppressWarnings``(``&quot;finally&quot;``)``    ``public</code> <code>static</code> <code>int</code> <code>bar() ``throws</code> <code>Exception``    ``&#123;``        ``try</code> <code>&#123;``            ``int</code> <code>a = ``5``/``0``;``            ``return</code> <code>1``;``        ``&#125;``finally</code> <code>&#123;``            ``throw</code> <code>new</code> <code>Exception(``&quot;我是finaly中的Exception&quot;``);``        ``&#125;</code> <code>    ``&#125;``&#125;</code></p>
-<p>2</p>
-<p>4</p>
-<p>6</p>
-<p>8</p>
-<p>10</p>
-<p>12</p>
-<p>14</p>
-<p>16</p>
-<p>18</p>
-<p>20</p>
-<p>22</p>
-<p>24</p>
-<p>26</p>
-<p>28</p>
-<p>30</p>
-<p>32</p>
-<p>34</p>
-<p>36</p>
-<p>38</p>
-<p>40</p>
-<p>42</p>
-<p>44</p>
-<p><code>class</code> <code>TestException</code></p>
-<p><code>    ``public</code> <code>static</code> <code>void</code> <code>main(String[] args)</code></p>
-<p><code>        ``int</code> <code>result;</code></p>
-<p><code>            ``result = foo();</code></p>
-<p><code>            ``System.out.println(e.getMessage());    ``//输出：我是finaly中的Exception</code></p>
-<p> </p>
-<p><code>            ``result  = bar();</code></p>
-<p><code>            ``System.out.println(e.getMessage());    ``//输出：我是finaly中的Exception</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>    ``//catch中的异常被抑制</code></p>
-<p><code>    ``public</code> <code>static</code> <code>int</code> <code>foo() ``throws</code> <code>Exception</code></p>
-<p><code>        ``try</code> <code>&#123;</code></p>
-<p><code>            ``return</code> <code>1``;</code></p>
-<p><code>            ``throw</code> <code>new</code> <code>Exception(``&quot;我将被忽略，因为下面的finally中抛出了新的异常&quot;``);</code></p>
-<p><code>            ``throw</code> <code>new</code> <code>Exception(``&quot;我是finaly中的Exception&quot;``);</code></p>
-<p><code>    ``&#125;</code></p>
-<p><code>    ``//try中的异常被抑制</code></p>
-<p><code>    ``public</code> <code>static</code> <code>int</code> <code>bar() ``throws</code> <code>Exception</code></p>
-<p><code>        ``try</code> <code>&#123;</code></p>
-<p><code>            ``return</code> <code>1``;</code></p>
-<p><code>            ``throw</code> <code>new</code> <code>Exception(``&quot;我是finaly中的Exception&quot;``);</code></p>
-<p> </p>
-<p><code>&#125;</code></p>
-<p>上面的3个例子都异于常人的编码思维，因此我建议：</p>
 
       
     </div>

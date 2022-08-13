@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -146,6 +146,96 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%8C%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E5%92%8C%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/31/%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%8C%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E5%92%8C%E9%9D%99%E6%80%81%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="编译型语言和解释型语言，动态语言和静态语言的区别"><a href="#编译型语言和解释型语言，动态语言和静态语言的区别" class="headerlink" title="编译型语言和解释型语言，动态语言和静态语言的区别"></a>编译型语言和解释型语言，动态语言和静态语言的区别</h1><h2 id="编译型和解释型的区别"><a href="#编译型和解释型的区别" class="headerlink" title="编译型和解释型的区别"></a>编译型和解释型的区别</h2><p>先来看看编译型语言的定义：</p>
+<blockquote>
+</blockquote>
+<p>编译型语言首先是将源代码编译生成机器指令，再由机器运行机器码（二进制）</p>
+<p>再来看看解释型语言的定义：</p>
+<blockquote>
+</blockquote>
+<p>解释型语言的源代码不是直接翻译成机器指令，而是先翻译成中间代码，再由解释器对中间代码进行解释运行。</p>
+<p>下面打个比方：</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>编译型和解释型的定义是对立存在的，但也可以在一个语言中同时存在。比如Java语言同时兼有编译型和解释型特点。整个流程如下：<br/><br>将源代码（.java)文件编译生成字节码（.class文件），再通过JVM（java虚拟机）运行生成机器指令，由机器运行机器码。<br/><br><strong>注</strong>：此处生成机器语言前的操作是解释型，每次运行都要重新解释。因此，此处表明Java是解释型。<br/><br>但是，部分JVM（java虚拟机）有一种JIT（Just in time)机制，能够将部分已经解释翻译的常用机器指令保存。下次不需要解释，直接运行即可。此时Java是编译型。<br/><br>因此，现在用编译型和解释型区分语言是行不通的。</p>
+<p><strong>编译型语言</strong><br/><br><strong>优点</strong>：<br/><br>1.编译型语言最大的优势之一就是其执行速度。用C&#x2F;C++编写的程序运行速度要比用Java编写的相同程序快30%~70%.<br/><br>2.编译型程序比解释型程序消耗的内存更少。<br/><br><strong>缺点</strong>：<br/><br>1.编译器比解释器要难写得多<br/><br>2.编译器在调试程序时提供不了多少帮助<br/><br>3.可执行的编译型代码比相同的解释型代码要大许多<br/><br>4.编译型程序是面向特定平台的因而是平台依赖的<br/><br>5.编译型程序不支持代码中实现安全性，大部分病毒是使用编译型语言编写的<br/><br>6.由于松散的安全性和平台依赖性，编译型语言不太适合开发因特网或者基于Web的应用</p>
+<p><strong>解释型语言</strong><br/><br><strong>优点</strong>：<br/><br>1.解释型语言提供了极佳的调试支持<br/><br>2.解释器比编译器更容易实现<br/><br>3.解释型语言最大的优势之一是其平台独立性<br/><br>4.解释型语言也可以保证高度的安全性，这正是互联网应用所迫切需要的<br/><br>5.中间语言代码的大小比编译型可执行代码小很多<br/><br><strong>缺点</strong>：<br/><br>1.解释型语言存在一些严重的缺点。解释型应用占用更多的内存和CPU资源<br/><br>2.由于解释型应用的decode-fetch-execute(解码-抓取-执行）的周期，它们比编译型程序慢很多</p>
+<h2 id="动态语言和静态语言"><a href="#动态语言和静态语言" class="headerlink" title="动态语言和静态语言"></a>动态语言和静态语言</h2><p>我们常说的动态语言和静态语言，其实是指动态类型和静态类型语言。先来看看动态类型语言定义：</p>
+<blockquote>
+</blockquote>
+<p>动态类型语言，是指数据类型的检查是在运行时做的。用动态类型语言编程时，不用给变量指定数据类型，该语言会在你第一次赋值给变量时，在内部记录数据类型。</p>
+<p>再来看看静态类型语言的定义：</p>
+<blockquote>
+</blockquote>
+<p>静态类型语言，是指数据类型的检查是在运行前（如编译阶段）做的。</p>
+<p>小结：</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1073,166 +1163,6 @@ Test模块支持使用JUnit和TestNG对Spring组件进行测试。</li>
 <h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>查看“D:\Install\Python27\lib\site-packages\robotide\context_<strong>init</strong>_.py”文件<br/><br>if IS_WINDOWS:<br/><br>SETTINGS_DIRECTORY &#x3D; os.path.join(<br/><br>os.environ[‘APPDATA’], ‘RobotFramework’, ‘ride’)<br/><br>else:<br/><br>SETTINGS_DIRECTORY &#x3D; os.path.join(<br/><br>os.path.expanduser(’~&#x2F;.robotframework’), ‘ride’)</p>
 <p>缺少os.environ[‘APPDATA’]</p>
 <h2 id="问题处理："><a href="#问题处理：" class="headerlink" title="问题处理："></a>问题处理：</h2><p>卸载python27,然后重新安装python27,重启之后解决此问题。<br/><br>估计是安装了nodejs的原因导致了环境变量的修改</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/07/31/README/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/31/README/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-31 15:58:18 / Modified: 15:51:32" itemprop="dateCreated datePublished" datetime="2022-07-31T15:58:18+08:00">2022-07-31</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="博文"><a href="#博文" class="headerlink" title="博文"></a>博文</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/79359929">转载：IdeaVim-常用操作</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/79368615">原创：MAC下homebrew出现xcrun: error: invalid active developer path</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88587769">原创：SPRING CLOUD微服务实战笔记–微服务构建:Spring Boot</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88605254">原创：SPRING CLOUD微服务实战笔记–服务治理:Spring Cloud Eureka(一)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88619169">原创：SpringCloud打成Jar包</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88622775">原创：SPRING CLOUD微服务实战笔记–服务治理:Spring Cloud Eureka(二)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88679482">转载：理解SQL原理，写出高效的SQL语句</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88744114">转载：Java 中的异常和处理详解</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88643292">原创：SPRING CLOUD微服务实战笔记–客户端负载均衡Spring Cloud Ribbon</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88763109">原创：SPRING CLOUD微服务实战笔记–服务容错保护:Spring Cloud Hystrix(一)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88777231">原创：SPRING CLOUD微服务实战笔记–服务容错保护:Spring Cloud Hystrix(二)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88834218">原创：maven打包</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88834326">原创：maven引入本地项目</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88832418">原创：SPRING CLOUD微服务实战笔记–声明式服务调用:Spring Cloud Feign</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88858804">原创：SPRING CLOUD微服务实战笔记–API网关服务Spring Cloud Zuul</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88884097">原创：SPRING CLOUD微服务实战笔记–分布式配置中心:Spring Cloud Config</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88924725">原创：SPRING CLOUD微服务实战笔记–消息总线:Spring Cloud Bus</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88972775">原创：SPRING CLOUD微服务实战笔记–消息驱动的微服务:Spring Cloud Stream</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/88993210">原创：SPRING CLOUD微服务实战笔记–分布式服务跟踪:Spring Cloud Sleuth</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/89163621">转载：Spring data报错：Inferred type ‘S’ for type parameter ‘S’ is not within its bound</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/89739097">原创：研磨设计模式笔记之简单工厂模式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/89789439">原创：研磨设计模式笔记之外观模式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/91793046">原创：Linux获取文件属性</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/93594159">原创：Maven Package跳过测试的两种方法及区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/94660590">原创：并发编程学习笔记（一）——并发编程的挑战</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/94669348">原创：并发编程学习笔记（二）——volatile关键字</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/94998704">原创：敏捷软件开发笔记（一）——敏捷实践</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/95033641">原创：并发编程学习笔记（三）——synchronized的实现原理及应用</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/95053991">原创：Gradle构建项目报错： Could not find method leftShift() for arguments</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/95255715">原创：并发编程学习笔记（四）——原子操作的实现原理</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/95304520">原创：Python知识点整理（一）</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/95733432">原创：并发编程学习笔记（五）—— Java内存模型</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/96039214">原创：并发编程学习笔记（六）—— 重排序</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/96479393">转载：KeyCode对照表</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/96694556">原创：并发编程学习笔记（七）—— 顺序一致性</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/96749678">原创：并发编程学习笔记（八）—— volatile的内存语义</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/97175145">原创：linux 终端启动图形化程序界面时报错：No protocol specified</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/98033053">原创：Linux&#x2F;Windows 下解压和打包jar包</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/98900788">原创：Python  from  找不到module</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/98966285">原创：Python u,b,r前缀的作用及应用</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/98744728">原创：了解Web及网络基础</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99577011">原创：简单的HTTP协议</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99659415">原创：HTTP报文内的HTTP信息</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99689008">原创：返回结果的HTTP状态码</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99692067">原创：与HTTP协作的Web服务器</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99693209">原创：HTTP首部（一）</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99702764">原创：HTTP首部（二）</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99707948">原创：HTTP首部（三）</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/99757269">原创：确保Web安全的HTTPS</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100180080">原创：常用但易忘的bash shell命令</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100639113">原创：Shell的部分内外建命令</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100777961">转载：正则表达式匹配标点符号</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100641778">原创：Linux环境变量</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100786609">原创：Linux文件权限</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100902844">原创：SprintBoot上传附件太大报错：org.apache.tomcat.util.http.fileupload.FileUploadBase$SizeLimitExceededException</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/100944022">原创：Shell编程的一些常识</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/101025541">原创：使用内部字段分隔符读取文件</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/101065926">原创：常用的Linux命令选项</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/101266083">原创：shell文本处理——gawk和sed简介</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/101285146">原创：shell文本处理——sed编辑器基础篇</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/101307284">原创：shell文本处理——正则表达式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102528020">原创：Java8中的默认方法</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102530938">原创：Lambda表达式之方法引用</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102586254">转载：java使 FileWriter FileReader 无编码格式，OutputStreamWriter InputStreamReader可设置编码格式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102537867">原创：Java8使用流</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102596720">原创：Java8数值流</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102633354">原创：Java8用流收集数据</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102733696">原创：编译型语言和解释型语言，动态语言和静态语言的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102918978">原创：PG批量删除表</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/102965523">原创：git add 撤销</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103046081">原创：Manifest file missing - please check OSGi facet settings.</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103093027">原创：超越Java8</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103378075">原创：mac下查看Class文件字节码</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103833651">转载：OSGI MANIFEST.MF</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103831298">原创：python &#x3D;&#x3D;与is的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103888158">原创：python脚本解释器</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/103902485">原创：shell source sh bash与.&#x2F;的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/104487641">原创：1.两数之和</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/104682444">转载：谷歌浏览器（Chrome）不能拖拽安装插件</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/104913959">原创：Ride启动报错：KeyError: ‘APPDATA’</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105022502">原创：365.水壶问题</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105047467">原创：[解题技巧]找出没有重复的数</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105048139">原创：[解题技巧]m的n次方</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105049399">转载：[转载]小白一路走来，连续刷题三年，谈谈我的算法学习经验</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105121299">转载：进程与线程的区别</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105126408">原创：线程的调度方式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105155254">原创：Spring整体架构和环境搭建</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105201410">原创：进程间通信的方式</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengdong12345/article/details/105202213">转载：线程间的同步方式</a></li>
-</ol>
 
       
     </div>
