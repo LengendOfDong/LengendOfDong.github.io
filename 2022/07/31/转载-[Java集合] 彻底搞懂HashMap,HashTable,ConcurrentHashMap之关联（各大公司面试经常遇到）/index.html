@@ -601,7 +601,7 @@ V put(K paramK, int paramInt, V paramV, boolean paramBoolean)  </li><l
 <p>从上述的分析看出，<strong><strong>ConcurrentHashMap基于concurrentLevel划分出了多个Segment来对key-value进行存储，从而避免每次锁定整个数组，在默认的情况下，允许16个线程并发无阻塞的操作集合对象，尽可能地减少并发时的阻塞现象。</strong></strong></p>
 <p>在多线程的环境中，相对于HashTable，ConcurrentHashMap会带来很大的性能提升！</p>
 <p><strong><u>欢迎读者批评指正，有任何建议请联系:</u></strong></p>
-<p><strong><u>EGG：<a href="mailto:&#120;&#x74;&#x66;&#x67;&#103;&#101;&#102;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#120;&#x74;&#x66;&#x67;&#103;&#101;&#102;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a>      <a target="_blank" rel="noopener" href="http://weibo.com/xtfggef">http://weibo.com/xtfggef</a></u></strong></p>
+<p><strong><u>EGG：<a href="mailto:&#120;&#x74;&#x66;&#x67;&#x67;&#101;&#x66;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#120;&#x74;&#x66;&#x67;&#x67;&#101;&#x66;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>      <a target="_blank" rel="noopener" href="http://weibo.com/xtfggef">http://weibo.com/xtfggef</a></u></strong></p>
 <p><strong>四、HashMap常见问题分析</strong></p>
 <p><strong><strong>1、此处我觉得</strong></strong>网友**<a href="mailto:huxb23@126">huxb23@126</a>**的一篇文章说的很好，<a target="_blank" rel="noopener" href="http://blog.163.com/huxb23@126/blog/static/625898182011211318854/"><strong>分析多线程并发写HashMap线程被hang住的原因</strong></a> ，因为是优秀的资源，此处我整理下搬到这儿。</p>
 <p>以下内容转自博文：<a target="_blank" rel="noopener" href="http://blog.163.com/huxb23@126/blog/static/625898182011211318854/">http:&#x2F;&#x2F;blog.163.com&#x2F;huxb23@126&#x2F;blog&#x2F;static&#x2F;625898182011211318854&#x2F;</a> </p>
