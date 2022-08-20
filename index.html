@@ -126,7 +126,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -160,6 +160,346 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/" class="post-title-link" itemprop="url">Atomic包之DoubleAccumulator</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-20 11:38:27 / Modified: 16:16:47" itemprop="dateCreated datePublished" datetime="2022-08-20T11:38:27+08:00">2022-08-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BAtomicMarkableReference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/20/Atomic%E5%8C%85%E4%B9%8BAtomicMarkableReference/" class="post-title-link" itemprop="url">Atomic包之AtomicMarkableReference</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-20 08:32:13 / Modified: 14:23:53" itemprop="dateCreated datePublished" datetime="2022-08-20T08:32:13+08:00">2022-08-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>AtomicMarkableReference 与 AtomicStampedReference 一样也可以解决 ABA 的问题，两者唯一的区别是，AtomicStampedReference 是通过 int 类型的版本号，而 AtomicMarkableReference 是通过 boolean 型的标识来判断数据是否有更改过。</p>
+<p>在现实业务场景中，有的时候会只关心是否有被修改过，而不会关心被修改了几次，所以AtomicMarkableReference有其独有的意义。</p>
+<p>1.AtomicMarkableReference构造</p>
+<p>AtomicMarkableReference有个静态内部类Pair，用来设置引用以及是否被标记。Pair类通过volatile标记，线程之间是可见的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">final</span> T reference;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">boolean</span> mark;</span><br><span class="line">        <span class="keyword">private</span> <span class="title function_">Pair</span><span class="params">(T reference, <span class="type">boolean</span> mark)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.reference = reference;</span><br><span class="line">            <span class="built_in">this</span>.mark = mark;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">static</span> &lt;T&gt; Pair&lt;T&gt; <span class="title function_">of</span><span class="params">(T reference, <span class="type">boolean</span> mark)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;T&gt;(reference, mark);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> Pair&lt;V&gt; pair;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates a new &#123;<span class="doctag">@code</span> AtomicMarkableReference&#125; with the given</span></span><br><span class="line"><span class="comment">     * initial values.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> initialRef the initial reference</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> initialMark the initial mark</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AtomicMarkableReference</span><span class="params">(V initialRef, <span class="type">boolean</span> initialMark)</span> &#123;</span><br><span class="line">        pair = Pair.of(initialRef, initialMark);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.其他方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先判断当前的引用和当前标记是否等于期望的，如果不相等，那么就返回false</span></span><br><span class="line"><span class="comment">//然后再判断当前的引用和当前的标记是否已经和新设置的引用和标记相同，如果相同那么直接返回true</span></span><br><span class="line"><span class="comment">//最后以上条件都满足后，再通过CAS操作来设置Pair新的</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">compareAndSet</span><span class="params">(V       expectedReference,</span></span><br><span class="line"><span class="params">                                 V       newReference,</span></span><br><span class="line"><span class="params">                                 <span class="type">boolean</span> expectedMark,</span></span><br><span class="line"><span class="params">                                 <span class="type">boolean</span> newMark)</span> &#123;</span><br><span class="line">        Pair&lt;V&gt; current = pair;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">            expectedReference == current.reference &amp;&amp;</span><br><span class="line">            expectedMark == current.mark &amp;&amp;</span><br><span class="line">            ((newReference == current.reference &amp;&amp;</span><br><span class="line">              newMark == current.mark) ||</span><br><span class="line">             casPair(current, Pair.of(newReference, newMark)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//利用Unsafe来获取pair域在整个类型中的偏移量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">pairOffset</span> <span class="operator">=</span></span><br><span class="line">        objectFieldOffset(UNSAFE, <span class="string">&quot;pair&quot;</span>, AtomicMarkableReference.class);</span><br><span class="line">    <span class="comment">//对于Pair的CAS操作，依赖于Unsafe的compareAndSwapObject方法</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">casPair</span><span class="params">(Pair&lt;V&gt; cmp, Pair&lt;V&gt; val)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> UNSAFE.compareAndSwapObject(<span class="built_in">this</span>, pairOffset, cmp, val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//通过反射获取对应名称的域，然后再通过Unsafe获取该域的偏移量</span></span><br><span class="line">    <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">objectFieldOffset</span><span class="params">(sun.misc.Unsafe UNSAFE,</span></span><br><span class="line"><span class="params">                                  String field, Class&lt;?&gt; klazz)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> UNSAFE.objectFieldOffset(klazz.getDeclaredField(field));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            <span class="comment">// Convert Exception to corresponding Error</span></span><br><span class="line">            <span class="type">NoSuchFieldError</span> <span class="variable">error</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NoSuchFieldError</span>(field);</span><br><span class="line">            error.initCause(e);</span><br><span class="line">            <span class="keyword">throw</span> error;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//尝试更新，会在引用相同的情况下，如果现有标记与新设标记相同，就直接返回true;</span></span><br><span class="line">    <span class="comment">//如果现有标记与新设标记不同，则通过CAS方式设置为新设值。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">attemptMark</span><span class="params">(V expectedReference, <span class="type">boolean</span> newMark)</span> &#123;</span><br><span class="line">        Pair&lt;V&gt; current = pair;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">            expectedReference == current.reference &amp;&amp;</span><br><span class="line">            (newMark == current.mark ||</span><br><span class="line">             casPair(current, Pair.of(expectedReference, newMark)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.应用举例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        AtomicMarkableReference&lt;Student&gt; amr = <span class="keyword">new</span> <span class="title class_">AtomicMarkableReference</span>&lt;&gt;(student, <span class="literal">false</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">oldReference</span> <span class="operator">=</span> amr.getReference();</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">oldMark</span> <span class="operator">=</span> amr.isMarked();</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化之后的引用值为：&quot;</span> + oldReference);</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化之后的标记为：&quot;</span> + oldMark);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">newStudent</span> <span class="operator">=</span> Student.builder().age(<span class="number">23</span>).build();</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b1</span> <span class="operator">=</span> amr.compareAndSet(student, newStudent, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (!b1) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;标记信息不同，不能更新&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b3</span> <span class="operator">=</span> amr.attemptMark(student, <span class="literal">true</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;尝试更新标记是否成功：&quot;</span> + b3);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b2</span> <span class="operator">=</span> amr.compareAndSet(student, newStudent, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (b2) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;标记信息相同，更新student信息&quot;</span>);</span><br><span class="line">            <span class="type">Student</span> <span class="variable">newReference</span> <span class="operator">=</span> amr.getReference();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">newMarked</span> <span class="operator">=</span> amr.isMarked();</span><br><span class="line">            System.out.println(<span class="string">&quot;更新之后的引用为：&quot;</span> + newReference);</span><br><span class="line">            System.out.println(<span class="string">&quot;更新之后的标记为：&quot;</span> + newMarked);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(<span class="type">int</span> age)</span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;age=&quot;</span> + age +</span><br><span class="line">                    <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.对比AtomicStampedReference</p>
+<p>从内部类来看，区别在于AtomicMarkableReference是isMark,boolean类型；AtomicStampedReference是stamp， int类型。</p>
+<p>isMark只能表示之前有没有被修改过，而stamp可以概括更多的情况，可以用于表示递增的版本号。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Pair</span>&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">final</span> T reference;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">int</span> stamp;</span><br><span class="line">        <span class="keyword">private</span> <span class="title function_">Pair</span><span class="params">(T reference, <span class="type">int</span> stamp)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.reference = reference;</span><br><span class="line">            <span class="built_in">this</span>.stamp = stamp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">static</span> &lt;T&gt; Pair&lt;T&gt; <span class="title function_">of</span><span class="params">(T reference, <span class="type">int</span> stamp)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Pair</span>&lt;T&gt;(reference, stamp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他函数和AtomicMarkableReference都差不多，所以就略过。</p>
+<p>AtomicStampedReference应用举例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    AtomicStampedReference&lt;Student&gt; asr = <span class="keyword">new</span> <span class="title class_">AtomicStampedReference</span>&lt;&gt;(student, <span class="number">3</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">stamp</span> <span class="operator">=</span> asr.getStamp();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">reference</span> <span class="operator">=</span> asr.getReference();</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化之后的引用值为：&quot;</span> + reference);</span><br><span class="line">        System.out.println(<span class="string">&quot;初始化之后的版本为：&quot;</span> + stamp);</span><br><span class="line">        student.setAge(<span class="number">25</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b4</span> <span class="operator">=</span> asr.attemptStamp(student, <span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;尝试更新标识是否成功：&quot;</span> + b4);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b5</span> <span class="operator">=</span> asr.compareAndSet(student, student, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">if</span>(b5)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;版本相同，更新student信息&quot;</span>);</span><br><span class="line">            <span class="type">Student</span> <span class="variable">reference1</span> <span class="operator">=</span> asr.getReference();</span><br><span class="line">            <span class="type">int</span> <span class="variable">stamp1</span> <span class="operator">=</span> asr.getStamp();</span><br><span class="line">            System.out.println(<span class="string">&quot;更新之后的引用为：&quot;</span> + reference1);</span><br><span class="line">            System.out.println(<span class="string">&quot;更新之后的版本为：&quot;</span> + stamp1);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;版本不同，更新失败！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/18/Atomic%E5%8C%85%E4%B9%8BAtomicLongFieldUpdater/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/18/Atomic%E5%8C%85%E4%B9%8BAtomicLongFieldUpdater/" class="post-title-link" itemprop="url">Atomic包之AtomicLongFieldUpdater</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-08-18 23:41:59" itemprop="dateCreated datePublished" datetime="2022-08-18T23:41:59+08:00">2022-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-08-20 11:37:22" itemprop="dateModified" datetime="2022-08-20T11:37:22+08:00">2022-08-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>AtomicLongFieldUpdater与AtomicIntegerFieldUpdater类似，都可以对类中的某个变量进行原子操作。</p>
+<p>从AtomicLongFieldUpdater的子类来看，和AtomicIntegerFieldUpdater有些许不同，当虚拟机层面支持long型数据进行无锁CAS操作，那么就使用CASUpdater来实例化对象，否则就需要在Java层面来通过锁机制来实例化对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过判断是否支持对long型进行cas操作，返回不同的实例实现</span></span><br><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; AtomicLongFieldUpdater&lt;U&gt; <span class="title function_">newUpdater</span><span class="params">(Class&lt;U&gt; tclass,</span></span><br><span class="line"><span class="params">                                                           String fieldName)</span> &#123;</span><br><span class="line">        Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">        <span class="keyword">if</span> (AtomicLong.VM_SUPPORTS_LONG_CAS)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CASUpdater</span>&lt;U&gt;(tclass, fieldName, caller);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LockedUpdater</span>&lt;U&gt;(tclass, fieldName, caller);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>分别来看下CASUpdater和LockedUpdater</p>
+<p>CASUpdater与AtomicIntegerFieldUpdaterImpl类似，都是依次对field的权限进行校验，对调用方的类加载器和传入的类加载器进行校验。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">CASUpdater(<span class="keyword">final</span> Class&lt;T&gt; tclass, <span class="keyword">final</span> String fieldName,</span><br><span class="line">                   <span class="keyword">final</span> Class&lt;?&gt; caller) &#123;</span><br><span class="line">            <span class="keyword">final</span> Field field;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> modifiers;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field = AccessController.doPrivileged(</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Field&gt;() &#123;</span><br><span class="line">                        <span class="keyword">public</span> Field <span class="title function_">run</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">                            <span class="keyword">return</span> tclass.getDeclaredField(fieldName);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                modifiers = field.getModifiers();</span><br><span class="line">                sun.reflect.misc.ReflectUtil.ensureMemberAccess(</span><br><span class="line">                    caller, tclass, <span class="literal">null</span>, modifiers);</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">cl</span> <span class="operator">=</span> tclass.getClassLoader();</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">ccl</span> <span class="operator">=</span> caller.getClassLoader();</span><br><span class="line">                <span class="keyword">if</span> ((ccl != <span class="literal">null</span>) &amp;&amp; (ccl != cl) &amp;&amp;</span><br><span class="line">                    ((cl == <span class="literal">null</span>) || !isAncestor(cl, ccl))) &#123;</span><br><span class="line">                    sun.reflect.misc.ReflectUtil.checkPackageAccess(tclass);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (PrivilegedActionException pae) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(pae.getException());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(ex);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//必须是long型</span></span><br><span class="line">            <span class="keyword">if</span> (field.getType() != <span class="type">long</span>.class)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be long type&quot;</span>);</span><br><span class="line">            <span class="comment">//必须是volatile类型</span></span><br><span class="line">            <span class="keyword">if</span> (!Modifier.isVolatile(modifiers))</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be volatile type&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Access to protected field members is restricted to receivers only</span></span><br><span class="line">            <span class="comment">// of the accessing class, or one of its subclasses, and the</span></span><br><span class="line">            <span class="comment">// accessing class must in turn be a subclass (or package sibling)</span></span><br><span class="line">            <span class="comment">// of the protected member&#x27;s defining class.</span></span><br><span class="line">            <span class="comment">// If the updater refers to a protected field of a declaring class</span></span><br><span class="line">            <span class="comment">// outside the current package, the receiver argument will be</span></span><br><span class="line">            <span class="comment">// narrowed to the type of the accessing class.</span></span><br><span class="line">            <span class="built_in">this</span>.cclass = (Modifier.isProtected(modifiers) &amp;&amp;</span><br><span class="line">                           tclass.isAssignableFrom(caller) &amp;&amp;</span><br><span class="line">                           !isSamePackage(tclass, caller))</span><br><span class="line">                          ? caller : tclass;</span><br><span class="line">            <span class="built_in">this</span>.tclass = tclass;</span><br><span class="line">            <span class="built_in">this</span>.offset = U.objectFieldOffset(field);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//无需加锁，直接使用无锁CAS来操作</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">compareAndSet</span><span class="params">(T obj, <span class="type">long</span> expect, <span class="type">long</span> update)</span> &#123;</span><br><span class="line">            accessCheck(obj);</span><br><span class="line">            <span class="keyword">return</span> U.compareAndSwapLong(obj, offset, expect, update);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>再来看下LockedUpdater,从初始化层面来看和CASUpdater差不多。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">LockedUpdater(<span class="keyword">final</span> Class&lt;T&gt; tclass, <span class="keyword">final</span> String fieldName,</span><br><span class="line">                      <span class="keyword">final</span> Class&lt;?&gt; caller) &#123;</span><br><span class="line">            <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">modifiers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field = AccessController.doPrivileged(</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Field&gt;() &#123;</span><br><span class="line">                        <span class="keyword">public</span> Field <span class="title function_">run</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">                            <span class="keyword">return</span> tclass.getDeclaredField(fieldName);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                modifiers = field.getModifiers();</span><br><span class="line">                sun.reflect.misc.ReflectUtil.ensureMemberAccess(</span><br><span class="line">                    caller, tclass, <span class="literal">null</span>, modifiers);</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">cl</span> <span class="operator">=</span> tclass.getClassLoader();</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">ccl</span> <span class="operator">=</span> caller.getClassLoader();</span><br><span class="line">                <span class="keyword">if</span> ((ccl != <span class="literal">null</span>) &amp;&amp; (ccl != cl) &amp;&amp;</span><br><span class="line">                    ((cl == <span class="literal">null</span>) || !isAncestor(cl, ccl))) &#123;</span><br><span class="line">                    sun.reflect.misc.ReflectUtil.checkPackageAccess(tclass);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (PrivilegedActionException pae) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(pae.getException());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(ex);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (field.getType() != <span class="type">long</span>.class)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be long type&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!Modifier.isVolatile(modifiers))</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be volatile type&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Access to protected field members is restricted to receivers only</span></span><br><span class="line">            <span class="comment">// of the accessing class, or one of its subclasses, and the</span></span><br><span class="line">            <span class="comment">// accessing class must in turn be a subclass (or package sibling)</span></span><br><span class="line">            <span class="comment">// of the protected member&#x27;s defining class.</span></span><br><span class="line">            <span class="comment">// If the updater refers to a protected field of a declaring class</span></span><br><span class="line">            <span class="comment">// outside the current package, the receiver argument will be</span></span><br><span class="line">            <span class="comment">// narrowed to the type of the accessing class.</span></span><br><span class="line">            <span class="built_in">this</span>.cclass = (Modifier.isProtected(modifiers) &amp;&amp;</span><br><span class="line">                           tclass.isAssignableFrom(caller) &amp;&amp;</span><br><span class="line">                           !isSamePackage(tclass, caller))</span><br><span class="line">                          ? caller : tclass;</span><br><span class="line">            <span class="built_in">this</span>.tclass = tclass;</span><br><span class="line">            <span class="built_in">this</span>.offset = U.objectFieldOffset(field);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是从支持的api来看有所不同，LockedUpdater所支持的api使用了锁机制，对于getLong和putLong都进行了加锁，保证原子性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">compareAndSet</span><span class="params">(T obj, <span class="type">long</span> expect, <span class="type">long</span> update)</span> &#123;</span><br><span class="line">            accessCheck(obj);</span><br><span class="line">            <span class="comment">//Unsafe对于long型的操作都加了锁</span></span><br><span class="line">            <span class="keyword">synchronized</span> (<span class="built_in">this</span>) &#123;</span><br><span class="line">                <span class="type">long</span> <span class="variable">v</span> <span class="operator">=</span> U.getLong(obj, offset);</span><br><span class="line">                <span class="keyword">if</span> (v != expect)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                U.putLong(obj, offset, update);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>AtomicReferenceFieldUpdater与AtomicLongFieldUpdater也是类似的，就是更新的域变成了引用类型。</p>
+<p>从构造函数来看，多了一个类型，这个类型是包含引用类型的类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//tclass是包含vclass的类型</span></span><br><span class="line"><span class="comment">//vclass是要更新的域的类型，并且vclass必须是引用类型，而且必须是volatile修饰的</span></span><br><span class="line"><span class="comment">//fieldName是域的名称，</span></span><br><span class="line"><span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U,W&gt; AtomicReferenceFieldUpdater&lt;U,W&gt; <span class="title function_">newUpdater</span><span class="params">(Class&lt;U&gt; tclass,</span></span><br><span class="line"><span class="params">                                                                Class&lt;W&gt; vclass,</span></span><br><span class="line"><span class="params">                                                                String fieldName)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AtomicReferenceFieldUpdaterImpl</span>&lt;U,W&gt;</span><br><span class="line">        (tclass, vclass, fieldName, Reflection.getCallerClass());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AtomicReferenceFieldUpdater的使用举例，以下是源码中的举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span> &#123;    </span><br><span class="line">    <span class="comment">//首先left和right是引用类型Node,而且被volatile修饰</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> Node left, right;     </span><br><span class="line">    <span class="comment">//初始化左节点更新器 </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> AtomicReferenceFieldUpdater&lt;Node, Node&gt; leftUpdater =              AtomicReferenceFieldUpdater.newUpdater(Node.class, Node.class, <span class="string">&quot;left&quot;</span>);    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicReferenceFieldUpdater&lt;Node, Node&gt; rightUpdater =      AtomicReferenceFieldUpdater.newUpdater(Node.class, Node.class, <span class="string">&quot;right&quot;</span>);      </span><br><span class="line">    Node <span class="title function_">getLeft</span><span class="params">()</span> &#123; <span class="keyword">return</span> left; &#125;    </span><br><span class="line">    <span class="comment">//更新左节点</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">compareAndSetLeft</span><span class="params">(Node expect, Node update)</span> &#123; </span><br><span class="line">         <span class="keyword">return</span> leftUpdater.compareAndSet(<span class="built_in">this</span>, expect, update);    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="comment">// ... and so on  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/17/Atomic%E5%8C%85%E4%B9%8BAtomicIntegerFieldUpdater/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.webp">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/17/Atomic%E5%8C%85%E4%B9%8BAtomicIntegerFieldUpdater/" class="post-title-link" itemprop="url">Atomic包之AtomicIntegerFieldUpdater</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-08-17 22:10:40" itemprop="dateCreated datePublished" datetime="2022-08-17T22:10:40+08:00">2022-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-08-18 00:31:17" itemprop="dateModified" datetime="2022-08-18T00:31:17+08:00">2022-08-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如果想要对一个类的某个域进行原子操作，可以使用AtomicIntegerFieldUpdater</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//传入类型，以及需要原子操作的域的名称，通过反射的方式对该域进行原子化</span></span><br><span class="line"> <span class="meta">@CallerSensitive</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;U&gt; AtomicIntegerFieldUpdater&lt;U&gt; <span class="title function_">newUpdater</span><span class="params">(Class&lt;U&gt; tclass,</span></span><br><span class="line"><span class="params">                                                          String fieldName)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AtomicIntegerFieldUpdaterImpl</span>&lt;U&gt;</span><br><span class="line">        (tclass, fieldName, Reflection.getCallerClass());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回一个AtomicIntegerFieldUpdater的实现类，可以先看下这个类的构造函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">AtomicIntegerFieldUpdaterImpl(<span class="keyword">final</span> Class&lt;T&gt; tclass,</span><br><span class="line">                                      <span class="keyword">final</span> String fieldName,</span><br><span class="line">                                      <span class="keyword">final</span> Class&lt;?&gt; caller) &#123;</span><br><span class="line">            <span class="keyword">final</span> Field field;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">int</span> modifiers;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//反射获取变量名对应的域</span></span><br><span class="line">                field = AccessController.doPrivileged(</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">PrivilegedExceptionAction</span>&lt;Field&gt;() &#123;</span><br><span class="line">                        <span class="keyword">public</span> Field <span class="title function_">run</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException &#123;</span><br><span class="line">                            <span class="keyword">return</span> tclass.getDeclaredField(fieldName);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                modifiers = field.getModifiers();</span><br><span class="line">                <span class="comment">//变量的访问权限修饰符进行校验，确保是可以获取的</span></span><br><span class="line">                sun.reflect.misc.ReflectUtil.ensureMemberAccess(</span><br><span class="line">                    caller, tclass, <span class="literal">null</span>, modifiers);</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">cl</span> <span class="operator">=</span> tclass.getClassLoader();</span><br><span class="line">                <span class="type">ClassLoader</span> <span class="variable">ccl</span> <span class="operator">=</span> caller.getClassLoader();</span><br><span class="line">                <span class="comment">//如果调用方类加载器不是传入的类的类加载器的祖先，则需要检查包权限</span></span><br><span class="line">                <span class="keyword">if</span> ((ccl != <span class="literal">null</span>) &amp;&amp; (ccl != cl) &amp;&amp;</span><br><span class="line">                    ((cl == <span class="literal">null</span>) || !isAncestor(cl, ccl))) &#123;</span><br><span class="line">                    sun.reflect.misc.ReflectUtil.checkPackageAccess(tclass);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (PrivilegedActionException pae) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(pae.getException());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(ex);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//该域的类型必须是int类型</span></span><br><span class="line">            <span class="keyword">if</span> (field.getType() != <span class="type">int</span>.class)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be integer type&quot;</span>);</span><br><span class="line">            <span class="comment">//该域的修饰符是volatile类型的</span></span><br><span class="line">            <span class="keyword">if</span> (!Modifier.isVolatile(modifiers))</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Must be volatile type&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Access to protected field members is restricted to receivers only</span></span><br><span class="line">            <span class="comment">// of the accessing class, or one of its subclasses, and the</span></span><br><span class="line">            <span class="comment">// accessing class must in turn be a subclass (or package sibling)</span></span><br><span class="line">            <span class="comment">// of the protected member&#x27;s defining class.</span></span><br><span class="line">            <span class="comment">// If the updater refers to a protected field of a declaring class</span></span><br><span class="line">            <span class="comment">// outside the current package, the receiver argument will be</span></span><br><span class="line">            <span class="comment">// narrowed to the type of the accessing class.</span></span><br><span class="line">            <span class="built_in">this</span>.cclass = (Modifier.isProtected(modifiers) &amp;&amp;</span><br><span class="line">                           tclass.isAssignableFrom(caller) &amp;&amp;</span><br><span class="line">                           !isSamePackage(tclass, caller))</span><br><span class="line">                          ? caller : tclass;</span><br><span class="line">            <span class="built_in">this</span>.tclass = tclass;</span><br><span class="line">            <span class="built_in">this</span>.offset = U.objectFieldOffset(field);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">20</span>);</span><br><span class="line">        AtomicIntegerFieldUpdater&lt;Student&gt; updater = AtomicIntegerFieldUpdater.newUpdater(Student.class, <span class="string">&quot;age&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> updater.get(student);</span><br><span class="line">        System.out.println(i);<span class="comment">//打印20</span></span><br><span class="line">        student.setAge(<span class="number">22</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> updater.compareAndSet(student, <span class="number">20</span>, <span class="number">21</span>);</span><br><span class="line">        System.out.println(b);<span class="comment">//之前修改成22，校验不通过</span></span><br><span class="line">        System.out.println(student</span><br><span class="line">);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">        <span class="comment">//用volatile 和 int修饰，少一个都不行</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(<span class="type">int</span> age)</span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;age=&quot;</span> + age +</span><br><span class="line">                    <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他的操作和AtomicInteger差不多，也就不多说了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

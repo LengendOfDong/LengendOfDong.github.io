@@ -20,27 +20,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"lengendofdong.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="拿我的jdk1.8来说，加载的位置包括C:\Program Files\Java\jdk1.8.0_261\jre\lib\ext 以及C:\Program Files\Java\jdk1.8.0_261\jre\lib 摘自OSCHINA:  JDK 1.8 lib: access-bridge-64.jarcharsets.jarcldrdata.jardeploy.jardnsns.jarj">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JDK介绍">
-<meta property="og:url" content="https://lengendofdong.github.io/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Atomic包之DoubleAccumulator">
+<meta property="og:url" content="https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="拿我的jdk1.8来说，加载的位置包括C:\Program Files\Java\jdk1.8.0_261\jre\lib\ext 以及C:\Program Files\Java\jdk1.8.0_261\jre\lib 摘自OSCHINA:  JDK 1.8 lib: access-bridge-64.jarcharsets.jarcldrdata.jardeploy.jardnsns.jarj">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-13T05:32:29.000Z">
-<meta property="article:modified_time" content="2022-08-13T08:08:37.082Z">
+<meta property="article:published_time" content="2022-08-20T03:38:27.000Z">
+<meta property="article:modified_time" content="2022-08-20T08:16:47.206Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="并发">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://lengendofdong.github.io/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/">
+<link rel="canonical" href="https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/","path":"2022/08/13/JDK介绍/","title":"JDK介绍"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/","path":"2022/08/20/Atomic包之DoubleAccumulator/","title":"Atomic包之DoubleAccumulator"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>JDK介绍 | Hexo</title>
+<title>Atomic包之DoubleAccumulator | Hexo</title>
   
 
 
@@ -174,7 +173,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/13/JDK%E4%BB%8B%E7%BB%8D/">
+    <link itemprop="mainEntityOfPage" href="https://lengendofdong.github.io/2022/08/20/Atomic%E5%8C%85%E4%B9%8BDoubleAccumulator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/1.webp">
@@ -187,12 +186,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="JDK介绍 | Hexo">
+      <meta itemprop="name" content="Atomic包之DoubleAccumulator | Hexo">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JDK介绍
+          Atomic包之DoubleAccumulator
         </h1>
 
         <div class="post-meta-container">
@@ -204,7 +203,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-08-13 13:32:29 / Modified: 16:08:37" itemprop="dateCreated datePublished" datetime="2022-08-13T13:32:29+08:00">2022-08-13</time>
+      <time title="Created: 2022-08-20 11:38:27 / Modified: 16:16:47" itemprop="dateCreated datePublished" datetime="2022-08-20T11:38:27+08:00">2022-08-20</time>
     </span>
 
   
@@ -217,35 +216,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>拿我的jdk1.8来说，加载的位置包括C:\Program Files\Java\jdk1.8.0_261\jre\lib\ext 以及C:\Program Files\Java\jdk1.8.0_261\jre\lib</p>
-<p>摘自OSCHINA:</p>
-<blockquote>
-<p>JDK 1.8 lib:</p>
-<p>access-bridge-64.jar<br>charsets.jar<br>cldrdata.jar<br>deploy.jar<br>dnsns.jar<br>jaccess.jar<br>javawa.jar<br>jce.jar<br>jfr.jar<br>jfxrt.jar<br>jfxswt.jar<br>jsse.jar<br>localedata.jar<br>management-agent.jar<br>nashorn.jar<br>plugin.jar<br>resources.jar<br>rt.jar<br>sunec.jar<br>sunjce_provider.jar<br>sunmscapi.jar<br>sunpkcs11.jar<br>zipfs.jar</p>
-</blockquote>
-<span id="more"></span>
-
-<p>&#x2F;&#x2F; 1<br>access-bridge-64.jar<br>Java Access Bridge is a technology that exposes the Java Accessibility API in a Microsoft Windows DLL, enabling Java applications and applets that implement the Java Accessibility API to be visible to assistive technologies on Microsoft Windows systems. Java Accessibility API is part of Java Accessibility Utilities, which is a set of utility classes that help assistive technologies provide access to GUI toolkits that implement the Java Accessibility API.<br>一个允许 WindowsDLL调用java api 技术。</p>
-<p>&#x2F;&#x2F; 2<br>charsets.jar<br>Java 字符集，这个类库中包含 Java 所有支持字符集的字符</p>
-<p>&#x2F;&#x2F; 3<br>cldrdata.jar<br>The Unicode CLDR provides key building blocks for software to support the world’s languages, with the largest and most extensive standard repository of locale data available. This data is used by a wide spectrum of companies for their software internationalization and localization, adapting software to the conventions of different languages for such common software tasks.<br>Unicode CLDR为支持世界语言的软件提供了关键的构建块，提供了最大和最广泛的语言环境数据标准存储库。</p>
-<p>&#x2F;&#x2F; 4<br>deploy.jar<br>Java安装目录的常见部分 - 该文件运行某些产品的安装。 正确设置Java路径后，用户可以执行此文件（只需双击它或按文件上的Enter键），要部署的应用程序将运行其安装程序。 例如。 诺基亚OVI套件通常使用这种部署形式。 作为彼此的JAVA包，如果您将其重命名为ZIP并打开内容，则可以检查包中的类。</p>
-<p>&#x2F;&#x2F; 5<br>dnsns.jar<br>名字是DNS naming service ,只有2个方法 getHostByAddr lookupAllHostAddr</p>
-<p>&#x2F;&#x2F; 6<br>jaccess.jar<br>Defines JDK utility classes used by implementors of Assistive Technologies.AWT(Abstract Window Toolkit)，中文译为抽象窗口工具包。<br>@Exported() 当前Activity是否可以被另一个Application的组件启动：true允许被启动；false不允许被启动。</p>
-<p>&#x2F;&#x2F; 7<br>javaws.jar<br>JNLP（Java Network Launching Protocol ）是java提供的一种可以通过浏览器直接执行java应用程序的途径<br>里面同时有com.sun 和 javax.jnlp的路径<br>包括<br>-exceptions 异常类<br>-jnl 各种 XXXDesc, 是这个包的POJO<br>-net 只有一个Handler.openConnection()<br>-progress 进度条相关<br>-security 权限校验<br>-ui  CacheViewer这个类很大，而且是很像是一个固定的使用页面<br>-util JavaFX<br>里面还有Main方法，怎么看都和别的JDK jar有很大的差异</p>
-<p>&#x2F;&#x2F; 8<br>jce.jar<br>路径是javax.crypto<br>（javax的x是extension的意思，也就是扩展包。java类库是java发布之初就确定了的基础库，<br>而javax类库则是在上面增加的一层东西，就是为了保持版本兼容要保存原来的，但有些东西有了更好的解决方案，<br>所以，就加上些，典型的就是awt(Abstract Windowing ToolKit) 和swing。）<br>这个包都是加密相关的。</p>
-<p>&#x2F;&#x2F; 9<br>jfr.jar<br>和 jdk\bin\jmc.exe有关系。Java Mission Control 包括 JMX 控制台和 Java 飞行记录器。<br>Java 飞行记录器 (JFR) 是一个用于收集有关正在运行的 Java 应用程序的诊断数据和概要分析数据的工具。它集成到 Java 虚拟机 (JVM) 中，<br>几乎不会带来性能开销，因此甚至可以在高负载生产环境中使用。使用默认设置时，内部测试和客户反馈表明性能影响低于 1%。<br>对于一些应用程序，这一数字会大幅降低。但是，对于短时间运行的应用程序 (不是在生产环境中运行的应用程序类型)，<br>相对的启动和预热时间可能会较长，这对性能的影响可能会超过 1%。JFR 收集有关 JVM 及其上运行的 Java 应用程序的数据。</p>
-<p>&#x2F;&#x2F; 10<br>jfxrt.jar<br>JDK有个 rt.jar ，是JAVA的。这个就是JavaFX的rt.jar. JavaFX&gt;Swing&gt;AWT.<br>JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich<br>client applications that operate consistently across diverse platforms.<br>里面的FXConsole类有针对键盘输入的代码。应该可以用来借鉴</p>
-<p>&#x2F;&#x2F; 11<br>jfxswt.jar<br>同为JavaFx相关，对JavaFx和Swing做兼容性操作。</p>
-<p>&#x2F;&#x2F; 12<br>jsse.jar<br>SSL连接，验证，X509文件验证，</p>
-<p>&#x2F;&#x2F; 13<br>localedata.jar<br>日期显示国际化的包，里面各地区的日期文字，没有复杂逻辑。</p>
-<p>&#x2F;&#x2F; 14<br>management-agent.jar<br>空的？网上资料说的和 jmx 监控有关，没研究为什么是空的。&#x2F;&#x2F;TODO</p>
-<p>&#x2F;&#x2F; 15<br>nashorn.jar<br>包括1.动态链接.包含用于链接调用的动态调用站点的接口和类。<br>dynalink与java.lang.invoke包密切相关，并且依赖于该包。<br>虽然java.lang.invoke为invoke dynamic调用站点的动态链接提供了一个低级别的API，但它不提供一种方法来表示对象的更高级别操作，也不提供实现这些操作的方法。<br>如果一种语言是静态类型的，并且它的类型系统与JVM的类型系统匹配，那么它可以使用通常的调用、字段访问等指令（例如invokevirtual、getfield）来实现这一点。<br>但是，如果语言是动态的（因此，某些表达式的类型直到在运行时进行计算时才知道），或者其对象模型或类型系统与JVM的对象模型或类型系统不匹配，<br>那么它应该使用invokedynamic调用站点，并让dynalink管理它们。<br>2.Javascript引擎<br>从 JDK 8 开始，Nashorn取代 Rhino 成为 Java 的嵌入式 JavaScript 引擎。Nashorn 完全支持ECMAScript 5.1<br>规范以及一些扩展。该特性允许开发人员将 JavaScript 代码嵌入到 Java 中，甚至从嵌入的 JavaScript 中调用 Java。此外，<br>它还提供了使用jrunscript从命令行运行 JavaScript 的能力。</p>
-<p>&#x2F;&#x2F; 16<br>plugin.jar<br>这个包相当杂。什么东西都有，不好概括。</p>
-<p>&#x2F;&#x2F; 17<br>resources.jar<br>提示信息显示国际化的包，里面各地区的文字。只有图片和properties，没有java代码</p>
-<p>&#x2F;&#x2F;18<br>rt.jar<br>JDK的灵魂</p>
-<p>&#x2F;&#x2F;19<br>sunec.jar<br>&#x2F;&#x2F; 20<br>sunjce_provider.jar<br>&#x2F;&#x2F; 21<br>sunmscapi.jar<br>&#x2F;&#x2F; 22<br>sunpkcs11.jar<br>以上4个包都是加密相关的。</p>
-<p>&#x2F;&#x2F; 23<br>zipfs.jar<br>java 对zip文件操作的支持。因为文件系统不一致， ZipInfo里有各种属性的转换。</p>
-
+        
     </div>
 
     
@@ -253,16 +224,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2022/08/20/Atomic%E5%8C%85%E4%B9%8BAtomicMarkableReference/" rel="prev" title="Atomic包之AtomicMarkableReference">
+                  <i class="fa fa-chevron-left"></i> Atomic包之AtomicMarkableReference
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/08/14/Atomic%E5%8C%85%E4%B9%8BAtomicInteger/" rel="next" title="Atomic包第一篇">
-                  Atomic包第一篇 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
