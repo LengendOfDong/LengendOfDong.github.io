@@ -1,0 +1,4 @@
+/* 头像卡片效果：花 */
+.card-info-avatar:hover {
+  background: url(https://cdn.jsdelivr.net/gh/rigodlee/BLOGCDN/img/20200530181856.gif);
+}
